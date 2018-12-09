@@ -1,5 +1,5 @@
 # FlansMod
-Une mise à jour de FlansMod 1.12.2 résolvant certains crash.
+Une mise à jour de FlansMod 1.12.2 résolvant certains bugs.
 
 Here you will find the source code for the Minecraft modification, Flan's Mod. If you want to pitch in,
 just submit a pull request, and either _aidancbrady_, _ChrisLane_ or _jamioflan_ will review and merge. If you are here
