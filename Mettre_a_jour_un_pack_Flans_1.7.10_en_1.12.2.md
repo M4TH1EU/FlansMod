@@ -5,35 +5,34 @@ Bonjour, dans ce tutoriel je vais vous apprendre à passer un pack Flans 1.7.10 
 # Parts
 Voici la partie dédiée aux parts.
 
-Info : Pensez à mettre le même nom partout (Exemple : ``your_item.txt``, ``your_item.png``, ``your_item.json``)
+Info : Pensez à mettre le même nom partout  
+(**Exemple** : ``your_item.txt``, ``your_item.png``, ``your_item.json``)
 
 ### Première étape
 Rendez vous dans le dossier ``YourPack/parts``. 
 
-Pour chaque fichier :
-    - Supprimez la ligne : ``ItemID XXXXX``
+Pour chaque fichier :  
+    - Supprimez la ligne : ``ItemID XXXXX``  
     - Enlevez les majuscules présente dans ``ShortName`` et ``Icon``
    
 ### Deuxième étape
-Ensuite allez dans ``YourPack/assets/flansmod/lang/`` et enlevez les majuscules dans les fichiers ``.lang``.
-Exemple :
-``en_US.lang`` -> ``en_us.lang``
-``fr_FR.lang`` -> ``fr_fr.lang``
-``etc...``
+Ensuite allez dans ``YourPack/assets/flansmod/lang/`` et enlevez les majuscules dans les fichiers ``.lang``.  
+***Exemple :*** 
+``en_US.lang`` -> ``en_us.lang``  
+
 ### Troisième étape
-Par la suite allez dans ``YourPack/assets/flansmod/textures/items/`` et enlevez à nouveau toutes les majuscules des fichiers ``.png``.
+Par la suite allez dans ``YourPack/assets/flansmod/textures/items/`` et enlevez à nouveau toutes les majuscules des fichiers ``.png``.  
 ***Exemple :***
-``ItemMotor.png`` -> ``itemmotor.png``
-``etc...``
+``ItemMotor.png`` -> ``itemmotor.png``  
 
 ### Dernière étape
-A partir de la 1.8 Minecraft gère les items/blocks via des fichiers ``.json``.
-Pour chaque item on va devoir en créer un pour chaque parts.
+A partir de la 1.8 Minecraft gère les items/blocks via des fichiers ``.json``.  
+Pour chaque parts on va devoir en créer afin d'afficher notre item en jeu.  
 
-Créer un nouveau dossier nommé ``models`` dans ``YourPack/assets/flansmod/``, dans ce dossier ``models`` ajouter un autre dossier nommé ``item``. 
-Dans ce dossier ``item``, vous allez créer un fichier ``your_item.json``
-``your_item`` correspondant à la ligne ``ShortName your_item`` dans ``YourPack/parts/your_item.txt``
-
+Créer un nouveau dossier nommé ``models`` dans ``YourPack/assets/flansmod/``, dans ce dossier ``models`` ajouter un autre dossier nommé ``item``.  
+Dans ce dossier ``item``, vous allez créer un fichier ``your_item.json``.  
+``your_item`` correspondant à la ligne ``ShortName your_item`` dans ``YourPack/parts/your_item.txt``  
+  
 Dans ce fichier ``your_item.json`` mettez
 
 ```json
