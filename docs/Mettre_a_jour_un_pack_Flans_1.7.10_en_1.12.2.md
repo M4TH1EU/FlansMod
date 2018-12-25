@@ -29,7 +29,7 @@ Par la suite allez dans ``YourPack/assets/flansmod/textures/items/`` et enlevez 
 ``ItemMotor.png`` -> ``itemmotor.png``  
 
 ### Dernière étape
-A partir de la 1.8 Minecraft gère les items/blocs via des fichiers ``.json``.  
+A partir de la 1.8 Minecraft gère les items/blocs et tout un tas d'autres choses via des fichiers ``.json``.  
 Pour chaque parts on va devoir en créer afin d'afficher notre item en jeu.  
 
 Créer un nouveau dossier nommé ``models`` dans ``YourPack/assets/flansmod/``, dans ce dossier ``models`` ajouter un autre dossier nommé ``item``.  
@@ -122,7 +122,9 @@ Pensez bien à modifier cette partie :
 "textures":{
     "layer0":"flansmod:items/your_item"
 },
-```
+```  
+
+Le ``your_item`` est le nom de votre la texture de votre part présente dans ``YourPack/assets/flansmod/textures/items/your_item.png`` sans le ``.png`` ou le ``.jpg``.
 
 
 **Enregistrez votre pack et vous pouvez désormais lancer votre pack en 1.12.2 !**
@@ -241,6 +243,9 @@ Ajouter dans ce fichier ce code :
 
 
 (_Vous pouvez aller voir [ce](https://minecraft-fr.gamepedia.com/Mod%C3%A8les) site pour un peu plus d'info sur les .json_)
+
+**Enregistrez votre pack et vous pouvez désormais lancer votre pack en 1.12.2 !**
+
   
 
 ### Munitions
@@ -263,6 +268,127 @@ Ce qui correspond au type de munitions/objets.
 
 Les armes n'ont pas de réelle modification, tout comme les munitions, vous pouvez ajouter la partie description.
 
+**Enregistrez votre pack et vous pouvez désormais lancer votre pack en 1.12.2 !**
 
 
 
+# Véhicules 
+
+Voici la partie pour les véhicules.
+
+### Première étape
+Rendez vous dans le dossier ``YourPack/vehicles``. 
+
+Pour chaque fichier :  
+    - Supprimez la ligne : ``ItemID XXXXX``  
+    - Enlevez les majuscules présente dans ``ShortName XXXX`` et ``Icon XXXX``
+   
+### Deuxième étape
+Ensuite allez dans ``YourPack/assets/flansmod/lang/`` et enlevez les majuscules dans les fichiers ``.lang``.  
+***Exemple :*** 
+``en_US.lang`` -> ``en_us.lang``  
+
+### Troisième étape
+Par la suite allez dans ``YourPack/assets/flansmod/textures/items/`` et enlevez à nouveau toutes les majuscules des fichiers ``.png/.jpg``.  
+***Exemple :***
+``VehicleBmw.png`` -> ``vehiclebmw.png``  
+
+### Dernière étape
+A partir de la 1.8 Minecraft gère les items/blocs et tout un tas d'autres choses via des fichiers ``.json``.  
+Pour chaque parts on va devoir en créer afin d'afficher notre item en jeu.  
+
+Créer un nouveau dossier nommé ``models`` dans ``YourPack/assets/flansmod/``, dans ce dossier ``models`` ajouter un autre dossier nommé ``item``.  
+Dans ce dossier ``item``, vous allez créer un fichier ``your_vehicle.json``.  
+``your_vehicle`` correspondant à la ligne ``ShortName your_vehicle`` dans ``YourPack/vehicles/your_vehicle.txt``  
+  
+Dans ce fichier ``your_vehicle.json`` mettez
+
+```json
+{
+   "parent":"builtin/generated",
+   "textures":{
+      "layer0":"flansmod:items/your_vehicle"
+   },
+   "display":{
+      "thirdperson_lefthand":{
+         "rotation":[
+            0,
+            90,
+            -35
+         ],
+         "translation":[
+            0,
+            1.25,
+            -2.5
+         ],
+         "scale":[
+            0.80,
+            0.80,
+            0.80
+         ]
+      },
+      "thirdperson_righthand":{
+         "rotation":[
+            0,
+            90,
+            -35
+         ],
+         "translation":[
+            0,
+            1.25,
+            -2.5
+         ],
+         "scale":[
+            0.80,
+            0.80,
+            0.80
+         ]
+      },
+      "firstperson_lefthand":{
+         "rotation":[
+            0,
+            -45,
+            25
+         ],
+         "translation":[
+            0,
+            4,
+            2
+         ],
+         "scale":[
+            0.80,
+            0.80,
+            0.80
+         ]
+      },
+      "firstperson_righthand":{
+         "rotation":[
+            0,
+            -45,
+            25
+         ],
+         "translation":[
+            0,
+            4,
+            2
+         ],
+         "scale":[
+            0.80,
+            0.80,
+            0.80
+         ]
+      }
+   }
+}
+```
+
+Pensez bien à modifier cette partie :
+```json
+"textures":{
+    "layer0":"flansmod:items/your_vehicle"
+},
+```  
+
+Le ``your_vehicle`` est le nom de votre la texture de votre part présente dans ``YourPack/assets/flansmod/textures/items/your_vehicle.png`` sans le ``.png`` ou le ``.jpg``.
+
+**Enregistrez votre pack et vous pouvez désormais lancer votre pack en 1.12.2 !**
