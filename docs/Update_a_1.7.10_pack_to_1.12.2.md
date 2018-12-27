@@ -148,8 +148,7 @@ Go to ``YourPack/assets/flansmod/models/`` and create a folder named ``item``.
   
 Get the line ``ShortName gun/bullet/grenade_name`` in :  
 ``YourPack/guns/`` or ``YourPack/bullets/`` or ``YourPack/grenades/``.  
-
-Dans ce dossier ``item`` créez donc un fichier avec ce qui suit ``ShortName XXXX`` en ajoutant ``.json`` à la fin.  
+In the ``item`` folder, then create a file with the following elements ``ShortName XXXX`` with adding ``.json`` at the end.  
 ***Example :***
 ``YourPack/guns/ak47.txt/ShortName ak47`` -> ``YourPack/assets/flansmod/models/item/ak47.json``  
   
