@@ -1,17 +1,11 @@
 package com.flansmod.client.model;
 
 import com.flansmod.client.tmt.ModelRendererTurbo;
-import com.flansmod.common.driveables.DriveableType;
-import com.flansmod.common.driveables.EntityDriveable;
-import com.flansmod.common.driveables.EntitySeat;
-import com.flansmod.common.driveables.EntityVehicle;
-import com.flansmod.common.driveables.EnumDriveablePart;
-import com.flansmod.common.driveables.VehicleType;
+import com.flansmod.common.driveables.*;
 import com.flansmod.common.vector.Vector3f;
 
 //Extensible ModelVehicle class for rendering vehicle models
-public class ModelVehicle extends ModelDriveable
-{
+public class ModelVehicle extends ModelDriveable {
 	public ModelRendererTurbo turretModel[] = new ModelRendererTurbo[0];            //The turret (for tanks)
 	public ModelRendererTurbo barrelModel[] = new ModelRendererTurbo[0];            //The barrel of the main turret
 	public ModelRendererTurbo ammoModel[][] = new ModelRendererTurbo[0][0];            //Ammo models for the main turret. ammoModel[i] will render if the vehicle has less than 3 ammo slots or if slot i is full. Checks shell / missile inventory
@@ -25,31 +19,29 @@ public class ModelVehicle extends ModelDriveable
 	public ModelRendererTurbo leftTrackModel[] = new ModelRendererTurbo[0];
 	public ModelRendererTurbo rightTrackWheelModels[] = new ModelRendererTurbo[0];    //These go with the tracks but rotate
 	public ModelRendererTurbo leftTrackWheelModels[] = new ModelRendererTurbo[0];
-	
+
 	public ModelRendererTurbo leftAnimTrackModel[][] = new ModelRendererTurbo[0][0];  //Unlimited frame track animations
 	public ModelRendererTurbo rightAnimTrackModel[][] = new ModelRendererTurbo[0][0];
-	
+
 	public ModelRendererTurbo bodyDoorOpenModel[] = new ModelRendererTurbo[0];
 	public ModelRendererTurbo bodyDoorCloseModel[] = new ModelRendererTurbo[0];
 	public ModelRendererTurbo trailerModel[] = new ModelRendererTurbo[0];
 	public ModelRendererTurbo steeringWheelModel[] = new ModelRendererTurbo[0];
-	
+
 	public ModelRendererTurbo drillHeadModel[] = new ModelRendererTurbo[0];        //Drill head. Rotates around
 	public Vector3f drillHeadOrigin = new Vector3f();                                //this point
-	
+
 	public int animFrame = 0;
-	
-	
+
+
 	@Override
-	public void render(EntityDriveable driveable, float f1)
-	{
-		render(0.0625F, (EntityVehicle)driveable, f1);
+	public void render(EntityDriveable driveable, float f1) {
+		render(0.0625F, (EntityVehicle) driveable, f1);
 	}
-	
+
 	@Override
 	/** GUI render method */
-	public void render(DriveableType type)
-	{
+	public void render(DriveableType type) {
 		super.render(type);
 		renderPart(leftBackWheelModel);
 		renderPart(rightBackWheelModel);
@@ -64,184 +56,147 @@ public class ModelVehicle extends ModelDriveable
 		renderPart(turretModel);
 		renderPart(barrelModel);
 		renderPart(drillHeadModel);
-		for(ModelRendererTurbo[] mods : ammoModel)
+		for (ModelRendererTurbo[] mods : ammoModel)
 			renderPart(mods);
 		//This might cause all animation frames to render simultaneously in the crafting box... but it doesn't crash. Which is a plus I guess?
-		for(ModelRendererTurbo[] latm : leftAnimTrackModel)
+		for (ModelRendererTurbo[] latm : leftAnimTrackModel)
 			renderPart(latm);
-		for(ModelRendererTurbo[] ratm : rightAnimTrackModel)
+		for (ModelRendererTurbo[] ratm : rightAnimTrackModel)
 			renderPart(ratm);
 		renderPart(steeringWheelModel);
 	}
-	
-	public void render(float f5, EntityVehicle vehicle, float f)
-	{
+
+	public void render(float f5, EntityVehicle vehicle, float f) {
 		boolean rotateWheels = vehicle.getVehicleType().rotateWheels;
 		animFrame = vehicle.animFrame;
-		
+
 		//Rendering the body
-		if(vehicle.isPartIntact(EnumDriveablePart.core))
-		{
-			for(ModelRendererTurbo aBodyModel : bodyModel)
-			{
+		if (vehicle.isPartIntact(EnumDriveablePart.core)) {
+			for (ModelRendererTurbo aBodyModel : bodyModel) {
 				aBodyModel.render(f5, oldRotateOrder);
 			}
-			for(ModelRendererTurbo aBodyDoorOpenModel : bodyDoorOpenModel)
-			{
-				if(vehicle.varDoor)
+			for (ModelRendererTurbo aBodyDoorOpenModel : bodyDoorOpenModel) {
+				if (vehicle.varDoor)
 					aBodyDoorOpenModel.render(f5, oldRotateOrder);
 			}
-			for(ModelRendererTurbo aBodyDoorCloseModel : bodyDoorCloseModel)
-			{
-				if(!vehicle.varDoor)
+			for (ModelRendererTurbo aBodyDoorCloseModel : bodyDoorCloseModel) {
+				if (!vehicle.varDoor)
 					aBodyDoorCloseModel.render(f5, oldRotateOrder);
 			}
-			for(ModelRendererTurbo aSteeringWheelModel : steeringWheelModel)
-			{
+			for (ModelRendererTurbo aSteeringWheelModel : steeringWheelModel) {
 				aSteeringWheelModel.rotateAngleX = vehicle.wheelsYaw * 3.14159265F / 180F * 3F;
 				aSteeringWheelModel.render(f5, oldRotateOrder);
 			}
 		}
-		
+
 		//Wheels
-		if(vehicle.isPartIntact(EnumDriveablePart.backLeftWheel))
-		{
-			for(ModelRendererTurbo aLeftBackWheelModel : leftBackWheelModel)
-			{
+		if (vehicle.isPartIntact(EnumDriveablePart.backLeftWheel)) {
+			for (ModelRendererTurbo aLeftBackWheelModel : leftBackWheelModel) {
 				aLeftBackWheelModel.rotateAngleZ = rotateWheels ? -vehicle.wheelsAngle : 0;
 				aLeftBackWheelModel.render(f5, oldRotateOrder);
 			}
 		}
-		if(vehicle.isPartIntact(EnumDriveablePart.backRightWheel))
-		{
-			for(ModelRendererTurbo aRightBackWheelModel : rightBackWheelModel)
-			{
+		if (vehicle.isPartIntact(EnumDriveablePart.backRightWheel)) {
+			for (ModelRendererTurbo aRightBackWheelModel : rightBackWheelModel) {
 				aRightBackWheelModel.rotateAngleZ = rotateWheels ? -vehicle.wheelsAngle : 0;
 				aRightBackWheelModel.render(f5, oldRotateOrder);
 			}
 		}
-		if(vehicle.isPartIntact(EnumDriveablePart.frontLeftWheel))
-		{
-			for(ModelRendererTurbo aLeftFrontWheelModel : leftFrontWheelModel)
-			{
+		if (vehicle.isPartIntact(EnumDriveablePart.frontLeftWheel)) {
+			for (ModelRendererTurbo aLeftFrontWheelModel : leftFrontWheelModel) {
 				aLeftFrontWheelModel.rotateAngleZ = rotateWheels ? -vehicle.wheelsAngle : 0;
 				aLeftFrontWheelModel.rotateAngleY = -vehicle.wheelsYaw * 3.14159265F / 180F * 3F;
 				aLeftFrontWheelModel.render(f5, oldRotateOrder);
 			}
 		}
-		if(vehicle.isPartIntact(EnumDriveablePart.frontRightWheel))
-		{
-			for(ModelRendererTurbo aRightFrontWheelModel : rightFrontWheelModel)
-			{
+		if (vehicle.isPartIntact(EnumDriveablePart.frontRightWheel)) {
+			for (ModelRendererTurbo aRightFrontWheelModel : rightFrontWheelModel) {
 				aRightFrontWheelModel.rotateAngleZ = rotateWheels ? -vehicle.wheelsAngle : 0;
 				aRightFrontWheelModel.rotateAngleY = -vehicle.wheelsYaw * 3.14159265F / 180F * 3F;
 				aRightFrontWheelModel.render(f5, oldRotateOrder);
 			}
 		}
-		if(vehicle.isPartIntact(EnumDriveablePart.frontWheel))
-		{
-			for(ModelRendererTurbo aFrontWheelModel : frontWheelModel)
-			{
+		if (vehicle.isPartIntact(EnumDriveablePart.frontWheel)) {
+			for (ModelRendererTurbo aFrontWheelModel : frontWheelModel) {
 				aFrontWheelModel.rotateAngleZ = rotateWheels ? -vehicle.wheelsAngle : 0;
 				aFrontWheelModel.rotateAngleY = -vehicle.wheelsYaw * 3.14159265F / 180F * 3F;
 				aFrontWheelModel.render(f5, oldRotateOrder);
 			}
 		}
-		if(vehicle.isPartIntact(EnumDriveablePart.backWheel))
-		{
-			for(ModelRendererTurbo aBackWheelModel : backWheelModel)
-			{
+		if (vehicle.isPartIntact(EnumDriveablePart.backWheel)) {
+			for (ModelRendererTurbo aBackWheelModel : backWheelModel) {
 				aBackWheelModel.rotateAngleZ = rotateWheels ? -vehicle.wheelsAngle : 0;
 				aBackWheelModel.render(f5, oldRotateOrder);
 			}
 		}
-		
-		if(vehicle.isPartIntact(EnumDriveablePart.leftTrack))
-		{
-			for(ModelRendererTurbo aLeftTrackModel : leftTrackModel)
-			{
+
+		if (vehicle.isPartIntact(EnumDriveablePart.leftTrack)) {
+			for (ModelRendererTurbo aLeftTrackModel : leftTrackModel) {
 				aLeftTrackModel.render(f5, oldRotateOrder);
 			}
-			for(ModelRendererTurbo leftTrackWheelModel : leftTrackWheelModels)
-			{
+			for (ModelRendererTurbo leftTrackWheelModel : leftTrackWheelModels) {
 				leftTrackWheelModel.rotateAngleZ = rotateWheels ? -vehicle.wheelsAngle : 0;
 				leftTrackWheelModel.render(f5, oldRotateOrder);
 			}
-			
-			for(int i = 0; i < leftAnimTrackModel.length; i++)
-			{
-				if(i == animFrame)
-				{
-					for(ModelRendererTurbo aLeftAnimTrackModel : leftAnimTrackModel[i])
-					{
+
+			for (int i = 0; i < leftAnimTrackModel.length; i++) {
+				if (i == animFrame) {
+					for (ModelRendererTurbo aLeftAnimTrackModel : leftAnimTrackModel[i]) {
 						aLeftAnimTrackModel.render(f5, oldRotateOrder);
 					}
 				}
 			}
-			
+
 		}
-		
-		if(vehicle.isPartIntact(EnumDriveablePart.rightTrack))
-		{
-			for(ModelRendererTurbo aRightTrackModel : rightTrackModel)
-			{
+
+		if (vehicle.isPartIntact(EnumDriveablePart.rightTrack)) {
+			for (ModelRendererTurbo aRightTrackModel : rightTrackModel) {
 				aRightTrackModel.render(f5, oldRotateOrder);
 			}
-			for(ModelRendererTurbo rightTrackWheelModel : rightTrackWheelModels)
-			{
+			for (ModelRendererTurbo rightTrackWheelModel : rightTrackWheelModels) {
 				rightTrackWheelModel.rotateAngleZ = rotateWheels ? -vehicle.wheelsAngle : 0;
 				rightTrackWheelModel.render(f5, oldRotateOrder);
 			}
-			
-			for(int i = 0; i < rightAnimTrackModel.length; i++)
-			{
-				if(i == animFrame)
-				{
-					for(ModelRendererTurbo aRightAnimTrackModel : rightAnimTrackModel[i])
-					{
+
+			for (int i = 0; i < rightAnimTrackModel.length; i++) {
+				if (i == animFrame) {
+					for (ModelRendererTurbo aRightAnimTrackModel : rightAnimTrackModel[i]) {
 						aRightAnimTrackModel.render(f5, oldRotateOrder);
 					}
 				}
 			}
 		}
-		
-		if(vehicle.isPartIntact(EnumDriveablePart.trailer))
-		{
-			for(ModelRendererTurbo aTrailerModel : trailerModel)
-			{
+
+		if (vehicle.isPartIntact(EnumDriveablePart.trailer)) {
+			for (ModelRendererTurbo aTrailerModel : trailerModel) {
 				aTrailerModel.render(f5, oldRotateOrder);
 			}
 		}
-		
+
 		//Render guns
-		for(EntitySeat seat : vehicle.getSeats())
-		{
+		for (EntitySeat seat : vehicle.getSeats()) {
 			//If the seat has a gun model attached
-			if(seat != null && seat.seatInfo != null && seat.seatInfo.gunName != null && gunModels.get(seat.seatInfo.gunName) != null && vehicle.isPartIntact(seat.seatInfo.part) && !vehicle.rotateWithTurret(seat.seatInfo))
-			{
+			if (seat != null && seat.seatInfo != null && seat.seatInfo.gunName != null && gunModels.get(seat.seatInfo.gunName) != null && vehicle.isPartIntact(seat.seatInfo.part) && !vehicle.rotateWithTurret(seat.seatInfo)) {
 				float yaw = seat.prevLooking.getYaw() + (seat.looking.getYaw() - seat.prevLooking.getYaw()) * f;
 				float pitch = seat.prevLooking.getPitch() + (seat.looking.getPitch() - seat.prevLooking.getPitch()) * f;
-				
+
 				//Iterate over the parts of that model
 				ModelRendererTurbo[][] gunModel = gunModels.get(seat.seatInfo.gunName);
 				//Yaw only parts
-				for(ModelRendererTurbo gunModelPart : gunModel[0])
-				{
+				for (ModelRendererTurbo gunModelPart : gunModel[0]) {
 					//Yaw and render
 					gunModelPart.rotateAngleY = -yaw * 3.14159265F / 180F;
 					gunModelPart.render(f5);
 				}
 				//Yaw and pitch, no recoil parts
-				for(ModelRendererTurbo gunModelPart : gunModel[1])
-				{
+				for (ModelRendererTurbo gunModelPart : gunModel[1]) {
 					//Yaw, pitch and render
 					gunModelPart.rotateAngleY = -yaw * 3.14159265F / 180F;
 					gunModelPart.rotateAngleZ = -pitch * 3.14159265F / 180F;
 					gunModelPart.render(f5);
 				}
 				//Yaw, pitch and recoil parts
-				for(ModelRendererTurbo gunModelPart : gunModel[2])
-				{
+				for (ModelRendererTurbo gunModelPart : gunModel[2]) {
 					//Yaw, pitch, recoil and render
 					gunModelPart.rotateAngleY = -yaw * 3.14159265F / 180F;
 					gunModelPart.rotateAngleZ = -pitch * 3.14159265F / 180F;
@@ -250,77 +205,66 @@ public class ModelVehicle extends ModelDriveable
 			}
 		}
 	}
-	
+
 	/**
 	 * Render the tank turret
 	 *
 	 * @param dt
 	 */
-	public void renderTurret(float f, float f1, float f2, float f3, float f4, float f5, EntityVehicle vehicle, float dt)
-	{
+	public void renderTurret(float f, float f1, float f2, float f3, float f4, float f5, EntityVehicle vehicle, float dt) {
 		VehicleType type = vehicle.getVehicleType();
-		
+
 		//Render main turret barrel
 		{
 			float yaw = vehicle.getSeat(0).looking.getYaw();
 			float pitch = vehicle.getSeat(0).looking.getPitch();
-			
-			for(ModelRendererTurbo aTurretModel : turretModel)
-			{
+
+			for (ModelRendererTurbo aTurretModel : turretModel) {
 				aTurretModel.render(f5, oldRotateOrder);
 			}
-			for(ModelRendererTurbo aBarrelModel : barrelModel)
-			{
+			for (ModelRendererTurbo aBarrelModel : barrelModel) {
 				aBarrelModel.rotateAngleZ = -pitch * 3.14159265F / 180F;
 				aBarrelModel.render(f5, oldRotateOrder);
 			}
-			for(int i = 0; i < ammoModel.length; i++)
-			{
-				if(i >= type.numMissileSlots || vehicle.getDriveableData().missiles[i] != null)
-				{
-					for(int j = 0; j < ammoModel[i].length; j++)
-					{
+			for (int i = 0; i < ammoModel.length; i++) {
+				if (i >= type.numMissileSlots || vehicle.getDriveableData().missiles[i] != null) {
+					for (int j = 0; j < ammoModel[i].length; j++) {
 						ammoModel[i][j].rotateAngleZ = -pitch * 3.14159265F / 180F;
 						ammoModel[i][j].render(f5, oldRotateOrder);
 					}
 				}
 			}
 		}
-		
+
 		//Render turret guns
-		for(EntitySeat seat : vehicle.getSeats())
-		{
+		for (EntitySeat seat : vehicle.getSeats()) {
 			//If the seat has a gun model attached
-			if(seat != null && seat.seatInfo != null && seat.seatInfo.gunName != null && gunModels.get(seat.seatInfo.gunName) != null && vehicle.isPartIntact(seat.seatInfo.part) && vehicle.rotateWithTurret(seat.seatInfo))
-			{
+			if (seat != null && seat.seatInfo != null && seat.seatInfo.gunName != null && gunModels.get(seat.seatInfo.gunName) != null && vehicle.isPartIntact(seat.seatInfo.part) && vehicle.rotateWithTurret(seat.seatInfo)) {
 				EntitySeat driverSeat = vehicle.getSeat(0);
-				
+
 				float driverYaw = driverSeat.prevLooking.getYaw() + (driverSeat.looking.getYaw() - driverSeat.prevLooking.getYaw()) * dt;
 				float yaw = seat.prevLooking.getYaw() + (seat.looking.getYaw() - seat.prevLooking.getYaw()) * dt;
 				float pitch = seat.prevLooking.getPitch() + (seat.looking.getPitch() - seat.prevLooking.getPitch()) * dt;
-				
+
 				float effectiveYaw = yaw - driverYaw;
-				
+
 				//Iterate over the parts of that model
 				ModelRendererTurbo[][] gunModel = gunModels.get(seat.seatInfo.gunName);
 				//Yaw only parts
-				for(ModelRendererTurbo gunModelPart : gunModel[0])
-				{
+				for (ModelRendererTurbo gunModelPart : gunModel[0]) {
 					//Yaw and render
 					gunModelPart.rotateAngleY = -effectiveYaw * 3.14159265F / 180F;
 					gunModelPart.render(f5, oldRotateOrder);
 				}
 				//Yaw and pitch, no recoil parts
-				for(ModelRendererTurbo gunModelPart : gunModel[1])
-				{
+				for (ModelRendererTurbo gunModelPart : gunModel[1]) {
 					//Yaw, pitch and render
 					gunModelPart.rotateAngleY = -effectiveYaw * 3.14159265F / 180F;
 					gunModelPart.rotateAngleZ = -pitch * 3.14159265F / 180F;
 					gunModelPart.render(f5, oldRotateOrder);
 				}
 				//Yaw, pitch and recoil parts
-				for(ModelRendererTurbo gunModelPart : gunModel[2])
-				{
+				for (ModelRendererTurbo gunModelPart : gunModel[2]) {
 					//Yaw, pitch, recoil and render
 					gunModelPart.rotateAngleY = -effectiveYaw * 3.14159265F / 180F;
 					gunModelPart.rotateAngleZ = -pitch * 3.14159265F / 180F;
@@ -329,21 +273,17 @@ public class ModelVehicle extends ModelDriveable
 			}
 		}
 	}
-	
-	public void renderDrillBit(EntityVehicle vehicle, float f)
-	{
-		if(vehicle.isPartIntact(EnumDriveablePart.harvester))
-		{
-			for(ModelRendererTurbo adrillHeadModel : drillHeadModel)
-			{
+
+	public void renderDrillBit(EntityVehicle vehicle, float f) {
+		if (vehicle.isPartIntact(EnumDriveablePart.harvester)) {
+			for (ModelRendererTurbo adrillHeadModel : drillHeadModel) {
 				adrillHeadModel.render(0.0625F, oldRotateOrder);
 			}
 		}
 	}
-	
+
 	@Override
-	public void flipAll()
-	{
+	public void flipAll() {
 		super.flipAll();
 		flip(bodyDoorOpenModel);
 		flip(bodyDoorCloseModel);
@@ -362,16 +302,15 @@ public class ModelVehicle extends ModelDriveable
 		flip(frontWheelModel);
 		flip(backWheelModel);
 		flip(drillHeadModel);
-		for(ModelRendererTurbo[] latm : leftAnimTrackModel)
+		for (ModelRendererTurbo[] latm : leftAnimTrackModel)
 			flip(latm);
-		for(ModelRendererTurbo[] ratm : rightAnimTrackModel)
+		for (ModelRendererTurbo[] ratm : rightAnimTrackModel)
 			flip(ratm);
 	}
-	
-	
+
+
 	@Override
-	public void translateAll(float x, float y, float z)
-	{
+	public void translateAll(float x, float y, float z) {
 		super.translateAll(x, y, z);
 		translate(bodyDoorOpenModel, x, y, z);
 		translate(bodyDoorCloseModel, x, y, z);
@@ -390,9 +329,9 @@ public class ModelVehicle extends ModelDriveable
 		translate(frontWheelModel, x, y, z);
 		translate(backWheelModel, x, y, z);
 		translate(drillHeadModel, x, y, z);
-		for(ModelRendererTurbo[] latm : leftAnimTrackModel)
+		for (ModelRendererTurbo[] latm : leftAnimTrackModel)
 			translate(latm, x, y, z);
-		for(ModelRendererTurbo[] ratm : rightAnimTrackModel)
+		for (ModelRendererTurbo[] ratm : rightAnimTrackModel)
 			translate(ratm, x, y, z);
 	}
 }

@@ -1,9 +1,11 @@
 package com.flansmod.common.guns;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
+import com.flansmod.client.model.ModelGun;
+import com.flansmod.client.model.ModelMG;
+import com.flansmod.common.FlansMod;
+import com.flansmod.common.types.PaintableType;
+import com.flansmod.common.types.TypeFile;
+import com.flansmod.common.vector.Vector3f;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,20 +14,24 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.flansmod.client.model.ModelGun;
-import com.flansmod.client.model.ModelMG;
-import com.flansmod.common.FlansMod;
-import com.flansmod.common.types.PaintableType;
-import com.flansmod.common.types.TypeFile;
-import com.flansmod.common.vector.Vector3f;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
-public class GunType extends PaintableType implements IScope
-{
+public class GunType extends PaintableType implements IScope {
 	//Gun Behaviour Variables
+	/**
+	 * The static hashmap of all guns by shortName
+	 */
+	public static HashMap<Integer, GunType> guns = new HashMap<>();
+	/**
+	 * The static list of all guns
+	 */
+	public static ArrayList<GunType> gunList = new ArrayList<>();
 	/**
 	 * The list of bullet types that can be used in this gun
 	 */
-	public List<ShootableType> ammo = new ArrayList<ShootableType>(), nonExplosiveAmmo = new ArrayList<ShootableType>();
+	public List<ShootableType> ammo = new ArrayList<>(), nonExplosiveAmmo = new ArrayList<>();
 	/**
 	 * Whether the player can press the reload key (default R) to reload this gun
 	 */
@@ -95,6 +101,7 @@ public class GunType extends PaintableType implements IScope
 	 * If true, then this gun can be dual wielded
 	 */
 	public boolean oneHanded = false;
+	//Custom Melee Stuff
 	/**
 	 * For one shot items like a panzerfaust
 	 */
@@ -103,7 +110,6 @@ public class GunType extends PaintableType implements IScope
 	 * Item to drop on shooting
 	 */
 	public String dropItemOnShoot = null;
-	//Custom Melee Stuff
 	/**
 	 * The time delay between custom melee attacks
 	 */
@@ -111,22 +117,26 @@ public class GunType extends PaintableType implements IScope
 	/**
 	 * The path the melee weapon takes
 	 */
-	public ArrayList<Vector3f> meleePath = new ArrayList<Vector3f>(), meleePathAngles = new ArrayList<Vector3f>();
+	public ArrayList<Vector3f> meleePath = new ArrayList<>(), meleePathAngles = new ArrayList<>();
+
+	//Information
+	//Show any variables into the GUI when hovering over items.
 	/**
 	 * The points on the melee weapon that damage is actually done from.
 	 */
-	public ArrayList<Vector3f> meleeDamagePoints = new ArrayList<Vector3f>();
+	public ArrayList<Vector3f> meleeDamagePoints = new ArrayList<>();
 	/**
 	 * Set these to make guns only usable by a certain type of entity
 	 */
 	public boolean usableByPlayers = true, usableByMechas = true;
-	
-	//Information
-	//Show any variables into the GUI when hovering over items.
 	/**
 	 * If false, then attachments wil not be listed in item GUI
 	 */
 	public boolean showAttachments = true;
+
+	//Shields
+	//A shield is actually a gun without any shoot functionality (similar to knives or binoculars)
+	//and a load of shield code on top. This means that guns can have in built shields (think Nerf Stampede)
 	/**
 	 * Show statistics
 	 */
@@ -135,14 +145,12 @@ public class GunType extends PaintableType implements IScope
 	 * Show reload time in seconds
 	 */
 	public boolean showReloadTime = false;
-	
-	//Shields
-	//A shield is actually a gun without any shoot functionality (similar to knives or binoculars)
-	//and a load of shield code on top. This means that guns can have in built shields (think Nerf Stampede)
 	/**
 	 * Whether or not this gun has a shield piece
 	 */
 	public boolean shield = false;
+
+	//Sounds
 	/**
 	 * Shield collision box definition. In model co-ordinates
 	 */
@@ -151,8 +159,6 @@ public class GunType extends PaintableType implements IScope
 	 * Float between 0 and 1 denoting the proportion of damage blocked by the shield
 	 */
 	public float shieldDamageAbsorption = 0F;
-	
-	//Sounds
 	/**
 	 * The sound played upon shooting
 	 */
@@ -161,6 +167,8 @@ public class GunType extends PaintableType implements IScope
 	 * The length of the sound for looping sounds
 	 */
 	public int shootSoundLength;
+
+	//Looping sounds
 	/**
 	 * Whether to distort the sound or not. Generally only set to false for looping sounds
 	 */
@@ -169,8 +177,6 @@ public class GunType extends PaintableType implements IScope
 	 * The sound to play upon reloading
 	 */
 	public String reloadSound;
-	
-	//Looping sounds
 	/**
 	 * Whether the looping sounds should be used. Automatically set if the player sets any one of the following sounds
 	 */
@@ -189,20 +195,18 @@ public class GunType extends PaintableType implements IScope
 	 * Played when the player stops holding shoot
 	 */
 	public String cooldownSound;
-	
-	
 	/**
 	 * The sound to play upon weapon swing
 	 */
 	public String meleeSound;
+
+
+	//Deployable Settings
 	/**
 	 * The sound to play while holding the weapon in the hand
 	 */
 	public String idleSound;
 	public int idleSoundLength;
-	
-	
-	//Deployable Settings
 	/**
 	 * If true, then the bullet does not shoot when right clicked, but must instead be placed on the ground
 	 */
@@ -212,6 +216,9 @@ public class GunType extends PaintableType implements IScope
 	 */
 	@SideOnly(Side.CLIENT)
 	public ModelMG deployableModel;
+
+	//Default Scope Settings. Overriden by scope attachments
+	//In many cases, this will simply be iron sights
 	/**
 	 * The deployable model's texture
 	 */
@@ -220,9 +227,6 @@ public class GunType extends PaintableType implements IScope
 	 * Various deployable settings controlling the player view limits and standing position
 	 */
 	public float standBackDist = 1.5F, topViewLimit = -60F, bottomViewLimit = 30F, sideViewLimit = 45F, pivotHeight = 0.375F;
-	
-	//Default Scope Settings. Overriden by scope attachments
-	//In many cases, this will simply be iron sights
 	/**
 	 * Default scope overlay texture
 	 */
@@ -235,18 +239,17 @@ public class GunType extends PaintableType implements IScope
 	 * The zoom level of the default scope
 	 */
 	public float zoomLevel = 1.0F;
+
+	//Attachment settings
 	/**
 	 * The FOV zoom level of the default scope
 	 */
 	public float FOVFactor = 1.5F;
-	
 	/**
 	 * For guns with 3D models
 	 */
 	@SideOnly(Side.CLIENT)
 	public ModelGun model;
-	
-	//Attachment settings
 	/**
 	 * If this is true, then all attachments are allowed. Otherwise the list is checked
 	 */
@@ -254,7 +257,7 @@ public class GunType extends PaintableType implements IScope
 	/**
 	 * The list of allowed attachments for this gun
 	 */
-	public ArrayList<AttachmentType> allowedAttachments = new ArrayList<AttachmentType>();
+	public ArrayList<AttachmentType> allowedAttachments = new ArrayList<>();
 	/**
 	 * Whether each attachment slot is available
 	 */
@@ -264,16 +267,7 @@ public class GunType extends PaintableType implements IScope
 	 * The number of generic attachment slots there are on this gun
 	 */
 	public int numGenericAttachmentSlots = 0;
-	
-	/**
-	 * The static hashmap of all guns by shortName
-	 */
-	public static HashMap<Integer, GunType> guns = new HashMap<Integer, GunType>();
-	/**
-	 * The static list of all guns
-	 */
-	public static ArrayList<GunType> gunList = new ArrayList<GunType>();
-	
+
 	//Modifiers
 	/**
 	 * Speeds up or slows down player movement when this item is held
@@ -283,27 +277,34 @@ public class GunType extends PaintableType implements IScope
 	 * Gives knockback resistance to the player
 	 */
 	public float knockbackModifier = 0F;
-	
-	
-	public GunType(TypeFile file)
-	{
+
+
+	public GunType(TypeFile file) {
 		super(file);
 	}
-	
+
+	/**
+	 * Static String to GunType method
+	 */
+	public static GunType getGun(String s) {
+		return guns.get(s.hashCode());
+	}
+
+	public static GunType getGun(int hash) {
+		return guns.get(hash);
+	}
+
 	@Override
-	public void postRead(TypeFile file)
-	{
+	public void postRead(TypeFile file) {
 		super.postRead(file);
 		gunList.add(this);
 		guns.put(shortName.hashCode(), this);
 	}
-	
+
 	@Override
-	protected void read(String[] split, TypeFile file)
-	{
+	protected void read(String[] split, TypeFile file) {
 		super.read(split, file);
-		try
-		{
+		try {
 			damage = Read(split, "Damage", damage);
 			canForceReload = Read(split, "CanForceReload", canForceReload);
 			reloadTime = Read(split, "ReloadTime", reloadTime);
@@ -316,20 +317,19 @@ public class GunType extends PaintableType implements IScope
 			dropItemOnShoot = Read(split, "DropItemOnShoot", dropItemOnShoot);
 			numBurstRounds = Read(split, "NumBurstRounds", numBurstRounds);
 			minigunStartSpeed = Read(split, "MinigunStartSpeed", minigunStartSpeed);
-			if(split[0].equals("MeleeDamage"))
-			{
+			if (split[0].equals("MeleeDamage")) {
 				meleeDamage = Float.parseFloat(split[1]);
-				if(meleeDamage > 0F)
+				if (meleeDamage > 0F)
 					secondaryFunction = EnumSecondaryFunction.MELEE;
 			}
-			
+
 			//Information
 			showAttachments = Read(split, "ShowAttachments", showAttachments);
 			showDamage = Read(split, "ShowDamage", showDamage);
 			showRecoil = Read(split, "ShowRecoil", showRecoil);
 			showSpread = Read(split, "ShowAccuracy", showSpread);
 			showReloadTime = Read(split, "ShowReloadTime", showReloadTime);
-			
+
 			//Sounds
 			shootDelay = Read(split, "ShootDelay", shootDelay);
 			shootSoundLength = Read(split, "SoundLength", shootSoundLength);
@@ -338,78 +338,57 @@ public class GunType extends PaintableType implements IScope
 			warmupSoundLength = Read(split, "WarmupSoundLength", warmupSoundLength);
 			loopedSoundLength = Read(split, "LoopedSoundLength", loopedSoundLength);
 			loopedSoundLength = Read(split, "SpinSoundLength", loopedSoundLength);
-			if(split[0].equals("ShootSound"))
-			{
+			if (split[0].equals("ShootSound")) {
 				shootSound = split[1];
 				FlansMod.proxy.loadSound(contentPack, "guns", split[1]);
-			}
-			else if(split[0].equals("ReloadSound"))
-			{
+			} else if (split[0].equals("ReloadSound")) {
 				reloadSound = split[1];
 				FlansMod.proxy.loadSound(contentPack, "guns", split[1]);
-			}
-			else if(split[0].equals("IdleSound"))
-			{
+			} else if (split[0].equals("IdleSound")) {
 				idleSound = split[1];
 				FlansMod.proxy.loadSound(contentPack, "guns", split[1]);
-			}
-			else if(split[0].equals("MeleeSound"))
-			{
+			} else if (split[0].equals("MeleeSound")) {
 				meleeSound = split[1];
 				FlansMod.proxy.loadSound(contentPack, "guns", split[1]);
 			}
-			
+
 			//Looping sounds
-			else if(split[0].equals("WarmupSound"))
-			{
+			else if (split[0].equals("WarmupSound")) {
 				warmupSound = split[1];
 				FlansMod.proxy.loadSound(contentPack, "guns", split[1]);
-			}
-			else if(split[0].equals("LoopedSound") || split[0].equals("SpinSound"))
-			{
+			} else if (split[0].equals("LoopedSound") || split[0].equals("SpinSound")) {
 				loopedSound = split[1];
 				useLoopingSounds = true;
 				FlansMod.proxy.loadSound(contentPack, "guns", split[1]);
-			}
-			else if(split[0].equals("CooldownSound"))
-			{
+			} else if (split[0].equals("CooldownSound")) {
 				cooldownSound = split[1];
 				FlansMod.proxy.loadSound(contentPack, "guns", split[1]);
 			}
-			
+
 			//Modes and zoom settings
-			else if(split[0].equals("Mode"))
+			else if (split[0].equals("Mode"))
 				mode = EnumFireMode.getFireMode(split[1]);
-			else if(split[0].equals("Scope"))
-			{
+			else if (split[0].equals("Scope")) {
 				hasScopeOverlay = true;
-				if(split[1].equals("None"))
+				if (split[1].equals("None"))
 					hasScopeOverlay = false;
 				else defaultScopeTexture = split[1];
-			}
-			else if(split[0].equals("ZoomLevel"))
-			{
+			} else if (split[0].equals("ZoomLevel")) {
 				zoomLevel = Float.parseFloat(split[1]);
-				if(zoomLevel > 1F)
+				if (zoomLevel > 1F)
 					secondaryFunction = EnumSecondaryFunction.ZOOM;
-			}
-			else if(split[0].equals("FOVZoomLevel"))
-			{
+			} else if (split[0].equals("FOVZoomLevel")) {
 				FOVFactor = Float.parseFloat(split[1]);
-				if(FOVFactor > 1F)
+				if (FOVFactor > 1F)
 					secondaryFunction = EnumSecondaryFunction.ADS_ZOOM;
-			}
-			else if(split[0].equals("Deployable"))
+			} else if (split[0].equals("Deployable"))
 				deployable = split[1].equals("True");
-			else if(FMLCommonHandler.instance().getSide().isClient() && deployable && split[0].equals("DeployedModel"))
-			{
+			else if (FMLCommonHandler.instance().getSide().isClient() && deployable && split[0].equals("DeployedModel")) {
 				deployableModel = FlansMod.proxy.loadModel(split[1], shortName, ModelMG.class);
-			}
-			else if(FMLCommonHandler.instance().getSide().isClient() && (split[0].equals("Model")))
-			{
+			} else if (FMLCommonHandler.instance().getSide().isClient() && (split[0].equals("Model"))) {
 				model = FlansMod.proxy.loadModel(split[1], shortName, ModelGun.class);
 			}
-			
+
 			deployableTexture = Read(split, "DeployedTexture", deployableTexture);
 			standBackDist = Read(split, "StandBackDistance", standBackDist);
 			topViewLimit = Read(split, "TopViewLimit", topViewLimit);
@@ -423,162 +402,132 @@ public class GunType extends PaintableType implements IScope
 			oneHanded = Read(split, "OneHanded", oneHanded);
 			usableByPlayers = Read(split, "UsableByPlayers", usableByPlayers);
 			usableByMechas = Read(split, "UsableByMechas", usableByMechas);
-			
-			if(split[0].equals("Ammo"))
-			{
+
+			if (split[0].equals("Ammo")) {
 				ShootableType type = ShootableType.getShootableType(split[1]);
-				if(type != null)
-				{
+				if (type != null) {
 					ammo.add(type);
-					if(type.explosionRadius <= 0F)
+					if (type.explosionRadius <= 0F)
 						nonExplosiveAmmo.add(type);
-				}
-				else FlansMod.log.warn("Could not find " + split[1] + " when reading ammo types for " + shortName);
-			}
-			else if(split[0].equals("BulletSpeed"))
-			{
-				if(split[1].toLowerCase().equals("instant"))
-				{
+				} else FlansMod.log.warn("Could not find " + split[1] + " when reading ammo types for " + shortName);
+			} else if (split[0].equals("BulletSpeed")) {
+				if (split[1].toLowerCase().equals("instant")) {
+					bulletSpeed = 0.0f;
+				} else bulletSpeed = Float.parseFloat(split[1]);
+
+				if (bulletSpeed > 3.0f) {
 					bulletSpeed = 0.0f;
 				}
-				else bulletSpeed = Float.parseFloat(split[1]);
-				
-				if(bulletSpeed > 3.0f)
-				{
-					bulletSpeed = 0.0f;
-				}
-			}
-			else if(split[0].equals("SecondaryFunction"))
+			} else if (split[0].equals("SecondaryFunction"))
 				secondaryFunction = EnumSecondaryFunction.get(split[1]);
-				
+
 				//Custom Melee Stuff
-			else if(split[0].equals("UseCustomMelee") && Boolean.parseBoolean(split[1]))
+			else if (split[0].equals("UseCustomMelee") && Boolean.parseBoolean(split[1]))
 				secondaryFunction = EnumSecondaryFunction.CUSTOM_MELEE;
-			
+
 			meleeTime = Read(split, "MeleeTime", meleeTime);
-			
-			if(split[0].equals("AddNode"))
-			{
+
+			if (split[0].equals("AddNode")) {
 				meleePath.add(new Vector3f(Float.parseFloat(split[1]) / 16F, Float.parseFloat(split[2]) / 16F, Float.parseFloat(split[3]) / 16F));
 				meleePathAngles.add(new Vector3f(Float.parseFloat(split[4]), Float.parseFloat(split[5]), Float.parseFloat(split[6])));
-			}
-			else if(split[0].equals("MeleeDamagePoint") || split[0].equals("MeleeDamageOffset"))
-			{
+			} else if (split[0].equals("MeleeDamagePoint") || split[0].equals("MeleeDamageOffset")) {
 				meleeDamagePoints.add(new Vector3f(Float.parseFloat(split[1]) / 16F, Float.parseFloat(split[2]) / 16F, Float.parseFloat(split[3]) / 16F));
 			}
-			
+
 			//Player modifiers
 			moveSpeedModifier = Read(split, "MoveSpeedModifier", moveSpeedModifier);
 			moveSpeedModifier = Read(split, "Slowness", moveSpeedModifier);
 			knockbackModifier = Read(split, "KnockbackReduction", knockbackModifier);
 			knockbackModifier = Read(split, "KnockbackModifier", knockbackModifier);
-			
+
 			//Attachment settings
 			allowAllAttachments = Read(split, "AllowAllAttachments", allowAllAttachments);
-			if(split[0].equals("AllowAttachments"))
-			{
-				for(int i = 1; i < split.length; i++)
-				{
+			if (split[0].equals("AllowAttachments")) {
+				for (int i = 1; i < split.length; i++) {
 					allowedAttachments.add(AttachmentType.getAttachment(split[i]));
 				}
 			}
-			
+
 			allowBarrelAttachments = Read(split, "AllowBarrelAttachments", allowBarrelAttachments);
 			allowScopeAttachments = Read(split, "AllowScopeAttachments", allowScopeAttachments);
 			allowStockAttachments = Read(split, "AllowStockAttachments", allowStockAttachments);
 			allowGripAttachments = Read(split, "AllowGripAttachments", allowGripAttachments);
 			numGenericAttachmentSlots = Read(split, "NumGenericAttachmentSlots", numGenericAttachmentSlots);
-			
+
 			//Shield settings
-			if(split[0].toLowerCase().equals("shield"))
-			{
+			if (split[0].toLowerCase().equals("shield")) {
 				shield = true;
 				shieldDamageAbsorption = Float.parseFloat(split[1]);
 				shieldOrigin = new Vector3f(Float.parseFloat(split[2]) / 16F, Float.parseFloat(split[3]) / 16F, Float.parseFloat(split[4]) / 16F);
 				shieldDimensions = new Vector3f(Float.parseFloat(split[5]) / 16F, Float.parseFloat(split[6]) / 16F, Float.parseFloat(split[7]) / 16F);
 			}
-		}
-		catch(Exception e)
-		{
+		} catch (Exception e) {
 			FlansMod.log.error("Reading gun file failed.");
 			FlansMod.log.throwing(e);
 		}
 	}
-	
-	public boolean isAmmo(ShootableType type)
-	{
+
+	public boolean isAmmo(ShootableType type) {
 		return ammo.contains(type);
 	}
-	
-	public boolean isAmmo(ItemStack stack)
-	{
-		if(stack == null || stack.isEmpty())
+
+	public boolean isAmmo(ItemStack stack) {
+		if (stack == null || stack.isEmpty())
 			return false;
-		else if(stack.getItem() instanceof ItemBullet)
-		{
-			return isAmmo(((ItemBullet)stack.getItem()).type);
-		}
-		else if(stack.getItem() instanceof ItemGrenade)
-		{
-			return isAmmo(((ItemGrenade)stack.getItem()).type);
+		else if (stack.getItem() instanceof ItemBullet) {
+			return isAmmo(((ItemBullet) stack.getItem()).type);
+		} else if (stack.getItem() instanceof ItemGrenade) {
+			return isAmmo(((ItemGrenade) stack.getItem()).type);
 		}
 		return false;
 	}
-	
+
 	/**
 	 * To be overriden by subtypes for model reloading
 	 */
-	public void reloadModel()
-	{
+	public void reloadModel() {
 		model = FlansMod.proxy.loadModel(modelString, shortName, ModelGun.class);
 	}
-	
+
 	@Override
-	public float getZoomFactor()
-	{
+	public float getZoomFactor() {
 		return zoomLevel;
 	}
-	
+
 	@Override
-	public boolean hasZoomOverlay()
-	{
+	public boolean hasZoomOverlay() {
 		return hasScopeOverlay;
 	}
-	
+
+	//ItemStack specific methods
+
 	@Override
-	public String getZoomOverlay()
-	{
+	public String getZoomOverlay() {
 		return defaultScopeTexture;
 	}
-	
+
 	@Override
-	public float getFOVFactor()
-	{
+	public float getFOVFactor() {
 		return FOVFactor;
 	}
-	
-	//ItemStack specific methods
-	
+
 	/**
 	 * Return the currently active scope on this gun. Search attachments, and by default, simply give the gun
 	 */
-	public IScope getCurrentScope(ItemStack gunStack)
-	{
+	public IScope getCurrentScope(ItemStack gunStack) {
 		IScope attachedScope = getScope(gunStack);
 		return attachedScope == null ? this : attachedScope;
 	}
-	
+
 	/**
 	 * Returns all attachments currently attached to the specified gun
 	 */
-	public ArrayList<AttachmentType> getCurrentAttachments(ItemStack gun)
-	{
+	public ArrayList<AttachmentType> getCurrentAttachments(ItemStack gun) {
 		checkForTags(gun);
-		ArrayList<AttachmentType> attachments = new ArrayList<AttachmentType>();
+		ArrayList<AttachmentType> attachments = new ArrayList<>();
 		NBTTagCompound attachmentTags = gun.getTagCompound().getCompoundTag("attachments");
-		NBTTagList genericsList = attachmentTags.getTagList("generics", (byte)10); //TODO : Check this 10 is correct
-		for(int i = 0; i < numGenericAttachmentSlots; i++)
-		{
+		NBTTagList genericsList = attachmentTags.getTagList("generics", (byte) 10); //TODO : Check this 10 is correct
+		for (int i = 0; i < numGenericAttachmentSlots; i++) {
 			appendToList(gun, "generic_" + i, attachments);
 		}
 		appendToList(gun, "barrel", attachments);
@@ -587,240 +536,192 @@ public class GunType extends PaintableType implements IScope
 		appendToList(gun, "grip", attachments);
 		return attachments;
 	}
-	
+
 	/**
 	 * Private method for attaching attachments to a list of attachments with a nullcheck
 	 */
-	private void appendToList(ItemStack gun, String name, ArrayList<AttachmentType> attachments)
-	{
+	private void appendToList(ItemStack gun, String name, ArrayList<AttachmentType> attachments) {
 		AttachmentType type = getAttachment(gun, name);
-		if(type != null) attachments.add(type);
+		if (type != null) attachments.add(type);
 	}
-	
+
 	//Attachment getter methods
-	public AttachmentType getBarrel(ItemStack gun)
-	{
+	public AttachmentType getBarrel(ItemStack gun) {
 		return getAttachment(gun, "barrel");
 	}
-	
-	public AttachmentType getScope(ItemStack gun)
-	{
+
+	public AttachmentType getScope(ItemStack gun) {
 		return getAttachment(gun, "scope");
 	}
-	
-	public AttachmentType getStock(ItemStack gun)
-	{
+
+	public AttachmentType getStock(ItemStack gun) {
 		return getAttachment(gun, "stock");
 	}
-	
-	public AttachmentType getGrip(ItemStack gun)
-	{
+
+	public AttachmentType getGrip(ItemStack gun) {
 		return getAttachment(gun, "grip");
 	}
-	
-	public AttachmentType getGeneric(ItemStack gun, int i)
-	{
+
+	public AttachmentType getGeneric(ItemStack gun, int i) {
 		return getAttachment(gun, "generic_" + i);
 	}
-	
+
 	//Attachment ItemStack getter methods
-	public ItemStack getBarrelItemStack(ItemStack gun)
-	{
+	public ItemStack getBarrelItemStack(ItemStack gun) {
 		return getAttachmentItemStack(gun, "barrel");
 	}
-	
-	public ItemStack getScopeItemStack(ItemStack gun)
-	{
+
+	public ItemStack getScopeItemStack(ItemStack gun) {
 		return getAttachmentItemStack(gun, "scope");
 	}
-	
-	public ItemStack getStockItemStack(ItemStack gun)
-	{
+
+	public ItemStack getStockItemStack(ItemStack gun) {
 		return getAttachmentItemStack(gun, "stock");
 	}
-	
-	public ItemStack getGripItemStack(ItemStack gun)
-	{
+
+	public ItemStack getGripItemStack(ItemStack gun) {
 		return getAttachmentItemStack(gun, "grip");
 	}
-	
-	public ItemStack getGenericItemStack(ItemStack gun, int i)
-	{
+
+	public ItemStack getGenericItemStack(ItemStack gun, int i) {
 		return getAttachmentItemStack(gun, "generic_" + i);
 	}
-	
+
 	/**
 	 * Generalised attachment getter method
 	 */
-	public AttachmentType getAttachment(ItemStack gun, String name)
-	{
+	public AttachmentType getAttachment(ItemStack gun, String name) {
 		checkForTags(gun);
 		return AttachmentType.getFromNBT(gun.getTagCompound().getCompoundTag("attachments").getCompoundTag(name));
 	}
-	
+
 	/**
 	 * Generalised attachment ItemStack getter method
 	 */
-	public ItemStack getAttachmentItemStack(ItemStack gun, String name)
-	{
+	public ItemStack getAttachmentItemStack(ItemStack gun, String name) {
 		checkForTags(gun);
 		return new ItemStack(gun.getTagCompound().getCompoundTag("attachments").getCompoundTag(name));
 	}
-	
+
 	/**
 	 * Method to check for null tags and assign default empty tags in that case
 	 */
-	private void checkForTags(ItemStack gun)
-	{
+	private void checkForTags(ItemStack gun) {
 		//If the gun has no tags, give it some
-		if(!gun.hasTagCompound())
-		{
+		if (!gun.hasTagCompound()) {
 			gun.setTagCompound(new NBTTagCompound());
 		}
 		//If the gun has no attachment tags, give it some
-		if(!gun.getTagCompound().hasKey("attachments"))
-		{
+		if (!gun.getTagCompound().hasKey("attachments")) {
 			NBTTagCompound attachmentTags = new NBTTagCompound();
-			for(int i = 0; i < numGenericAttachmentSlots; i++)
+			for (int i = 0; i < numGenericAttachmentSlots; i++)
 				attachmentTags.setTag("generic_" + i, new NBTTagCompound());
 			attachmentTags.setTag("barrel", new NBTTagCompound());
 			attachmentTags.setTag("scope", new NBTTagCompound());
 			attachmentTags.setTag("stock", new NBTTagCompound());
 			attachmentTags.setTag("grip", new NBTTagCompound());
-			
+
 			gun.getTagCompound().setTag("attachments", attachmentTags);
 		}
 	}
-	
+
 	/**
 	 * Get the melee damage of a specific gun, taking into account attachments
 	 */
-	public float getMeleeDamage(ItemStack stack)
-	{
+	public float getMeleeDamage(ItemStack stack) {
 		float stackMeleeDamage = meleeDamage;
-		for(AttachmentType attachment : getCurrentAttachments(stack))
-		{
+		for (AttachmentType attachment : getCurrentAttachments(stack)) {
 			stackMeleeDamage *= attachment.meleeDamageMultiplier;
 		}
 		return stackMeleeDamage;
 	}
-	
+
 	/**
 	 * Get the damage of a specific gun, taking into account attachments
 	 */
-	public float getDamage(ItemStack stack)
-	{
+	public float getDamage(ItemStack stack) {
 		float stackDamage = damage;
-		for(AttachmentType attachment : getCurrentAttachments(stack))
-		{
+		for (AttachmentType attachment : getCurrentAttachments(stack)) {
 			stackDamage *= attachment.damageMultiplier;
 		}
 		return stackDamage;
 	}
-	
+
 	/**
 	 * Get the bullet spread of a specific gun, taking into account attachments
 	 */
-	public float getSpread(ItemStack stack)
-	{
+	public float getSpread(ItemStack stack) {
 		float stackSpread = bulletSpread;
-		for(AttachmentType attachment : getCurrentAttachments(stack))
-		{
+		for (AttachmentType attachment : getCurrentAttachments(stack)) {
 			stackSpread *= attachment.spreadMultiplier;
 		}
 		return stackSpread;
 	}
-	
+
 	/**
 	 * Get the recoil of a specific gun, taking into account attachments
 	 */
-	public float getRecoil(ItemStack stack)
-	{
+	public float getRecoil(ItemStack stack) {
 		float stackRecoil = recoil;
-		for(AttachmentType attachment : getCurrentAttachments(stack))
-		{
+		for (AttachmentType attachment : getCurrentAttachments(stack)) {
 			stackRecoil *= attachment.recoilMultiplier;
 		}
 		return stackRecoil;
 	}
-	
+
 	/**
 	 * Get the bullet speed of a specific gun, taking into account attachments
 	 */
-	public float getBulletSpeed(ItemStack stack)
-	{
+	public float getBulletSpeed(ItemStack stack) {
 		float stackBulletSpeed = bulletSpeed;
-		for(AttachmentType attachment : getCurrentAttachments(stack))
-		{
+		for (AttachmentType attachment : getCurrentAttachments(stack)) {
 			stackBulletSpeed *= attachment.bulletSpeedMultiplier;
 		}
 		return stackBulletSpeed;
 	}
-	
+
 	/**
 	 * Get the reload time of a specific gun, taking into account attachments
 	 */
-	public float getReloadTime(ItemStack stack)
-	{
+	public float getReloadTime(ItemStack stack) {
 		float stackReloadTime = reloadTime;
-		for(AttachmentType attachment : getCurrentAttachments(stack))
-		{
+		for (AttachmentType attachment : getCurrentAttachments(stack)) {
 			stackReloadTime *= attachment.reloadTimeMultiplier;
 		}
 		return stackReloadTime;
 	}
-	
+
 	/**
 	 * Get the firing mode of a specific gun, taking into account attachments
 	 */
-	public EnumFireMode getFireMode(ItemStack stack)
-	{
-		for(AttachmentType attachment : getCurrentAttachments(stack))
-		{
-			if(attachment.modeOverride != null)
+	public EnumFireMode getFireMode(ItemStack stack) {
+		for (AttachmentType attachment : getCurrentAttachments(stack)) {
+			if (attachment.modeOverride != null)
 				return attachment.modeOverride;
 		}
 		return mode;
 	}
-	
-	public float GetShootDelay(ItemStack stack)
-	{
-		for(AttachmentType attachment : getCurrentAttachments(stack))
-		{
-			if(attachment.modeOverride == EnumFireMode.BURST)
+
+	public float GetShootDelay(ItemStack stack) {
+		for (AttachmentType attachment : getCurrentAttachments(stack)) {
+			if (attachment.modeOverride == EnumFireMode.BURST)
 				return Math.max(shootDelay, 3);
 		}
 		return shootDelay;
 	}
-	
-	/**
-	 * Static String to GunType method
-	 */
-	public static GunType getGun(String s)
-	{
-		return guns.get(s.hashCode());
-	}
-	
-	public static GunType getGun(int hash)
-	{
-		return guns.get(hash);
-	}
-	
+
 	@Override
-	protected void preRead(TypeFile file)
-	{
+	protected void preRead(TypeFile file) {
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
-	public ModelBase GetModel()
-	{
+	public ModelBase GetModel() {
 		return model;
 	}
-	
+
 	@Override
-	public float GetRecommendedScale()
-	{
+	public float GetRecommendedScale() {
 		return 60.0f;
 	}
 }

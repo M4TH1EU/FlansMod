@@ -1,0 +1,16 @@
+# Auto detect text file line endings
+* text=auto
+
+# Text
+*.java  text
+*.json  text
+*.md    text
+*.txt   text
+*.sh    text    eol=lf
+*.bat   text    eol=crlf
+
+# Binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.jar   binary

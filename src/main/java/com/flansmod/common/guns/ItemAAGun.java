@@ -1,7 +1,8 @@
 package com.flansmod.common.guns;
 
-import java.util.ArrayList;
-
+import com.flansmod.common.FlansMod;
+import com.flansmod.common.types.IFlanItem;
+import com.flansmod.common.types.InfoType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -16,27 +17,22 @@ import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-import com.flansmod.common.FlansMod;
-import com.flansmod.common.types.IFlanItem;
-import com.flansmod.common.types.InfoType;
+import java.util.ArrayList;
 
-public class ItemAAGun extends Item implements IFlanItem
-{
-	public static final ArrayList<String> names = new ArrayList<String>();
+public class ItemAAGun extends Item implements IFlanItem {
+	public static final ArrayList<String> names = new ArrayList<>();
 	public AAGunType type;
-	
-	public ItemAAGun(AAGunType type1)
-	{
+
+	public ItemAAGun(AAGunType type1) {
 		maxStackSize = 1;
 		type = type1;
 		type.item = this;
 		setRegistryName(type.shortName);
 		setCreativeTab(FlansMod.tabFlanGuns);
 	}
-	
+
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer entityplayer, EnumHand hand)
-	{
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer entityplayer, EnumHand hand) {
 		ItemStack itemstack = entityplayer.getHeldItem(hand);
 		//Raytracing
 		float cosYaw = MathHelper.cos(-entityplayer.rotationYaw * 0.01745329F - 3.141593F);
@@ -47,43 +43,36 @@ public class ItemAAGun extends Item implements IFlanItem
 		Vec3d posVec = new Vec3d(entityplayer.posX, entityplayer.posY + 1.62D - entityplayer.getYOffset(), entityplayer.posZ);
 		Vec3d lookVec = posVec.add(sinYaw * cosPitch * length, sinPitch * length, cosYaw * cosPitch * length);
 		RayTraceResult RayTraceResult = world.rayTraceBlocks(posVec, lookVec, true);
-		
+
 		//Result check
-		if(RayTraceResult == null)
-		{
-			return new ActionResult<ItemStack>(EnumActionResult.PASS, itemstack);
+		if (RayTraceResult == null) {
+			return new ActionResult<>(EnumActionResult.PASS, itemstack);
 		}
-		if(RayTraceResult.typeOfHit == Type.BLOCK)
-		{
+		if (RayTraceResult.typeOfHit == Type.BLOCK) {
 			int i = RayTraceResult.getBlockPos().getX();
 			int j = RayTraceResult.getBlockPos().getY();
 			int k = RayTraceResult.getBlockPos().getZ();
-			if(!world.isRemote && world.isSideSolid(RayTraceResult.getBlockPos(), EnumFacing.UP))
-			{
-				world.spawnEntity(new EntityAAGun(world, type, (double)i + 0.5F, (double)j + 1F, (double)k + 0.5F, entityplayer));
+			if (!world.isRemote && world.isSideSolid(RayTraceResult.getBlockPos(), EnumFacing.UP)) {
+				world.spawnEntity(new EntityAAGun(world, type, (double) i + 0.5F, (double) j + 1F, (double) k + 0.5F, entityplayer));
 			}
-			if(!entityplayer.capabilities.isCreativeMode)
-			{
+			if (!entityplayer.capabilities.isCreativeMode) {
 				itemstack.setCount(itemstack.getCount() - 1);
 			}
-			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
+			return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
 		}
-		return new ActionResult<ItemStack>(EnumActionResult.PASS, itemstack);
+		return new ActionResult<>(EnumActionResult.PASS, itemstack);
 	}
-	
-	public Entity spawnAAGun(World world, double x, double y, double z, ItemStack stack)
-	{
+
+	public Entity spawnAAGun(World world, double x, double y, double z, ItemStack stack) {
 		Entity entity = new EntityAAGun(world, type, x, y, z, null);
-		if(!world.isRemote)
-		{
+		if (!world.isRemote) {
 			world.spawnEntity(entity);
 		}
 		return entity;
 	}
-	
+
 	@Override
-	public InfoType getInfoType()
-	{
+	public InfoType getInfoType() {
 		return type;
 	}
 }

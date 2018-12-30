@@ -1,5 +1,6 @@
 package com.flansmod.common.tools;
 
+import com.flansmod.common.FlansMod;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -16,112 +17,94 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 
-import com.flansmod.common.FlansMod;
-
-public class EntityParachute extends Entity implements IEntityAdditionalSpawnData
-{
+public class EntityParachute extends Entity implements IEntityAdditionalSpawnData {
 	public ToolType type;
-	
-	public EntityParachute(World w)
-	{
+
+	public EntityParachute(World w) {
 		super(w);
 		ignoreFrustumCheck = true;
 		FlansMod.log.debug(w.isRemote ? "Client paraspawn" : "Server paraspawn");
 	}
-	
-	public EntityParachute(World w, ToolType t, EntityPlayer player)
-	{
+
+	public EntityParachute(World w, ToolType t, EntityPlayer player) {
 		this(w);
 		type = t;
 		setPosition(player.posX, player.posY, player.posZ);
 	}
-	
+
 	@Override
-	public void onUpdate()
-	{
+	public void onUpdate() {
 		super.onUpdate();
-		
-		if(!world.isRemote && (getControllingPassenger() == null || getControllingPassenger().getRidingEntity() != this))
-		{
+
+		if (!world.isRemote && (getControllingPassenger() == null || getControllingPassenger().getRidingEntity() != this)) {
 			setDead();
 		}
-		
-		if(getControllingPassenger() != null)
+
+		if (getControllingPassenger() != null)
 			getControllingPassenger().fallDistance = 0F;
-		
+
 		motionY = -0.1D;
-		
-		if(getControllingPassenger() != null && getControllingPassenger() instanceof EntityLivingBase)
-		{
+
+		if (getControllingPassenger() != null && getControllingPassenger() instanceof EntityLivingBase) {
 			float speedMultiplier = 0.002F;
-			double moveForwards = ((EntityLivingBase)this.getControllingPassenger()).moveForward;
-			double moveStrafing = ((EntityLivingBase)this.getControllingPassenger()).moveStrafing;
-			double sinYaw = -Math.sin((getControllingPassenger().rotationYaw * (float)Math.PI / 180.0F));
-			double cosYaw = Math.cos((this.getControllingPassenger().rotationYaw * (float)Math.PI / 180.0F));
+			double moveForwards = ((EntityLivingBase) this.getControllingPassenger()).moveForward;
+			double moveStrafing = ((EntityLivingBase) this.getControllingPassenger()).moveStrafing;
+			double sinYaw = -Math.sin((getControllingPassenger().rotationYaw * (float) Math.PI / 180.0F));
+			double cosYaw = Math.cos((this.getControllingPassenger().rotationYaw * (float) Math.PI / 180.0F));
 			motionX += (moveForwards * sinYaw + moveStrafing * cosYaw) * speedMultiplier;
 			motionZ += (moveForwards * cosYaw - moveStrafing * sinYaw) * speedMultiplier;
-			
+
 			prevRotationYaw = rotationYaw;
 			rotationYaw = getControllingPassenger().rotationYaw;
 		}
-		
+
 		motionX *= 0.8F;
 		motionZ *= 0.8F;
-		
+
 		move(MoverType.SELF, motionX, motionY, motionZ);
-		
-		if(onGround || world.getBlockState(new BlockPos(MathHelper.floor(posX), MathHelper.floor(posY), MathHelper.floor(posZ))).getMaterial() == Material.WATER)
-		{
+
+		if (onGround || world.getBlockState(new BlockPos(MathHelper.floor(posX), MathHelper.floor(posY), MathHelper.floor(posZ))).getMaterial() == Material.WATER) {
 			setDead();
 		}
 	}
-	
+
 	@Override
-	public void fall(float par1, float k)
-	{
+	public void fall(float par1, float k) {
 		//Ignore fall damage
 	}
-	
+
 	@Override
-	public boolean attackEntityFrom(DamageSource source, float f)
-	{
+	public boolean attackEntityFrom(DamageSource source, float f) {
 		setDead();
 		return true;
 	}
-	
+
 	@Override
-	protected void entityInit()
-	{
+	protected void entityInit() {
 	}
-	
+
 	@Override
-	protected void readEntityFromNBT(NBTTagCompound tags)
-	{
+	protected void readEntityFromNBT(NBTTagCompound tags) {
 		type = ToolType.getType(tags.getString("Type"));
 	}
-	
+
 	@Override
-	protected void writeEntityToNBT(NBTTagCompound tags)
-	{
+	protected void writeEntityToNBT(NBTTagCompound tags) {
 		tags.setString("Type", type.shortName);
 	}
-	
+
 	@Override
-	public ItemStack getPickedResult(RayTraceResult target)
-	{
-		ItemStack stack = new ItemStack(type.item, 1, 0);
-		return stack;
+	public ItemStack getPickedResult(RayTraceResult target) {
+		return new ItemStack(type.item, 1, 0);
 	}
-	
+
 	@Override
-	public void writeSpawnData(ByteBuf buffer)
-	{
+	public void writeSpawnData(ByteBuf buffer) {
 		ByteBufUtils.writeUTF8String(buffer, type.shortName);
 	}
-	
+
 	@Override
-	public void readSpawnData(ByteBuf additionalData)
-	{
+	public void readSpawnData(ByteBuf additionalData) {
 		type = ToolType.getType(ByteBufUtils.readUTF8String(additionalData));
 	}
 }

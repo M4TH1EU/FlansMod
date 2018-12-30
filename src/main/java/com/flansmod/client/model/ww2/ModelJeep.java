@@ -1645,8 +1645,7 @@ public class ModelJeep extends ModelVehicle //Same as Filename
 		gun_2_Model[1][7].addShapeBox(-5.5F, -3.25F, -0.5F, 1, 1, 1, 0F, -0.4F, -0.2F, -0.2F, -0.4F, -0.2F, -0.2F, -0.4F, -0.2F, -0.2F, -0.4F, -0.2F, -0.2F, -0.4F, -0.2F, -0.2F, -0.4F, -0.2F, -0.2F, -0.4F, -0.2F, -0.2F, -0.4F, -0.2F, -0.2F); // Box 14
 
 		//Gun Origin
-		for(ModelRendererTurbo gunPart : gun_2_Model[1])
-		{
+		for (ModelRendererTurbo gunPart : gun_2_Model[1]) {
 			gunPart.setRotationPoint(-15F, -30F, 0F);
 		}
 
@@ -1657,8 +1656,7 @@ public class ModelJeep extends ModelVehicle //Same as Filename
 		gun_2_Model[2][0].addShapeBox(-4.5F, -1.7F, 1F, 4, 2, 3, 0F, -0.6F, 0F, 0F, -0.6F, 0F, 0F, -0.6F, 0F, 0.5F, -0.6F, 0F, 0.5F, -0.6F, 0.5F, 0F, -0.6F, 0.5F, 0F, -0.6F, 0.5F, 0.5F, -0.6F, 0.5F, 0.5F); // Box 299
 
 		//Gun Origin
-		for(ModelRendererTurbo gunPart : gun_2_Model[2])
-		{
+		for (ModelRendererTurbo gunPart : gun_2_Model[2]) {
 			gunPart.setRotationPoint(-15F, -30F, 0F);
 		}
 

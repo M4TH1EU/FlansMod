@@ -3,17 +3,15 @@ package com.flansmod.client.model.ww2;
 import com.flansmod.client.model.ModelPlane;
 import com.flansmod.client.tmt.ModelRendererTurbo;
 
-public class ModelZero extends ModelPlane
-{
-	public ModelZero()
-	{
+public class ModelZero extends ModelPlane {
+	public ModelZero() {
 		int textureX = 512; //The x-size of the texture
 		int textureY = 512;    //The y-size of the texture
 		//Initializing Model
 
 		//Creates each block with texture co-ordinates starting at the first two values. Second 2 values are the overall size of the texture
 		//(Dont forget the crazy shapes you can make with it)
-		
+
 		//Body
 		bodyModel = new ModelRendererTurbo[25];
 		bodyModel[0] = new ModelRendererTurbo(this, 450, 470, textureX, textureY); // CR.CoreFront
@@ -133,7 +131,7 @@ public class ModelZero extends ModelPlane
 
 		bodyModel[24].addBox(0F, 0F, 0F, 1, 14, 1, 0F); // CR.Antenna
 		bodyModel[24].setRotationPoint(0F, -37F, -0.5F);
-		
+
 
 		//Nose
 		noseModel = new ModelRendererTurbo[2];
@@ -145,8 +143,8 @@ public class ModelZero extends ModelPlane
 
 		noseModel[1].addBox(-2F, -3.5F, -3.5F, 5, 7, 7, 0F); // NS.Nosecone
 		noseModel[1].setRotationPoint(-53F, -15F, 0F);
-		
-		
+
+
 		//Bay
 		bayModel = new ModelRendererTurbo[5];
 		bayModel[0] = new ModelRendererTurbo(this, 300, 150, textureX, textureY); // BY.BayRight
@@ -234,7 +232,7 @@ public class ModelZero extends ModelPlane
 		tailWheelModel[0].addBox(0F, 0F, 0F, 4, 4, 2, 0F); // LGT.BackWheel
 		tailWheelModel[0].setRotationPoint(50F, -8F, -1F);
 
-		
+
 		//Right wing
 		rightWingModel = new ModelRendererTurbo[5];
 		rightWingModel[0] = new ModelRendererTurbo(this, 200, 0, textureX, textureY); // RW.RightWingMain
@@ -267,7 +265,7 @@ public class ModelZero extends ModelPlane
 		rightWingModel[4].setRotationPoint(-31F, -9.5F, -23F);
 		rightWingModel[4].rotateAngleX = 0.06981317F;
 
-		
+
 		//Left wing
 		leftWingModel = new ModelRendererTurbo[5];
 		leftWingModel[0] = new ModelRendererTurbo(this, 0, 0, textureX, textureY); // LW.LeftWingMain
@@ -312,7 +310,7 @@ public class ModelZero extends ModelPlane
 		propellerModels[0][0].setRotationPoint(-53F, -15F, 0F);    //Set the position of the propeller
 		propellerModels[0][1].setRotationPoint(-53F, -15F, 0F);
 		propellerModels[0][2].setRotationPoint(-53F, -15F, 0F);
-		
+
 		yawFlapModel = new ModelRendererTurbo[4];
 		yawFlapModel[0] = new ModelRendererTurbo(this, 420, 420, textureX, textureY); // YF.JoyStick
 		yawFlapModel[1] = new ModelRendererTurbo(this, 410, 420, textureX, textureY); // YF.JoyStickGrip
@@ -330,8 +328,8 @@ public class ModelZero extends ModelPlane
 
 		yawFlapModel[3].addBox(-3F, -4F, 0F, 6, 4, 2, 0F); // YF.TailYawFlapTop
 		yawFlapModel[3].setRotationPoint(52F, -36F, -1F);
-		
-		
+
+
 		pitchFlapLeftModel = new ModelRendererTurbo[2];
 		pitchFlapLeftModel[0] = new ModelRendererTurbo(this, 400, 460, textureX, textureY); // LF.LeftPedal
 		pitchFlapLeftModel[1] = new ModelRendererTurbo(this, 200, 430, textureX, textureY); // LF.LeftTailFlap
@@ -342,8 +340,8 @@ public class ModelZero extends ModelPlane
 
 		pitchFlapLeftModel[1].addBox(0F, -0.5F, 0F, 4, 1, 22, 0F); // LF.LeftTailFlap
 		pitchFlapLeftModel[1].setRotationPoint(47F, -17F, 5F);
-		
-		
+
+
 		pitchFlapRightModel = new ModelRendererTurbo[2];
 		pitchFlapRightModel[0] = new ModelRendererTurbo(this, 400, 460, textureX, textureY); // RF.RightPedal
 		pitchFlapRightModel[1] = new ModelRendererTurbo(this, 200, 430, textureX, textureY); // RF.RightTailFlap
@@ -354,7 +352,7 @@ public class ModelZero extends ModelPlane
 
 		pitchFlapRightModel[1].addBox(0F, -0.5F, 0F, 4, 1, 22, 0F); // RF.RightTailFlap
 		pitchFlapRightModel[1].setRotationPoint(47F, -17F, -27F);
-		
+
 		pitchFlapLeftWingModel = new ModelRendererTurbo[1];
 		pitchFlapLeftWingModel[0] = new ModelRendererTurbo(this, 0, 220, textureX, textureY); // LF.LeftWingFlap
 
@@ -372,8 +370,8 @@ public class ModelZero extends ModelPlane
 		pitchFlapRightWingModel[0].setRotationPoint(-5.5F, -9.5F, -38F);
 		pitchFlapRightWingModel[0].rotateAngleX = -0.06981317F;
 		pitchFlapRightWingModel[0].rotateAngleY = -0.122173F;
-		
-		
+
+
 		leftWingWheelModel = new ModelRendererTurbo[3];
 		leftWingWheelModel[0] = new ModelRendererTurbo(this, 0, 320, textureX, textureY); // LGLW.Stick
 		leftWingWheelModel[1] = new ModelRendererTurbo(this, 0, 345, textureX, textureY); // LGLW.Wheel

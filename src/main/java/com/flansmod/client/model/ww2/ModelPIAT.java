@@ -14,13 +14,11 @@ import com.flansmod.client.model.EnumAnimationType;
 import com.flansmod.client.model.ModelGun;
 import com.flansmod.client.tmt.ModelRendererTurbo;
 
-public class ModelPIAT extends ModelGun
-{
+public class ModelPIAT extends ModelGun {
 	int textureX = 128;
 	int textureY = 128;
 
-	public ModelPIAT()
-	{
+	public ModelPIAT() {
 
 
 // Gun

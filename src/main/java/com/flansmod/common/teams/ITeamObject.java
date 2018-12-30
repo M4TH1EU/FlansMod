@@ -5,39 +5,38 @@ package com.flansmod.common.teams;
  *
  * @author James
  */
-public interface ITeamObject
-{
-	
+public interface ITeamObject {
+
 	//Return the base that this object is a part of
-	public ITeamBase getBase();
-	
+	ITeamBase getBase();
+
+	//Called when an op connects this object to a new base
+	void setBase(ITeamBase base);
+
 	//Called when the owner of a base is set by an op
 	//The object should remember the base ID for saving / loading
-	public void onBaseSet(int newTeamID);
-	
+	void onBaseSet(int newTeamID);
+
 	//Called when a base is captured, but not when set by an op
 	//The object should remember the base ID for saving / loading
-	public void onBaseCapture(int newTeamID);
-	
-	//Called when an op connects this object to a new base
-	public void setBase(ITeamBase base);
-	
+	void onBaseCapture(int newTeamID);
+
 	//Tick hook for this object. You may use hooks inherited from super classes or this hook interchangeably
-	public void tick();
-	
+	void tick();
+
 	//Called when this object is clicked with a Stick of Destruction
-	public void destroy();
-	
+	void destroy();
+
 	//Returns the position of this object
-	public double getPosX();
-	
-	public double getPosY();
-	
-	public double getPosZ();
-	
+	double getPosX();
+
+	double getPosY();
+
+	double getPosZ();
+
 	//Return true if players can spawn here
-	public boolean isSpawnPoint();
-	
+	boolean isSpawnPoint();
+
 	//Return true if this object should force the chunk it is in to remain loaded
-	public boolean forceChunkLoading();
+	boolean forceChunkLoading();
 }

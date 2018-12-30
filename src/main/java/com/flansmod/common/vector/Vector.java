@@ -31,10 +31,10 @@
  */
 package com.flansmod.common.vector;
 
+import com.flansmod.common.FlansMod;
+
 import java.io.Serializable;
 import java.nio.FloatBuffer;
-
-import com.flansmod.common.FlansMod;
 
 /**
  * Base class for vectors.
@@ -43,33 +43,30 @@ import com.flansmod.common.FlansMod;
  * @version $Revision$
  * $Id$
  */
-public abstract class Vector implements Serializable, ReadableVector
-{
-	
+public abstract class Vector implements Serializable, ReadableVector {
+
 	/**
 	 * Constructor for Vector.
 	 */
-	protected Vector()
-	{
+	protected Vector() {
 		super();
 	}
-	
+
 	/**
 	 * @return the length of the vector
 	 */
 	@Override
-	public final float length()
-	{
-		return (float)Math.sqrt(lengthSquared());
+	public final float length() {
+		return (float) Math.sqrt(lengthSquared());
 	}
-	
-	
+
+
 	/**
 	 * @return the length squared of the vector
 	 */
 	@Override
 	public abstract float lengthSquared();
-	
+
 	/**
 	 * Load this vector from a FloatBuffer
 	 *
@@ -77,36 +74,32 @@ public abstract class Vector implements Serializable, ReadableVector
 	 * @return this
 	 */
 	public abstract Vector load(FloatBuffer buf);
-	
+
 	/**
 	 * Negate a vector
 	 *
 	 * @return this
 	 */
 	public abstract Vector negate();
-	
-	
+
+
 	/**
 	 * Normalise this vector
 	 *
 	 * @return this
 	 */
-	public final Vector normalise()
-	{
+	public final Vector normalise() {
 		float len = length();
-		if(len != 0.0f)
-		{
+		if (len != 0.0f) {
 			float l = 1.0f / len;
 			return scale(l);
-		}
-		else
-		{
+		} else {
 			FlansMod.Assert(false, "ZERO LENGTH VECTOR");
 			return this;
 		}
 	}
-	
-	
+
+
 	/**
 	 * Store this vector in a FloatBuffer
 	 *
@@ -115,8 +108,8 @@ public abstract class Vector implements Serializable, ReadableVector
 	 */
 	@Override
 	public abstract Vector store(FloatBuffer buf);
-	
-	
+
+
 	/**
 	 * Scale this vector
 	 *
@@ -124,6 +117,6 @@ public abstract class Vector implements Serializable, ReadableVector
 	 * @return this
 	 */
 	public abstract Vector scale(float scale);
-	
-	
+
+
 }

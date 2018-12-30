@@ -3,13 +3,11 @@ package com.flansmod.client.model.zombie;
 import com.flansmod.client.model.ModelCustomArmour;
 import com.flansmod.client.tmt.ModelRendererTurbo;
 
-public class ModelPoliceHat extends ModelCustomArmour
-{
+public class ModelPoliceHat extends ModelCustomArmour {
 	int textureX = 64;
 	int textureY = 32;
 
-	public ModelPoliceHat()
-	{
+	public ModelPoliceHat() {
 		headModel = new ModelRendererTurbo[9];
 		headModel[0] = new ModelRendererTurbo(this, 0, 0, textureX, textureY);
 		headModel[1] = new ModelRendererTurbo(this, 0, 12, textureX, textureY);

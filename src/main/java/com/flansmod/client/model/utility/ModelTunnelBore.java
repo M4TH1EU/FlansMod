@@ -8,13 +8,11 @@ import com.flansmod.client.model.ModelVehicle;
 import com.flansmod.client.tmt.ModelRendererTurbo;
 import com.flansmod.common.vector.Vector3f;
 
-public class ModelTunnelBore extends ModelVehicle
-{
+public class ModelTunnelBore extends ModelVehicle {
 	int textureX = 256;
 	int textureY = 512;
 
-	public ModelTunnelBore()
-	{
+	public ModelTunnelBore() {
 		bodyModel = new ModelRendererTurbo[6];
 		bodyModel[0] = new ModelRendererTurbo(this, 0, 0, textureX, textureY); // Part
 		bodyModel[1] = new ModelRendererTurbo(this, 0, 56, textureX, textureY); // Box 13
@@ -89,7 +87,7 @@ public class ModelTunnelBore extends ModelVehicle
 		drillHeadModel[8].rotateAngleX = 3.35103216F;
 
 		drillHeadOrigin = new Vector3f(48F / 16F, 16F / 16F, 0F);
-		
+
 
 		leftTrackModel = new ModelRendererTurbo[10];
 		leftTrackModel[0] = new ModelRendererTurbo(this, 0, 489, textureX, textureY); // Box 26

@@ -565,8 +565,7 @@ public class ModelBF109 extends ModelPlane //Same as Filename
 		flipAll();
 	}
 
-	private ModelRendererTurbo[] makeProp1(float i, float j, float k)
-	{
+	private ModelRendererTurbo[] makeProp1(float i, float j, float k) {
 		ModelRendererTurbo[] prop = new ModelRendererTurbo[3];
 		prop[0] = new ModelRendererTurbo(this, 0, 197, textureX, textureY);
 		prop[1] = new ModelRendererTurbo(this, 0, 197, textureX, textureY);

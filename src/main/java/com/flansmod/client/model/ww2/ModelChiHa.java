@@ -13,13 +13,11 @@ package com.flansmod.client.model.ww2;
 import com.flansmod.client.model.ModelVehicle;
 import com.flansmod.client.tmt.ModelRendererTurbo;
 
-public class ModelChiHa extends ModelVehicle
-{
+public class ModelChiHa extends ModelVehicle {
 	int textureX = 1024;
 	int textureY = 1024;
 
-	public ModelChiHa()
-	{
+	public ModelChiHa() {
 
 // Body
 		bodyModel = new ModelRendererTurbo[22];

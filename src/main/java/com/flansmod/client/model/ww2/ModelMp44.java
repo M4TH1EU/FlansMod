@@ -343,7 +343,7 @@ public class ModelMp44 extends ModelGun //Same as Filename
 		stockAttachPoint = new Vector3f(0.1F / 16F, 4F / 16F, 0F / 16F);
 		scopeAttachPoint = new Vector3f(-80F / 16F, 16F / 4F, 0F / 16F);
 		gripAttachPoint = new Vector3f(8F / 16F, 4.5F / 16F, 0F / 16F);
-		
+
 		gunSlideDistance = 5.17F;
 		animationType = EnumAnimationType.PISTOL_CLIP;
 

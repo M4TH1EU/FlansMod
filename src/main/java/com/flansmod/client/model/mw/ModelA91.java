@@ -8,13 +8,11 @@ import com.flansmod.client.model.ModelGun;
 import com.flansmod.client.tmt.ModelRendererTurbo;
 import com.flansmod.common.vector.Vector3f;
 
-public class ModelA91 extends ModelGun
-{
+public class ModelA91 extends ModelGun {
 	int textureX = 64;
 	int textureY = 16;
 
-	public ModelA91()
-	{
+	public ModelA91() {
 		gunModel = new ModelRendererTurbo[16];
 		gunModel[0] = new ModelRendererTurbo(this, 0, 0, textureX, textureY); // Box 0
 		gunModel[1] = new ModelRendererTurbo(this, 32, 5, textureX, textureY); // Box 1

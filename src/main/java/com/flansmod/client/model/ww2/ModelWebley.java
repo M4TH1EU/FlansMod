@@ -15,13 +15,11 @@ import com.flansmod.client.model.ModelGun;
 import com.flansmod.client.tmt.ModelRendererTurbo;
 import com.flansmod.common.vector.Vector3f;
 
-public class ModelWebley extends ModelGun
-{
+public class ModelWebley extends ModelGun {
 	int textureX = 256;
 	int textureY = 128;
 
-	public ModelWebley()
-	{
+	public ModelWebley() {
 
 
 // Gun
@@ -29,7 +27,7 @@ public class ModelWebley extends ModelGun
 		gunModel[0] = new ModelRendererTurbo(this, 0, 11, textureX, textureY); // Gun1
 		gunModel[1] = new ModelRendererTurbo(this, 0, 26, textureX, textureY); // Gun2
 		gunModel[2] = new ModelRendererTurbo(this, 0, 37, textureX, textureY); // Gun3
-		
+
 		gunModel[3] = new ModelRendererTurbo(this, 0, 83, textureX, textureY); // Gun7
 		gunModel[4] = new ModelRendererTurbo(this, 0, 91, textureX, textureY); // Gun8
 		gunModel[5] = new ModelRendererTurbo(this, 0, 97, textureX, textureY); // Gun9
@@ -65,9 +63,9 @@ public class ModelWebley extends ModelGun
 
 		gunModel[8].addBox(0F, 0F, 0F, 3, 1, 1, 0F); // Gun12
 		gunModel[8].setRotationPoint(25F, -7F, -0.5F);
-		
+
 		revolverBarrelModel = new ModelRendererTurbo[3];
-		
+
 		revolverBarrelModel[0] = new ModelRendererTurbo(this, 0, 47, textureX, textureY); // Gun4
 		revolverBarrelModel[1] = new ModelRendererTurbo(this, 0, 59, textureX, textureY); // Gun5
 		revolverBarrelModel[2] = new ModelRendererTurbo(this, 0, 72, textureX, textureY); // Gun6
@@ -97,19 +95,19 @@ public class ModelWebley extends ModelGun
 
 		ammoModel[1].addBox(0F, 0F, 0.1F, 2, 2, 2, 0F); // Ammo2
 		ammoModel[1].setRotationPoint(11.9F, -4F, -3F);
-		
+
 		ammoModel[2].addBox(0F, 0F, 0.1F, 4, 2, 2, 0F); // Ammo1
 		ammoModel[2].setRotationPoint(8.1F, -1.5F, -3F);
 
 		ammoModel[3].addBox(0F, 0F, 0.1F, 2, 2, 2, 0F); // Ammo2
 		ammoModel[3].setRotationPoint(11.9F, -1.5F, -3F);
-		
+
 		ammoModel[4].addBox(0F, 0F, 0.1F, 4, 2, 2, 0F); // Ammo1
 		ammoModel[4].setRotationPoint(8.1F, -4F, 0.5F);
 
 		ammoModel[5].addBox(0F, 0F, 0.1F, 2, 2, 2, 0F); // Ammo2
 		ammoModel[5].setRotationPoint(11.9F, -4F, 0.5F);
-		
+
 		ammoModel[6].addBox(0F, 0F, 0.1F, 4, 2, 2, 0F); // Ammo1
 		ammoModel[6].setRotationPoint(8.1F, -1.5F, 0.5F);
 
@@ -119,8 +117,8 @@ public class ModelWebley extends ModelGun
 
 		gunSlideDistance = 0F;
 		animationType = EnumAnimationType.REVOLVER;
-		
-		
+
+
 		flipAll();
 		translateAll(0F, 13F, 0F);
 		thirdPersonOffset = new Vector3f(-0.05F, -0.05F, 0F);

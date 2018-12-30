@@ -13,13 +13,11 @@ package com.flansmod.client.model.ww2;
 import com.flansmod.client.model.ModelPlane;
 import com.flansmod.client.tmt.ModelRendererTurbo;
 
-public class ModelYak9 extends ModelPlane
-{
+public class ModelYak9 extends ModelPlane {
 	int textureX = 512;
 	int textureY = 512;
 
-	public ModelYak9()
-	{
+	public ModelYak9() {
 
 // Nose
 		noseModel = new ModelRendererTurbo[8];
@@ -56,11 +54,11 @@ public class ModelYak9 extends ModelPlane
 
 		noseModel[6].addBox(0F, -0.5F, -0.5F, 10, 1, 1, 0F); // NS.Cannon
 		noseModel[6].setRotationPoint(-74F, -18F, 0F);
-		
+
 		noseModel[7].addBox(-2F, -3.5F, -3.5F, 7, 7, 7, 0F); // NS.cone
 		noseModel[7].setRotationPoint(-70F, -18F, 0F);
-		
-		
+
+
 		propellerModels = new ModelRendererTurbo[1][3]; //1 propeller in 3 parts
 		propellerModels[0][0] = new ModelRendererTurbo(this, 0, 450, textureX, textureY); //Propeller 0 - Blade 0 : 192, 12 is the texture origin
 		propellerModels[0][1] = new ModelRendererTurbo(this, 0, 450, textureX, textureY); //Propeller 0 - Blade 1
@@ -430,10 +428,8 @@ public class ModelYak9 extends ModelPlane
 	}
 
 	// Replace with your propeller function
-	private ModelRendererTurbo[] makeProp(int i, int j, int k)
-	{
-		ModelRendererTurbo[] prop = new ModelRendererTurbo[0];
-		return prop;
+	private ModelRendererTurbo[] makeProp(int i, int j, int k) {
+		return new ModelRendererTurbo[0];
 
 	}
 }

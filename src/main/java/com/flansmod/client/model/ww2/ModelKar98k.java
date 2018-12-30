@@ -165,7 +165,7 @@ public class ModelKar98k extends ModelGun //Same as Filename
 		pumpDelay = 11;
 		pumpTime = 9;
 		animationType = EnumAnimationType.RIFLE_TOP;
-		
+
 		numBulletsInReloadAnimation = 1;
 		tiltGunTime = 0.25F;
 		unloadClipTime = 0.0F;

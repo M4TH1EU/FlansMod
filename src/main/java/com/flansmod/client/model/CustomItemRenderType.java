@@ -1,7 +1,6 @@
 package com.flansmod.client.model;
 
-public enum CustomItemRenderType
-{
+public enum CustomItemRenderType {
 	ENTITY,
 	EQUIPPED,
 	EQUIPPED_FIRST_PERSON,

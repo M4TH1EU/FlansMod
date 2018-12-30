@@ -7,13 +7,11 @@ package com.flansmod.client.model.mw;
 import com.flansmod.client.model.ModelCustomArmour;
 import com.flansmod.client.tmt.ModelRendererTurbo;
 
-public class ModelExoskeletonBody extends ModelCustomArmour
-{
+public class ModelExoskeletonBody extends ModelCustomArmour {
 	int textureX = 512;
 	int textureY = 512;
 
-	public ModelExoskeletonBody()
-	{
+	public ModelExoskeletonBody() {
 		bodyModel = new ModelRendererTurbo[33];
 		bodyModel[0] = new ModelRendererTurbo(this, 145, 41, textureX, textureY); // Box 17
 		bodyModel[1] = new ModelRendererTurbo(this, 233, 1, textureX, textureY); // Box 18
@@ -151,7 +149,7 @@ public class ModelExoskeletonBody extends ModelCustomArmour
 
 
 		rightArmModel = new ModelRendererTurbo[13];
-		
+
 		rightArmModel[0] = new ModelRendererTurbo(this, 457, 17, textureX, textureY); // Box 26
 		rightArmModel[1] = new ModelRendererTurbo(this, 505, 1, textureX, textureY); // Box 28
 		rightArmModel[2] = new ModelRendererTurbo(this, 97, 1, textureX, textureY); // Box 31
@@ -168,7 +166,7 @@ public class ModelExoskeletonBody extends ModelCustomArmour
 
 		float armOffsetX = 20, armOffsetY = 60, armOffsetZ = -1;
 
-		
+
 		rightArmModel[0].addBox(-33F + armOffsetX, -39F + armOffsetY, -6F + armOffsetZ, 1, 10, 14, 0F); // Box 26
 		rightArmModel[0].setRotationPoint(0F, 0F, -1F);
 
@@ -210,7 +208,7 @@ public class ModelExoskeletonBody extends ModelCustomArmour
 
 
 		leftArmModel = new ModelRendererTurbo[13];
-		
+
 		leftArmModel[0] = new ModelRendererTurbo(this, 337, 49, textureX, textureY); // Box 27
 		leftArmModel[1] = new ModelRendererTurbo(this, 385, 73, textureX, textureY); // Box 71
 		leftArmModel[2] = new ModelRendererTurbo(this, 1, 41, textureX, textureY); // Box 77

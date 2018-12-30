@@ -1,5 +1,6 @@
 package com.flansmod.common.teams;
 
+import com.flansmod.common.FlansMod;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -15,21 +16,16 @@ import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-import com.flansmod.common.FlansMod;
-
-public class ItemFlagpole extends Item
-{
-	public ItemFlagpole()
-	{
+public class ItemFlagpole extends Item {
+	public ItemFlagpole() {
 		setCreativeTab(FlansMod.tabFlanTeams);
 		setRegistryName("flagpole");
 	}
-	
+
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer entityplayer, EnumHand hand)
-	{
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer entityplayer, EnumHand hand) {
 		ItemStack itemstack = entityplayer.getHeldItem(hand);
-		
+
 		float f = 1.0F;
 		float f1 = entityplayer.prevRotationPitch + (entityplayer.rotationPitch - entityplayer.prevRotationPitch) * f;
 		float f2 = entityplayer.prevRotationYaw + (entityplayer.rotationYaw - entityplayer.prevRotationYaw) * f;
@@ -42,38 +38,31 @@ public class ItemFlagpole extends Item
 		float f5 = -MathHelper.cos(-f1 * 0.01745329F);
 		float f6 = MathHelper.sin(-f1 * 0.01745329F);
 		float f7 = f4 * f5;
-		float f8 = f6;
 		float f9 = f3 * f5;
 		double d3 = 5D;
-		Vec3d vec3d1 = vec3d.add(f7 * d3, f8 * d3, f9 * d3);
+		Vec3d vec3d1 = vec3d.add(f7 * d3, f6 * d3, f9 * d3);
 		RayTraceResult RayTraceResult = world.rayTraceBlocks(vec3d, vec3d1, true);
-		if(RayTraceResult == null)
-		{
-			return new ActionResult<ItemStack>(EnumActionResult.PASS, itemstack);
+		if (RayTraceResult == null) {
+			return new ActionResult<>(EnumActionResult.PASS, itemstack);
 		}
-		if(RayTraceResult.typeOfHit == Type.BLOCK)
-		{
+		if (RayTraceResult.typeOfHit == Type.BLOCK) {
 			BlockPos pos = RayTraceResult.getBlockPos();
-			if(!world.isRemote)
-			{
-				if(world.getBlockState(pos).getBlock() == Blocks.SNOW)
-				{
+			if (!world.isRemote) {
+				if (world.getBlockState(pos).getBlock() == Blocks.SNOW) {
 					pos.add(0, -1, 0);
 				}
-				if(isSolid(world, pos))
-				{
+				if (isSolid(world, pos)) {
 					world.spawnEntity(new EntityFlagpole(world, pos));
 				}
 			}
-			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
+			return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
 		}
-		return new ActionResult<ItemStack>(EnumActionResult.PASS, itemstack);
+		return new ActionResult<>(EnumActionResult.PASS, itemstack);
 	}
-	
-	private boolean isSolid(World world, BlockPos pos)
-	{
+
+	private boolean isSolid(World world, BlockPos pos) {
 		IBlockState state = world.getBlockState(pos);
-		if(state == null)
+		if (state == null)
 			return false;
 		return state.getMaterial().isSolid() && state.isOpaqueCube();
 	}

@@ -1213,8 +1213,7 @@ public class ModelKubel extends ModelVehicle //Same as Filename
 		gun_1_Model[1][15].addShapeBox(-1.5F, -0.9F, 1F, 2, 3, 4, 0F, 0F, 0F, -0.2F, 0F, 0F, -0.2F, 0F, 0F, -0.2F, 0F, 0F, -0.2F, 0F, 0F, -0.2F, 0F, 0F, -0.2F, 0F, 0F, -0.2F, 0F, 0F, -0.2F); // Box 1
 
 		//Gun Origin
-		for(ModelRendererTurbo gunPart : gun_1_Model[1])
-		{
+		for (ModelRendererTurbo gunPart : gun_1_Model[1]) {
 			gunPart.setRotationPoint(-5F, -25F, 0F);
 		}
 

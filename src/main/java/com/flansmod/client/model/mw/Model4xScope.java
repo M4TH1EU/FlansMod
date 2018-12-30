@@ -13,13 +13,11 @@ package com.flansmod.client.model.mw;
 import com.flansmod.client.model.ModelAttachment;
 import com.flansmod.client.tmt.ModelRendererTurbo;
 
-public class Model4xScope extends ModelAttachment
-{
+public class Model4xScope extends ModelAttachment {
 	int textureX = 32;
 	int textureY = 32;
-	
-	public Model4xScope()
-	{
+
+	public Model4xScope() {
 
 
 // Attachment
@@ -31,32 +29,32 @@ public class Model4xScope extends ModelAttachment
 		attachmentModel[4] = new ModelRendererTurbo(this, 9, 15, textureX, textureY); // LensFront
 		attachmentModel[5] = new ModelRendererTurbo(this, 0, 20, textureX, textureY); // Dial1
 		attachmentModel[6] = new ModelRendererTurbo(this, 0, 20, textureX, textureY); // Dial2
-		
+
 		attachmentModel[0].addBox(0F, 0F, 0F, 9, 1, 1, 0F); // MainScope
 		attachmentModel[0].setRotationPoint(-4F, -2F, -0.5F);
-		
+
 		attachmentModel[1].addBox(0F, 0F, 0F, 1, 2, 1, 0F); // Stand
 		attachmentModel[1].setRotationPoint(-2F, -1F, -0.5F);
-		
+
 		attachmentModel[2].addBox(0F, 0F, 0F, 1, 2, 1, 0F); // Stand
 		attachmentModel[2].setRotationPoint(2F, -1F, -0.5F);
-		
+
 		attachmentModel[3].addBox(0F, 0F, 0F, 2, 2, 2, 0F); // LensRear
 		attachmentModel[3].setRotationPoint(-5F, -2.5F, -1F);
-		
+
 		attachmentModel[4].addBox(0F, 0F, 0F, 2, 2, 2, 0F); // LensFront
 		attachmentModel[4].setRotationPoint(4F, -2.5F, -1F);
-		
+
 		attachmentModel[5].addBox(0F, 0F, 0F, 1, 1, 1, 0F); // Dial1
 		attachmentModel[5].setRotationPoint(-1F, -2.5F, -0.5F);
-		
+
 		attachmentModel[6].addBox(0F, 0F, 0F, 1, 1, 1, 0F); // Dial2
 		attachmentModel[6].setRotationPoint(-1F, -2F, -1F);
-		
-		
+
+
 		renderOffset = 0F;
-		
-		
+
+
 		flipAll();
 	}
 }

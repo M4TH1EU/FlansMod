@@ -2303,8 +2303,7 @@ public class ModelUC2Pdr extends ModelVehicle //Same as Filename
 		gun_1_Model[1][34].addShapeBox(-7F, -0.5F, -1F, 1, 1, 1, 0F, -0.3F, 0F, -0.3F, -0.3F, 0F, -0.3F, -0.3F, 0F, -0.3F, -0.3F, 0F, -0.3F, -0.3F, 0F, -0.3F, -0.3F, 0F, -0.3F, -0.3F, 0F, -0.3F, -0.3F, 0F, -0.3F); // Box 0
 
 		//Gun Origin
-		for(ModelRendererTurbo gunPart : gun_1_Model[1])
-		{
+		for (ModelRendererTurbo gunPart : gun_1_Model[1]) {
 			gunPart.setRotationPoint(27F, -13F, 7F);
 		}
 
@@ -2406,8 +2405,7 @@ public class ModelUC2Pdr extends ModelVehicle //Same as Filename
 		gun_2_Model[0][28].addShapeBox(6.2F, -7.3F, -10.7F, 1, 2, 3, 0F, 5.7F, -0.8F, 2F, -6.3F, -0.8F, 2F, -4.3F, -0.8F, 0F, 3.7F, -0.8F, 0F, 5.7F, -0.5F, 2F, -6.3F, -0.5F, 2F, -4F, -0.5F, 0F, 3.4F, -0.5F, 0F); // Box 4
 
 		//Gun Origin
-		for(ModelRendererTurbo gunPart : gun_2_Model[0])
-		{
+		for (ModelRendererTurbo gunPart : gun_2_Model[0]) {
 			gunPart.setRotationPoint(0F, -26F, 0F);
 		}
 
@@ -2469,8 +2467,7 @@ public class ModelUC2Pdr extends ModelVehicle //Same as Filename
 		gun_2_Model[1][17].addShapeBox(-1F, -1F, -2.5F, 2, 2, 5, 0F, -0.3F, -0.3F, 0.1F, -0.3F, -0.3F, 0.1F, -0.3F, -0.3F, 0.1F, -0.3F, -0.3F, 0.1F, -0.3F, -0.3F, 0.1F, -0.3F, -0.3F, 0.1F, -0.3F, -0.3F, 0.1F, -0.3F, -0.3F, 0.1F); // Box 104
 
 		//Gun Origin
-		for(ModelRendererTurbo gunPart : gun_2_Model[1])
-		{
+		for (ModelRendererTurbo gunPart : gun_2_Model[1]) {
 			gunPart.setRotationPoint(0F, -26F, 0F);
 		}
 

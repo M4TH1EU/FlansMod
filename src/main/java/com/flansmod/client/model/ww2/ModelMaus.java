@@ -13,13 +13,11 @@ package com.flansmod.client.model.ww2;
 import com.flansmod.client.model.ModelVehicle;
 import com.flansmod.client.tmt.ModelRendererTurbo;
 
-public class ModelMaus extends ModelVehicle
-{
+public class ModelMaus extends ModelVehicle {
 	int textureX = 1024;
 	int textureY = 1024;
 
-	public ModelMaus()
-	{
+	public ModelMaus() {
 
 // Body
 		bodyModel = new ModelRendererTurbo[26];

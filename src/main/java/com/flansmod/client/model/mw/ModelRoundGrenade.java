@@ -1,17 +1,14 @@
 package com.flansmod.client.model.mw;
 
+import com.flansmod.client.tmt.ModelRendererTurbo;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.Entity;
 
-import com.flansmod.client.tmt.ModelRendererTurbo;
-
-public class ModelRoundGrenade extends ModelBase
-{
+public class ModelRoundGrenade extends ModelBase {
 	public ModelRendererTurbo headModel;
 	public ModelRendererTurbo bodyModel;
 
-	public ModelRoundGrenade()
-	{
+	public ModelRoundGrenade() {
 		bodyModel = new ModelRendererTurbo(this, 0, 0, 16, 8);
 		bodyModel.addBox(-1F, -1F, -1F, 2, 2, 2);
 		headModel = new ModelRendererTurbo(this, 8, 0, 16, 8);
@@ -21,8 +18,7 @@ public class ModelRoundGrenade extends ModelBase
 	}
 
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		headModel.render(f5);
 		bodyModel.render(f5);
 	}

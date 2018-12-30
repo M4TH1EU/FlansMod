@@ -1914,8 +1914,7 @@ public class ModelStuG extends ModelVehicle //Same as Filename
 		gun_1_Model[1][12].addShapeBox(-2F, -1F, -0.5F, 12, 1, 1, 0F, 0F, 0F, 0.4F, 0F, 0F, 0.2F, 0F, 0F, 0.2F, 0F, 0F, 0.4F, 0F, 0F, 0.4F, 0F, 0F, 0.2F, 0F, 0F, 0.2F, 0F, 0F, 0.4F); // Box 0
 
 		//Gun Origin
-		for(ModelRendererTurbo gunPart : gun_1_Model[1])
-		{
+		for (ModelRendererTurbo gunPart : gun_1_Model[1]) {
 			gunPart.setRotationPoint(-5F, -37F, -20F);
 		}
 
@@ -1932,8 +1931,7 @@ public class ModelStuG extends ModelVehicle //Same as Filename
 		gun_1_Model[2][2].addShapeBox(-4.5F, -1.06F, 1F, 2, 3, 4, 0F, 0F, 0F, -0.2F, 0F, 0F, -0.2F, 0F, 0F, -0.2F, 0F, 0F, -0.2F, 0F, 0F, -0.2F, 0F, 0F, -0.2F, 0F, 0F, -0.2F, 0F, 0F, -0.2F); // Box 1
 
 		//Gun Origin
-		for(ModelRendererTurbo gunPart : gun_1_Model[2])
-		{
+		for (ModelRendererTurbo gunPart : gun_1_Model[2]) {
 			gunPart.setRotationPoint(-5F, -37F, -20F);
 		}
 

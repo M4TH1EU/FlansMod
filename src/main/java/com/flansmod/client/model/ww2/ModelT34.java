@@ -7,13 +7,11 @@ package com.flansmod.client.model.ww2;
 import com.flansmod.client.model.ModelVehicle;
 import com.flansmod.client.tmt.ModelRendererTurbo;
 
-public class ModelT34 extends ModelVehicle
-{
+public class ModelT34 extends ModelVehicle {
 	int textureX = 512;
 	int textureY = 1024;
 
-	public ModelT34()
-	{
+	public ModelT34() {
 		bodyModel = new ModelRendererTurbo[21];
 		bodyModel[0] = new ModelRendererTurbo(this, 0, 50, textureX, textureY); // UnderBody
 		bodyModel[1] = new ModelRendererTurbo(this, 0, 110, textureX, textureY); // UnderBase

@@ -14,13 +14,11 @@ import com.flansmod.client.model.EnumAnimationType;
 import com.flansmod.client.model.ModelGun;
 import com.flansmod.client.tmt.ModelRendererTurbo;
 
-public class ModelPPSH extends ModelGun
-{
+public class ModelPPSH extends ModelGun {
 	int textureX = 512;
 	int textureY = 512;
 
-	public ModelPPSH()
-	{
+	public ModelPPSH() {
 
 
 // Gun

@@ -1,16 +1,13 @@
 package com.flansmod.client.model.zombie;
 
+import com.flansmod.client.tmt.ModelRendererTurbo;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.Entity;
 
-import com.flansmod.client.tmt.ModelRendererTurbo;
-
-public class ModelFleshLump extends ModelBase
-{
+public class ModelFleshLump extends ModelBase {
 	public ModelRendererTurbo[] fleshModel;
 
-	public ModelFleshLump()
-	{
+	public ModelFleshLump() {
 		fleshModel = new ModelRendererTurbo[2];
 
 		fleshModel[0] = new ModelRendererTurbo(this, 0, 0, 16, 16);
@@ -20,9 +17,8 @@ public class ModelFleshLump extends ModelBase
 	}
 
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
-		for(ModelRendererTurbo m : fleshModel)
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+		for (ModelRendererTurbo m : fleshModel)
 			m.render(f5);
 	}
 }

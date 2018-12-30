@@ -6,10 +6,9 @@ package com.flansmod.api;
  *
  * @author AidanBrady
  */
-public interface IExplodeable
-{
+public interface IExplodeable {
 	/**
 	 * Explode the entity completely.
 	 */
-	public void explode();
+	void explode();
 }

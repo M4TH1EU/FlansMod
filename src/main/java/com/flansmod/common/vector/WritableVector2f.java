@@ -38,23 +38,22 @@ package com.flansmod.common.vector;
  * @version $revision$
  * $Id$
  */
-public interface WritableVector2f
-{
-	
+public interface WritableVector2f {
+
 	/**
 	 * Set the X value
 	 *
 	 * @param x
 	 */
 	void setX(float x);
-	
+
 	/**
 	 * Set the Y value
 	 *
 	 * @param y
 	 */
 	void setY(float y);
-	
+
 	/**
 	 * Set the X,Y values
 	 *
@@ -62,5 +61,5 @@ public interface WritableVector2f
 	 * @param y
 	 */
 	void set(float x, float y);
-	
+
 }

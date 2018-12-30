@@ -34,12 +34,11 @@ package com.flansmod.common.vector;
 /**
  * @author foo
  */
-public interface ReadableVector4f extends ReadableVector3f
-{
-	
+public interface ReadableVector4f extends ReadableVector3f {
+
 	/**
 	 * @return w
 	 */
 	float getW();
-	
+
 }

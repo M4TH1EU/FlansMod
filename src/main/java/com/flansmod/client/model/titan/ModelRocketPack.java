@@ -3,13 +3,11 @@ package com.flansmod.client.model.titan;
 import com.flansmod.client.model.ModelMechaTool;
 import com.flansmod.client.tmt.ModelRendererTurbo;
 
-public class ModelRocketPack extends ModelMechaTool
-{
-	public ModelRocketPack()
-	{
+public class ModelRocketPack extends ModelMechaTool {
+	public ModelRocketPack() {
 		int textureX = 64;
 		int textureY = 64;
-		
+
 		baseModel = new ModelRendererTurbo[5];
 		baseModel[0] = new ModelRendererTurbo(this, 0, 27, textureX, textureY);
 		baseModel[0].addBox(-1, -10, -8, 1, 20, 16);

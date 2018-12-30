@@ -15,13 +15,11 @@ import com.flansmod.client.model.ModelGun;
 import com.flansmod.client.tmt.ModelRendererTurbo;
 import com.flansmod.common.vector.Vector3f;
 
-public class ModelAT4 extends ModelGun
-{
+public class ModelAT4 extends ModelGun {
 	int textureX = 256;
 	int textureY = 32;
 
-	public ModelAT4()
-	{
+	public ModelAT4() {
 
 
 // Gun
@@ -75,7 +73,7 @@ public class ModelAT4 extends ModelGun
 		flipAll();
 		translateAll(0, 0, 3);
 		thirdPersonOffset = new Vector3f(0F, 0F, -0.2F);
-		
+
 		itemFrameOffset = new Vector3f(11F / 16F, 0F / 16F, 0F);
 	}
 }

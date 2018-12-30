@@ -3,8 +3,7 @@ package com.flansmod.common.driveables;
 import com.flansmod.common.parts.PartType;
 import com.flansmod.common.vector.Vector3f;
 
-public class Propeller
-{
+public class Propeller {
 	/**
 	 * For crafting and plane destruction
 	 */
@@ -21,9 +20,8 @@ public class Propeller
 	 * Part of the plane it is connected to, for partial plane destruction purposes
 	 */
 	public EnumDriveablePart planePart;
-	
-	public Propeller(int i, int x, int y, int z, EnumDriveablePart part, PartType type)
-	{
+
+	public Propeller(int i, int x, int y, int z, EnumDriveablePart part, PartType type) {
 		ID = i;
 		this.x = x;
 		this.y = y;
@@ -31,9 +29,8 @@ public class Propeller
 		planePart = part;
 		itemType = type;
 	}
-	
-	public Vector3f getPosition()
-	{
+
+	public Vector3f getPosition() {
 		return new Vector3f(x / 16F, y / 16F, z / 16F);
 	}
 }

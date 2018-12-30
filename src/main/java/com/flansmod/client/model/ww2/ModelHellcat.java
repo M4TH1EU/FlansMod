@@ -19,6 +19,65 @@ public class ModelHellcat extends ModelVehicle //Same as Filename
 	int textureX = 512;
 	int textureY = 512;
 
+	{
+
+		// Passenger 2
+		ModelRendererTurbo[][] gun_1_Model = new ModelRendererTurbo[3][];
+
+		gun_1_Model[0] = new ModelRendererTurbo[0];
+
+		gun_1_Model[1] = new ModelRendererTurbo[10];
+		gun_1_Model[1][0] = new ModelRendererTurbo(this, 1, 341, textureX, textureY); // Box 299
+		gun_1_Model[1][1] = new ModelRendererTurbo(this, 9, 341, textureX, textureY); // Box 299
+		gun_1_Model[1][2] = new ModelRendererTurbo(this, 33, 341, textureX, textureY); // Box 299
+		gun_1_Model[1][3] = new ModelRendererTurbo(this, 1, 349, textureX, textureY); // Box 299
+		gun_1_Model[1][4] = new ModelRendererTurbo(this, 49, 341, textureX, textureY); // Box 299
+		gun_1_Model[1][5] = new ModelRendererTurbo(this, 49, 349, textureX, textureY); // Box 299
+		gun_1_Model[1][6] = new ModelRendererTurbo(this, 57, 341, textureX, textureY); // Box 299
+		gun_1_Model[1][7] = new ModelRendererTurbo(this, 1, 357, textureX, textureY); // Box 299
+		gun_1_Model[1][8] = new ModelRendererTurbo(this, 25, 349, textureX, textureY); // Box 299
+		gun_1_Model[1][9] = new ModelRendererTurbo(this, 41, 349, textureX, textureY); // Box 299
+
+		gun_1_Model[1][0].addShapeBox(7F, -0.8F, -1.5F, 1, 1, 2, 0F, 0F, 0F, -1F, 3F, 0F, -1F, 3F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -1F, 3F, 0F, -1F, 3F, 0F, 0F, 0F, 0F, 0F); // Box 299
+
+		gun_1_Model[1][1].addShapeBox(7F, -1.5F, -0.5F, 7, 1, 1, 0F, 0F, -0.2F, -0.2F, 3F, -0.2F, -0.2F, 3F, -0.2F, -0.2F, 0F, -0.2F, -0.2F, 0F, -0.2F, -0.2F, 3F, -0.2F, -0.2F, 3F, -0.2F, -0.2F, 0F, -0.2F, -0.2F); // Box 299
+
+		gun_1_Model[1][2].addShapeBox(4F, -1.5F, -0.5F, 5, 1, 1, 0F, 0F, 0.2F, 0.2F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0.2F, 0.2F, 0F, 0.2F, 0.2F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0.2F, 0.2F); // Box 299
+
+		gun_1_Model[1][3].addShapeBox(-5F, -2F, -1F, 9, 2, 2, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 299
+
+		gun_1_Model[1][4].addShapeBox(-3F, -1.8F, -2F, 1, 1, 2, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 299
+
+		gun_1_Model[1][5].addShapeBox(-9F, -2F, -1F, 4, 2, 2, 0F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F); // Box 299
+
+		gun_1_Model[1][6].addShapeBox(-11F, -2.5F, 1F, 1, 3, 1, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 299
+
+		gun_1_Model[1][7].addShapeBox(-11F, -2.5F, -2F, 1, 3, 1, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 299
+
+		gun_1_Model[1][8].addShapeBox(-10F, -2F, -1F, 1, 2, 0, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 299
+
+		gun_1_Model[1][9].addShapeBox(-10F, -2F, 1F, 1, 2, 0, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 299
+
+		//Gun Origin
+		for (ModelRendererTurbo gunPart : gun_1_Model[1]) {
+			gunPart.setRotationPoint(5F, -38F, 11F);
+		}
+
+
+		gun_1_Model[2] = new ModelRendererTurbo[1];
+		gun_1_Model[2][0] = new ModelRendererTurbo(this, 25, 349, textureX, textureY); // Box 299
+
+		gun_1_Model[2][0].addShapeBox(-4.5F, -1.5F, 1F, 4, 3, 4, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 299
+
+		//Gun Origin
+		for (ModelRendererTurbo gunPart : gun_1_Model[2]) {
+			gunPart.setRotationPoint(5F, -38F, 11F);
+		}
+
+
+		registerGunModel("PassengerGun1", gun_1_Model);
+	}
+
 	public ModelHellcat() //Same as Filename
 	{
 		bodyModel = new ModelRendererTurbo[310];
@@ -45,8 +104,7 @@ public class ModelHellcat extends ModelVehicle //Same as Filename
 		flipAll();
 	}
 
-	private void initbodyModel_1()
-	{
+	private void initbodyModel_1() {
 		bodyModel[0] = new ModelRendererTurbo(this, 233, 57, textureX, textureY); // Box 35
 		bodyModel[1] = new ModelRendererTurbo(this, 329, 65, textureX, textureY); // Box 36
 		bodyModel[2] = new ModelRendererTurbo(this, 329, 57, textureX, textureY); // Box 38
@@ -1523,8 +1581,7 @@ public class ModelHellcat extends ModelVehicle //Same as Filename
 		bodyModel[309].rotateAngleY = -1.57079633F;
 	}
 
-	private void initturretModel_1()
-	{
+	private void initturretModel_1() {
 		turretModel[0] = new ModelRendererTurbo(this, 0, 301, textureX, textureY); // Box 256
 		turretModel[1] = new ModelRendererTurbo(this, 83, 23, textureX, textureY); // Box 257
 		turretModel[2] = new ModelRendererTurbo(this, 17, 59, textureX, textureY); // Box 259
@@ -2190,8 +2247,7 @@ public class ModelHellcat extends ModelVehicle //Same as Filename
 		turretModel[153].rotateAngleY = -0.29670597F;
 	}
 
-	private void initbarrelModel_1()
-	{
+	private void initbarrelModel_1() {
 		barrelModel[0] = new ModelRendererTurbo(this, 185, 1, textureX, textureY); // Box 1080
 		barrelModel[1] = new ModelRendererTurbo(this, 50, 2, textureX, textureY); // Box 1127
 		barrelModel[2] = new ModelRendererTurbo(this, 97, 1, textureX, textureY); // Box 1127
@@ -2346,8 +2402,7 @@ public class ModelHellcat extends ModelVehicle //Same as Filename
 		barrelModel[36].setRotationPoint(19F, -26.5F, 0F);
 	}
 
-	private void initleftTrackWheelModels_1()
-	{
+	private void initleftTrackWheelModels_1() {
 		leftTrackWheelModels[0] = new ModelRendererTurbo(this, 162, 298, textureX, textureY); // Shape 26
 		leftTrackWheelModels[1] = new ModelRendererTurbo(this, 56, 311, textureX, textureY); // Shape 27
 		leftTrackWheelModels[2] = new ModelRendererTurbo(this, 81, 322, textureX, textureY); // Shape 28
@@ -2466,8 +2521,7 @@ public class ModelHellcat extends ModelVehicle //Same as Filename
 		leftTrackWheelModels[28].setRotationPoint(-22F, -6.5F, -6.5F);
 	}
 
-	private void initrightTrackWheelModels_1()
-	{
+	private void initrightTrackWheelModels_1() {
 		rightTrackWheelModels[0] = new ModelRendererTurbo(this, 162, 298, textureX, textureY); // Shape 612
 		rightTrackWheelModels[1] = new ModelRendererTurbo(this, 56, 311, textureX, textureY); // Shape 613
 		rightTrackWheelModels[2] = new ModelRendererTurbo(this, 81, 322, textureX, textureY); // Shape 614
@@ -2586,8 +2640,7 @@ public class ModelHellcat extends ModelVehicle //Same as Filename
 		rightTrackWheelModels[28].setRotationPoint(-22F, -6.5F, -47.5F);
 	}
 
-	private void initleftTrackModel_1()
-	{
+	private void initleftTrackModel_1() {
 		leftTrackModel[0] = new ModelRendererTurbo(this, 321, 233, textureX, textureY); // Box 2
 		leftTrackModel[1] = new ModelRendererTurbo(this, 449, 113, textureX, textureY); // Box 3
 		leftTrackModel[2] = new ModelRendererTurbo(this, 169, 89, textureX, textureY); // Box 4
@@ -2659,8 +2712,7 @@ public class ModelHellcat extends ModelVehicle //Same as Filename
 		leftTrackModel[13].rotateAngleZ = 5.48033385F;
 	}
 
-	private void initrightTrackModel_1()
-	{
+	private void initrightTrackModel_1() {
 		rightTrackModel[0] = new ModelRendererTurbo(this, 321, 253, textureX, textureY); // Box 16
 		rightTrackModel[1] = new ModelRendererTurbo(this, 73, 145, textureX, textureY); // Box 17
 		rightTrackModel[2] = new ModelRendererTurbo(this, 1, 145, textureX, textureY); // Box 18
@@ -2732,68 +2784,6 @@ public class ModelHellcat extends ModelVehicle //Same as Filename
 		rightTrackModel[13].rotateAngleZ = 5.48033385F;
 	}
 
-	private void initGuns()
-	{
-	}
-
-	{
-
-		// Passenger 2
-		ModelRendererTurbo[][] gun_1_Model = new ModelRendererTurbo[3][];
-
-		gun_1_Model[0] = new ModelRendererTurbo[0];
-
-		gun_1_Model[1] = new ModelRendererTurbo[10];
-		gun_1_Model[1][0] = new ModelRendererTurbo(this, 1, 341, textureX, textureY); // Box 299
-		gun_1_Model[1][1] = new ModelRendererTurbo(this, 9, 341, textureX, textureY); // Box 299
-		gun_1_Model[1][2] = new ModelRendererTurbo(this, 33, 341, textureX, textureY); // Box 299
-		gun_1_Model[1][3] = new ModelRendererTurbo(this, 1, 349, textureX, textureY); // Box 299
-		gun_1_Model[1][4] = new ModelRendererTurbo(this, 49, 341, textureX, textureY); // Box 299
-		gun_1_Model[1][5] = new ModelRendererTurbo(this, 49, 349, textureX, textureY); // Box 299
-		gun_1_Model[1][6] = new ModelRendererTurbo(this, 57, 341, textureX, textureY); // Box 299
-		gun_1_Model[1][7] = new ModelRendererTurbo(this, 1, 357, textureX, textureY); // Box 299
-		gun_1_Model[1][8] = new ModelRendererTurbo(this, 25, 349, textureX, textureY); // Box 299
-		gun_1_Model[1][9] = new ModelRendererTurbo(this, 41, 349, textureX, textureY); // Box 299
-
-		gun_1_Model[1][0].addShapeBox(7F, -0.8F, -1.5F, 1, 1, 2, 0F, 0F, 0F, -1F, 3F, 0F, -1F, 3F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -1F, 3F, 0F, -1F, 3F, 0F, 0F, 0F, 0F, 0F); // Box 299
-
-		gun_1_Model[1][1].addShapeBox(7F, -1.5F, -0.5F, 7, 1, 1, 0F, 0F, -0.2F, -0.2F, 3F, -0.2F, -0.2F, 3F, -0.2F, -0.2F, 0F, -0.2F, -0.2F, 0F, -0.2F, -0.2F, 3F, -0.2F, -0.2F, 3F, -0.2F, -0.2F, 0F, -0.2F, -0.2F); // Box 299
-
-		gun_1_Model[1][2].addShapeBox(4F, -1.5F, -0.5F, 5, 1, 1, 0F, 0F, 0.2F, 0.2F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0.2F, 0.2F, 0F, 0.2F, 0.2F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0.2F, 0.2F); // Box 299
-
-		gun_1_Model[1][3].addShapeBox(-5F, -2F, -1F, 9, 2, 2, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 299
-
-		gun_1_Model[1][4].addShapeBox(-3F, -1.8F, -2F, 1, 1, 2, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 299
-
-		gun_1_Model[1][5].addShapeBox(-9F, -2F, -1F, 4, 2, 2, 0F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F, 0.2F); // Box 299
-
-		gun_1_Model[1][6].addShapeBox(-11F, -2.5F, 1F, 1, 3, 1, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 299
-
-		gun_1_Model[1][7].addShapeBox(-11F, -2.5F, -2F, 1, 3, 1, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 299
-
-		gun_1_Model[1][8].addShapeBox(-10F, -2F, -1F, 1, 2, 0, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 299
-
-		gun_1_Model[1][9].addShapeBox(-10F, -2F, 1F, 1, 2, 0, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 299
-
-		//Gun Origin
-		for(ModelRendererTurbo gunPart : gun_1_Model[1])
-		{
-			gunPart.setRotationPoint(5F, -38F, 11F);
-		}
-
-
-		gun_1_Model[2] = new ModelRendererTurbo[1];
-		gun_1_Model[2][0] = new ModelRendererTurbo(this, 25, 349, textureX, textureY); // Box 299
-
-		gun_1_Model[2][0].addShapeBox(-4.5F, -1.5F, 1F, 4, 3, 4, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 299
-
-		//Gun Origin
-		for(ModelRendererTurbo gunPart : gun_1_Model[2])
-		{
-			gunPart.setRotationPoint(5F, -38F, 11F);
-		}
-
-
-		registerGunModel("PassengerGun1", gun_1_Model);
+	private void initGuns() {
 	}
 }

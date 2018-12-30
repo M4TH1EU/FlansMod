@@ -8,13 +8,11 @@ import com.flansmod.client.model.ModelItemHolder;
 import com.flansmod.client.tmt.ModelRendererTurbo;
 import com.flansmod.common.vector.Vector3f;
 
-public class ModelGunRack extends ModelItemHolder
-{
+public class ModelGunRack extends ModelItemHolder {
 	int textureX = 256;
 	int textureY = 32;
 
-	public ModelGunRack()
-	{
+	public ModelGunRack() {
 		baseModel = new ModelRendererTurbo[10];
 		baseModel[0] = new ModelRendererTurbo(this, 1, 1, textureX, textureY); // Import Box5
 		baseModel[1] = new ModelRendererTurbo(this, 57, 1, textureX, textureY); // Box 6

@@ -3,15 +3,13 @@ package com.flansmod.client.model.mw;
 import com.flansmod.client.model.ModelCustomArmour;
 import com.flansmod.client.tmt.ModelRendererTurbo;
 
-public class ModelExoskeletonLegs extends ModelCustomArmour
-{
-	public ModelExoskeletonLegs()
-	{
+public class ModelExoskeletonLegs extends ModelCustomArmour {
+	public ModelExoskeletonLegs() {
 		int textureX = 512;
 		int textureY = 512;
-		
+
 		rightLegModel = new ModelRendererTurbo[19];
-		
+
 		rightLegModel[0] = new ModelRendererTurbo(this, 497, 81, textureX, textureY); // Box 63
 		rightLegModel[1] = new ModelRendererTurbo(this, 273, 89, textureX, textureY); // Box 64
 		rightLegModel[2] = new ModelRendererTurbo(this, 337, 89, textureX, textureY); // Box 65
@@ -34,7 +32,7 @@ public class ModelExoskeletonLegs extends ModelCustomArmour
 		rightLegModel[16] = new ModelRendererTurbo(this, 353, 145, textureX, textureY); // Box 112
 		rightLegModel[17] = new ModelRendererTurbo(this, 1, 65, textureX, textureY); // Box 113
 		rightLegModel[18] = new ModelRendererTurbo(this, 121, 1, textureX, textureY); // Box 117
-		
+
 		float x = 8.5F;
 		float y = 24F;
 		float z = 1F;
@@ -98,7 +96,7 @@ public class ModelExoskeletonLegs extends ModelCustomArmour
 
 
 		leftLegModel = new ModelRendererTurbo[19];
-		
+
 		leftLegModel[0] = new ModelRendererTurbo(this, 153, 81, textureX, textureY); // Box 72
 		leftLegModel[1] = new ModelRendererTurbo(this, 1, 25, textureX, textureY); // Box 73
 		leftLegModel[2] = new ModelRendererTurbo(this, 193, 97, textureX, textureY); // Box 74

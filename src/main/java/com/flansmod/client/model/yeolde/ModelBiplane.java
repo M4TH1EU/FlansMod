@@ -3,10 +3,8 @@ package com.flansmod.client.model.yeolde;
 import com.flansmod.client.model.ModelPlane;
 import com.flansmod.client.tmt.ModelRendererTurbo;
 
-public class ModelBiplane extends ModelPlane
-{
-	public ModelBiplane()
-	{
+public class ModelBiplane extends ModelPlane {
+	public ModelBiplane() {
 		int textureX = 128; //The width of the texture
 		int textureY = 64;    //The height of the texture
 
@@ -23,7 +21,7 @@ public class ModelBiplane extends ModelPlane
 		propellerModels[0][0].setRotationPoint(-14, 0, 0);
 		propellerModels[0][1].setRotationPoint(-14, 0, 0);
 		propellerModels[0][2].setRotationPoint(-14, 0, 0);
-		
+
 		//Yaw flap
 		yawFlapModel = new ModelRendererTurbo[1];
 		yawFlapModel[0] = new ModelRendererTurbo(this, 104, 0, textureX, textureY);
@@ -36,14 +34,14 @@ public class ModelBiplane extends ModelPlane
 		pitchFlapLeftModel[0].addBox(0F, 0F, 0F, 10, 15, 2, 0.0F);
 		pitchFlapLeftModel[0].rotateAngleX = pi / 2;
 		pitchFlapLeftModel[0].setPosition(40F, 3F, -15F);
-		
+
 		//Right pitch flap
 		pitchFlapRightModel = new ModelRendererTurbo[1];
 		pitchFlapRightModel[0] = new ModelRendererTurbo(this, 104, 0, textureX, textureY);
 		pitchFlapRightModel[0].addBox(0F, 0F, 0F, 10, 15, 2, 0.0F);
 		pitchFlapRightModel[0].rotateAngleX = pi / 2;
 		pitchFlapRightModel[0].setPosition(40F, 3F, 0F);
-		
+
 		//Front wheels with struts
 		bodyWheelModel = new ModelRendererTurbo[4];
 		bodyWheelModel[0] = new ModelRendererTurbo(this, 0, 32, textureX, textureY);
@@ -125,7 +123,7 @@ public class ModelBiplane extends ModelPlane
 		topWingModel[0] = new ModelRendererTurbo(this, 64, 0, textureX, textureY);
 		topWingModel[1] = new ModelRendererTurbo(this, 64, 0, textureX, textureY);
 		topWingModel[2] = new ModelRendererTurbo(this, 64, 0, textureX, textureY);
-		
+
 		topWingModel[0].addBox(0F, 0F, 0F, 18, 18, 2, 0.0F);        //Top Middle Wing
 		topWingModel[0].rotateAngleX = -pi / 2;
 		topWingModel[0].setPosition(-9F, -20F, 9F);
@@ -133,7 +131,7 @@ public class ModelBiplane extends ModelPlane
 		topWingModel[1].addBox(0F, 0F, 0F, 18, 41, 2, 0.0F);        //Top Left Wing
 		topWingModel[1].rotateAngleX = -pi / 2;
 		topWingModel[1].setPosition(-9F, -20F, 50F);
-		
+
 		topWingModel[2].addBox(0F, 0F, 0F, 18, 41, 2, 0.0F);        //Top Right Wing
 		topWingModel[2].rotateAngleX = -pi / 2;
 		topWingModel[2].setPosition(-9F, -20F, -9F);
@@ -142,7 +140,7 @@ public class ModelBiplane extends ModelPlane
 		tailModel = new ModelRendererTurbo[1];
 		tailModel[0] = new ModelRendererTurbo(this, 0, 43, textureX, textureY);
 		tailModel[0].addBox(11F, -2F, -5F, 40, 8, 10, 0.0F);
-		
+
 		//Tail wheel
 		tailWheelModel = new ModelRendererTurbo[1];
 		tailWheelModel[0] = new ModelRendererTurbo(this, 0, 32, textureX, textureY);

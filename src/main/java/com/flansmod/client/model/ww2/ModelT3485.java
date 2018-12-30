@@ -40,8 +40,7 @@ public class ModelT3485 extends ModelVehicle //Same as Filename
 		flipAll();
 	}
 
-	private void initbodyModel_1()
-	{
+	private void initbodyModel_1() {
 		bodyModel[0] = new ModelRendererTurbo(this, 1, 1, textureX, textureY); // Box 0
 		bodyModel[1] = new ModelRendererTurbo(this, 249, 1, textureX, textureY); // Box 1
 		bodyModel[2] = new ModelRendererTurbo(this, 65, 41, textureX, textureY); // Box 2
@@ -1951,8 +1950,7 @@ public class ModelT3485 extends ModelVehicle //Same as Filename
 		bodyModel[454].rotateAngleY = -1.57079633F;
 	}
 
-	private void initbodyDoorCloseModel_1()
-	{
+	private void initbodyDoorCloseModel_1() {
 		bodyDoorCloseModel[0] = new ModelRendererTurbo(this, 104, 293, textureX, textureY); // Box 8
 		bodyDoorCloseModel[1] = new ModelRendererTurbo(this, 104, 293, textureX, textureY); // Box 84
 
@@ -1963,8 +1961,7 @@ public class ModelT3485 extends ModelVehicle //Same as Filename
 		bodyDoorCloseModel[1].setRotationPoint(0.5F, -14F, -23F);
 	}
 
-	private void initturretModel_1()
-	{
+	private void initturretModel_1() {
 		turretModel[0] = new ModelRendererTurbo(this, 1, 41, textureX, textureY); // Box 13
 		turretModel[1] = new ModelRendererTurbo(this, 409, 49, textureX, textureY); // Box 14
 		turretModel[2] = new ModelRendererTurbo(this, 465, 41, textureX, textureY); // Box 15
@@ -3044,8 +3041,7 @@ public class ModelT3485 extends ModelVehicle //Same as Filename
 		turretModel[194].setRotationPoint(0F, -17F, 0F);
 	}
 
-	private void initbarrelModel_1()
-	{
+	private void initbarrelModel_1() {
 		barrelModel[0] = new ModelRendererTurbo(this, 217, 17, textureX, textureY); // Box 43
 		barrelModel[1] = new ModelRendererTurbo(this, 241, 17, textureX, textureY); // Box 44
 		barrelModel[2] = new ModelRendererTurbo(this, 465, 17, textureX, textureY); // Box 45
@@ -3104,8 +3100,7 @@ public class ModelT3485 extends ModelVehicle //Same as Filename
 		barrelModel[13].setRotationPoint(0F, -3.5F, 0F);
 	}
 
-	private void initleftTrackWheelModels_1()
-	{
+	private void initleftTrackWheelModels_1() {
 		leftTrackWheelModels[0] = new ModelRendererTurbo(this, 257, 262, textureX, textureY); // Shape 194
 		leftTrackWheelModels[1] = new ModelRendererTurbo(this, 257, 237, textureX, textureY); // Shape 195
 		leftTrackWheelModels[2] = new ModelRendererTurbo(this, 297, 236, textureX, textureY); // Shape 0
@@ -3161,8 +3156,7 @@ public class ModelT3485 extends ModelVehicle //Same as Filename
 		leftTrackWheelModels[11].setRotationPoint(15F, 0.2F, 24.5F);
 	}
 
-	private void initrightTrackWheelModels_1()
-	{
+	private void initrightTrackWheelModels_1() {
 		rightTrackWheelModels[0] = new ModelRendererTurbo(this, 321, 237, textureX, textureY); // Shape 22
 		rightTrackWheelModels[1] = new ModelRendererTurbo(this, 297, 236, textureX, textureY); // Shape 58
 		rightTrackWheelModels[2] = new ModelRendererTurbo(this, 257, 262, textureX, textureY); // Shape 100
@@ -3218,8 +3212,7 @@ public class ModelT3485 extends ModelVehicle //Same as Filename
 		rightTrackWheelModels[11].rotateAngleZ = 3.14159265F;
 	}
 
-	private void initleftTrackModel_1()
-	{
+	private void initleftTrackModel_1() {
 		leftTrackModel[0] = new ModelRendererTurbo(this, 289, 177, textureX, textureY); // Box 168
 		leftTrackModel[1] = new ModelRendererTurbo(this, 33, 177, textureX, textureY); // Box 169
 		leftTrackModel[2] = new ModelRendererTurbo(this, 457, 169, textureX, textureY); // Box 170
@@ -3346,8 +3339,7 @@ public class ModelT3485 extends ModelVehicle //Same as Filename
 		leftTrackModel[24].rotateAngleZ = 6.14355897F;
 	}
 
-	private void initrightTrackModel_1()
-	{
+	private void initrightTrackModel_1() {
 		rightTrackModel[0] = new ModelRendererTurbo(this, 313, 145, textureX, textureY); // Box 127
 		rightTrackModel[1] = new ModelRendererTurbo(this, 377, 129, textureX, textureY); // Box 138
 		rightTrackModel[2] = new ModelRendererTurbo(this, 361, 89, textureX, textureY); // Box 139

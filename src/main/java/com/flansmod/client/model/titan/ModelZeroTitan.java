@@ -8,17 +8,15 @@ import com.flansmod.client.model.ModelMecha;
 import com.flansmod.client.tmt.ModelRendererTurbo;
 import com.flansmod.common.vector.Vector3f;
 
-public class ModelZeroTitan extends ModelMecha
-{
+public class ModelZeroTitan extends ModelMecha {
 	int textureX = 1024;
 	int textureY = 1024;
-	
 
-	public ModelZeroTitan()
-	{
-		
+
+	public ModelZeroTitan() {
+
 		hipsAttachmentPoint = new Vector3f(-50F / 16F, 120F / 16F, 0F);
-		
+
 		bodyModel = new ModelRendererTurbo[65];
 		bodyModel[0] = new ModelRendererTurbo(this, 0, 100, textureX, textureY); // Box 0
 		bodyModel[1] = new ModelRendererTurbo(this, 0, 130, textureX, textureY); // Box 8
@@ -587,8 +585,8 @@ public class ModelZeroTitan extends ModelMecha
 		leftArmModel[9].addBox(-26F, -1F, -2F, 6, 4, 4, 0F); // Box 88
 		leftArmModel[9].setRotationPoint(0F, 0F, 0F);
 		leftArmModel[9].rotateAngleZ = -1.57079633F;
-		
-		
+
+
 		rightArmModel = new ModelRendererTurbo[10];
 		rightArmModel[0] = new ModelRendererTurbo(this, 200, 720, textureX, textureY); // Box 79
 		rightArmModel[1] = new ModelRendererTurbo(this, 200, 750, textureX, textureY); // Box 80
@@ -641,7 +639,7 @@ public class ModelZeroTitan extends ModelMecha
 		rightArmModel[9].setRotationPoint(0F, 0F, 0F);
 		rightArmModel[9].rotateAngleZ = -1.57079633F;
 
-		
+
 		translateAll(0F, 0F, 0F);
 
 

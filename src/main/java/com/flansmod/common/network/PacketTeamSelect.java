@@ -1,5 +1,10 @@
 package com.flansmod.common.network;
 
+import com.flansmod.client.gui.teams.GuiTeamSelect;
+import com.flansmod.common.FlansMod;
+import com.flansmod.common.teams.PlayerClass;
+import com.flansmod.common.teams.Team;
+import com.flansmod.common.teams.TeamsManager;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.client.Minecraft;
@@ -8,14 +13,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.flansmod.client.gui.teams.GuiTeamSelect;
-import com.flansmod.common.FlansMod;
-import com.flansmod.common.teams.PlayerClass;
-import com.flansmod.common.teams.Team;
-import com.flansmod.common.teams.TeamsManager;
-
-public class PacketTeamSelect extends PacketBase
-{
+public class PacketTeamSelect extends PacketBase {
 	public boolean selectionPacket = false;
 	public String selection;
 	public boolean classChoicesPacket = false;
@@ -25,147 +23,114 @@ public class PacketTeamSelect extends PacketBase
 	 * If true, then this packet simply updates the available choices, rather than forcing the player to choose
 	 */
 	public boolean info = false;
-	
-	public PacketTeamSelect()
-	{
+
+	public PacketTeamSelect() {
 	}
-	
-	public PacketTeamSelect(Team[] t, boolean i)
-	{
+
+	public PacketTeamSelect(Team[] t, boolean i) {
 		selectionPacket = false;
 		classChoicesPacket = false;
 		teams = t;
 		info = i;
 	}
-	
-	public PacketTeamSelect(Team[] t)
-	{
+
+	public PacketTeamSelect(Team[] t) {
 		this(t, false);
 	}
-	
-	public PacketTeamSelect(PlayerClass[] c)
-	{
+
+	public PacketTeamSelect(PlayerClass[] c) {
 		selectionPacket = false;
 		classChoicesPacket = true;
 		playerClasses = c;
 	}
-	
-	public PacketTeamSelect(String shortName, boolean classPacket)
-	{
+
+	public PacketTeamSelect(String shortName, boolean classPacket) {
 		selectionPacket = true;
 		classChoicesPacket = classPacket;
 		selection = shortName;
 	}
-	
+
 	@Override
-	public void encodeInto(ChannelHandlerContext ctx, ByteBuf data)
-	{
+	public void encodeInto(ChannelHandlerContext ctx, ByteBuf data) {
 		data.writeBoolean(selectionPacket);
 		data.writeBoolean(classChoicesPacket);
 		data.writeBoolean(info);
-		
+
 		//If it is a selection packet, then we need only send the selection
-		if(selectionPacket)
-		{
+		if (selectionPacket) {
 			writeUTF(data, selection);
 		}
 		//Otherwise, we must send the full list of teams or classes on offer
-		else
-		{
-			if(classChoicesPacket)
-			{
+		else {
+			if (classChoicesPacket) {
 				data.writeByte(playerClasses.length);
-				for(PlayerClass playerClass : playerClasses)
-				{
+				for (PlayerClass playerClass : playerClasses) {
 					writeUTF(data, playerClass.shortName);
 				}
-			}
-			else
-			{
+			} else {
 				data.writeByte(teams.length);
-				for(Team team : teams)
-				{
+				for (Team team : teams) {
 					writeUTF(data, team == null ? "null" : team.shortName);
 				}
 			}
 		}
 	}
-	
+
 	@Override
-	public void decodeInto(ChannelHandlerContext ctx, ByteBuf data)
-	{
+	public void decodeInto(ChannelHandlerContext ctx, ByteBuf data) {
 		selectionPacket = data.readBoolean();
 		classChoicesPacket = data.readBoolean();
 		info = data.readBoolean();
-		
-		if(selectionPacket)
-		{
+
+		if (selectionPacket) {
 			selection = readUTF(data);
-		}
-		else
-		{
-			if(classChoicesPacket)
-			{
+		} else {
+			if (classChoicesPacket) {
 				byte numClasses = data.readByte();
 				playerClasses = new PlayerClass[numClasses];
-				for(int i = 0; i < numClasses; i++)
-				{
+				for (int i = 0; i < numClasses; i++) {
 					playerClasses[i] = PlayerClass.getClass(readUTF(data));
 				}
-			}
-			else
-			{
+			} else {
 				byte numTeams = data.readByte();
 				teams = new Team[numTeams];
-				for(int i = 0; i < numTeams; i++)
-				{
+				for (int i = 0; i < numTeams; i++) {
 					teams[i] = Team.getTeam(readUTF(data));
 				}
 			}
 		}
 	}
-	
+
 	/**
 	 * Handle player responses to team / class selection packets
 	 */
 	@Override
-	public void handleServerSide(EntityPlayerMP playerEntity)
-	{
-		if(!selectionPacket)
-		{
+	public void handleServerSide(EntityPlayerMP playerEntity) {
+		if (!selectionPacket) {
 			FlansMod.log.warn("Class / Team listing packet received on server. Rejecting.");
 			return;
 		}
-		if(classChoicesPacket)
-		{
+		if (classChoicesPacket) {
 			TeamsManager.getInstance().playerSelectedClass(playerEntity, selection);
-		}
-		else
-		{
+		} else {
 			TeamsManager.getInstance().playerSelectedTeam(playerEntity, selection);
 		}
 	}
-	
+
 	/**
 	 * Handle a request from the server to display a team / class selection window
 	 */
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void handleClientSide(EntityPlayer clientPlayer)
-	{
-		if(selectionPacket)
-		{
+	public void handleClientSide(EntityPlayer clientPlayer) {
+		if (selectionPacket) {
 			FlansMod.log.warn("Class / Team selection packet received on client. Rejecting.");
 			return;
 		}
-		if(classChoicesPacket)
-		{
+		if (classChoicesPacket) {
 			Minecraft.getMinecraft().displayGuiScreen(new GuiTeamSelect(playerClasses));
-		}
-		else if(info)
-		{
+		} else if (info) {
 			GuiTeamSelect.teamChoices = teams;
-		}
-		else Minecraft.getMinecraft().displayGuiScreen(new GuiTeamSelect(teams));
+		} else Minecraft.getMinecraft().displayGuiScreen(new GuiTeamSelect(teams));
 	}
 }

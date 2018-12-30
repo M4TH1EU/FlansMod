@@ -7,13 +7,11 @@ package com.flansmod.client.model.ww2;
 import com.flansmod.client.model.ModelVehicle;
 import com.flansmod.client.tmt.ModelRendererTurbo;
 
-public class ModelChiNu extends ModelVehicle
-{
+public class ModelChiNu extends ModelVehicle {
 	int textureX = 512;
 	int textureY = 512;
 
-	public ModelChiNu()
-	{
+	public ModelChiNu() {
 		bodyModel = new ModelRendererTurbo[107];
 		bodyModel[0] = new ModelRendererTurbo(this, 1, 1, textureX, textureY); // Import TrackCoverLeft
 		bodyModel[1] = new ModelRendererTurbo(this, 201, 1, textureX, textureY); // Import TrackCoverRight

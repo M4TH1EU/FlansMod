@@ -1,24 +1,23 @@
 package com.flansmod.common.teams;
 
-import java.util.List;
-
 import net.minecraft.item.ItemStack;
 
-public interface IPlayerClass
-{
-	public List<ItemStack> GetStartingItems();
-	
-	public boolean GetHorse();
-	
-	public ItemStack GetHat();
-	
-	public ItemStack GetChest();
-	
-	public ItemStack GetLegs();
-	
-	public ItemStack GetShoes();
-	
-	public String GetName();
-	
-	public String GetShortName();
+import java.util.List;
+
+public interface IPlayerClass {
+	List<ItemStack> GetStartingItems();
+
+	boolean GetHorse();
+
+	ItemStack GetHat();
+
+	ItemStack GetChest();
+
+	ItemStack GetLegs();
+
+	ItemStack GetShoes();
+
+	String GetName();
+
+	String GetShortName();
 }

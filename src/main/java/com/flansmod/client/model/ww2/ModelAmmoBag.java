@@ -9,18 +9,17 @@
 
 package com.flansmod.client.model.ww2;
 
+import com.flansmod.client.tmt.ModelRendererTurbo;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.Entity;
 
-import com.flansmod.client.tmt.ModelRendererTurbo;
-
-public class ModelAmmoBag extends ModelBase
-{
+public class ModelAmmoBag extends ModelBase {
+	public ModelRendererTurbo ammobagModel[];
 	int textureX = 512;
 	int textureY = 512;
 
-	public ModelAmmoBag()
-	{
+
+	public ModelAmmoBag() {
 		ammobagModel = new ModelRendererTurbo[98];
 		ammobagModel[0] = new ModelRendererTurbo(this, 1, 1, textureX, textureY); // Box 57
 		ammobagModel[1] = new ModelRendererTurbo(this, 25, 1, textureX, textureY); // Box 62
@@ -588,27 +587,20 @@ public class ModelAmmoBag extends ModelBase
 		ammobagModel[97].rotateAngleX = -0.19198622F;
 		ammobagModel[97].rotateAngleY = -2.35619449F;
 
-		
-		for(ModelRendererTurbo part : ammobagModel)
-		{
+
+		for (ModelRendererTurbo part : ammobagModel) {
 			part.doMirror(false, true, true);
 			part.setRotationPoint(part.rotationPointX, -part.rotationPointY, -part.rotationPointZ);
 		}
 	}
 
-	
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
-		for(int i = 0; i < 98; i++)
-		{
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+		for (int i = 0; i < 98; i++) {
 			ammobagModel[i].render(f5);
 		}
 	}
 
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5)
-	{
+	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5) {
 	}
-
-	public ModelRendererTurbo ammobagModel[];
 }

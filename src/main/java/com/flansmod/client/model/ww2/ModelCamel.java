@@ -3,10 +3,8 @@ package com.flansmod.client.model.ww2;
 import com.flansmod.client.model.ModelPlane;
 import com.flansmod.client.tmt.ModelRendererTurbo;
 
-public class ModelCamel extends ModelPlane
-{
-	public ModelCamel()
-	{
+public class ModelCamel extends ModelPlane {
+	public ModelCamel() {
 		int textureX = 128; //The x-size of the texture
 		int textureY = 128;    //The y-size of the texture
 
@@ -20,7 +18,7 @@ public class ModelCamel extends ModelPlane
 		propellerModels[0][0].setRotationPoint(-27, 0, 0);    //Set the position of the propeller
 		propellerModels[0][1].setRotationPoint(-27, 0, 0);
 		propellerModels[0][2].setRotationPoint(-27, 0, 0);
-		
+
 		yawFlapModel = new ModelRendererTurbo[1]; //Only one part to the yaw flap
 		yawFlapModel[0] = new ModelRendererTurbo(this, 104, 0, textureX, textureY);
 		yawFlapModel[0].addBox(0F, 0F, 0F, 10, 10, 2, 0.0F);
@@ -31,7 +29,7 @@ public class ModelCamel extends ModelPlane
 		pitchFlapLeftModel[0].addBox(0F, 0F, 0F, 10, 15, 2, 0.0F);
 		pitchFlapLeftModel[0].rotateAngleX = 1.570796F;
 		pitchFlapLeftModel[0].setPosition(40F, 3F, -15F);
-		
+
 		pitchFlapRightModel = new ModelRendererTurbo[1]; //Only one part to the right pitch flap
 		pitchFlapRightModel[0] = new ModelRendererTurbo(this, 104, 0, textureX, textureY);
 		pitchFlapRightModel[0].addBox(0F, 0F, 0F, 10, 15, 2, 0.0F);
@@ -69,7 +67,7 @@ public class ModelCamel extends ModelPlane
 		bodyModel[1].rotateAngleY = 4.712389F;
 		bodyModel[2].rotateAngleY = 1.570796F;
 		bodyModel[3].rotateAngleY = 3.141593F;
-		
+
 		//Nose
 		noseModel = new ModelRendererTurbo[4];
 		noseModel[0] = new ModelRendererTurbo(this, 44, 0, textureX, textureY);
@@ -83,7 +81,7 @@ public class ModelCamel extends ModelPlane
 		noseModel[1].setPosition(-24F, -3F, -9F);
 		noseModel[2].addBox(-24F, -5F, 2F, 14, 2, 2, 0.0F);        //gun
 		noseModel[3].addBox(-24F, -5F, -4F, 14, 2, 2, 0.0F);    //gun
-		
+
 		//Front wheels with struts
 		bodyWheelModel = new ModelRendererTurbo[4];
 		bodyWheelModel[0] = new ModelRendererTurbo(this, 0, 32, textureX, textureY);
@@ -105,7 +103,7 @@ public class ModelCamel extends ModelPlane
 		rightWingModel[0].setPosition(-9F, 0F, -9F);
 		rightWingModel[1].addBox(-1F, -18F, -40F, 2, 18, 2, 0.0F);    //Right Strut
 
-		
+
 		leftWingModel = new ModelRendererTurbo[2];
 		leftWingModel[0] = new ModelRendererTurbo(this, 64, 0, textureX, textureY);
 		leftWingModel[1] = new ModelRendererTurbo(this, 56, 15, textureX, textureY);
@@ -119,15 +117,15 @@ public class ModelCamel extends ModelPlane
 		topWingModel[0] = new ModelRendererTurbo(this, 64, 0, textureX, textureY);
 		topWingModel[1] = new ModelRendererTurbo(this, 64, 0, textureX, textureY);
 		topWingModel[2] = new ModelRendererTurbo(this, 64, 0, textureX, textureY);
-		
+
 		topWingModel[0].addBox(0F, 0F, 0F, 18, 18, 2, 0.0F);        //Top Middle Wing
 		topWingModel[0].rotateAngleX = -1.570796F;
 		topWingModel[0].setPosition(-9F, -20F, 9F);
-		
+
 		topWingModel[1].addBox(0F, 0F, 0F, 18, 41, 2, 0.0F);        //Top Left Wing
 		topWingModel[1].rotateAngleX = -1.570796F;
 		topWingModel[1].setPosition(-9F, -20F, 50F);
-		
+
 		topWingModel[2].addBox(0F, 0F, 0F, 18, 41, 2, 0.0F);        //Top Right Wing
 		topWingModel[2].rotateAngleX = -1.570796F;
 		topWingModel[2].setPosition(-9F, -20F, -9F);

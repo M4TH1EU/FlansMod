@@ -3,10 +3,8 @@ package com.flansmod.client.model.nerf;
 import com.flansmod.client.model.ModelMG;
 import com.flansmod.client.tmt.ModelRendererTurbo;
 
-public class ModelVulcan extends ModelMG
-{
-	public ModelVulcan()
-	{
+public class ModelVulcan extends ModelMG {
+	public ModelVulcan() {
 		bipodModel = new ModelRendererTurbo[3];
 		bipodModel[0] = new ModelRendererTurbo(this, 0, 0);
 		bipodModel[0].addBox(0F, 0F, 0F, 1, 5, 1);

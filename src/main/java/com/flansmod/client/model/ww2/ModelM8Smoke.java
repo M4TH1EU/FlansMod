@@ -9,20 +9,17 @@
 
 package com.flansmod.client.model.ww2;
 
-import org.lwjgl.opengl.GL11;
-
+import com.flansmod.client.tmt.ModelRendererTurbo;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.Entity;
+import org.lwjgl.opengl.GL11;
 
-import com.flansmod.client.tmt.ModelRendererTurbo;
-
-public class ModelM8Smoke extends ModelBase
-{
+public class ModelM8Smoke extends ModelBase {
+	public ModelRendererTurbo m8smokeModel[];
 	int textureX = 128;
 	int textureY = 128;
 
-	public ModelM8Smoke()
-	{
+	public ModelM8Smoke() {
 		m8smokeModel = new ModelRendererTurbo[18];
 		m8smokeModel[0] = new ModelRendererTurbo(this, 1, 1, textureX, textureY); // Box 102
 		m8smokeModel[1] = new ModelRendererTurbo(this, 25, 1, textureX, textureY); // Box 103
@@ -137,20 +134,15 @@ public class ModelM8Smoke extends ModelBase
 	}
 
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 
 		GL11.glScalef(0.2F, 0.2F, 0.2F);
 
-		for(int i = 0; i < 18; i++)
-		{
+		for (int i = 0; i < 18; i++) {
 			m8smokeModel[i].render(f5);
 		}
 	}
 
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5)
-	{
+	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5) {
 	}
-
-	public ModelRendererTurbo m8smokeModel[];
 }

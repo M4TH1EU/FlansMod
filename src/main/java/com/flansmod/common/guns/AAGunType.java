@@ -1,8 +1,9 @@
 package com.flansmod.common.guns;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.flansmod.client.model.ModelAAGun;
+import com.flansmod.common.FlansMod;
+import com.flansmod.common.types.InfoType;
+import com.flansmod.common.types.TypeFile;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.LootTableLoadEvent;
@@ -10,17 +11,15 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.flansmod.client.model.ModelAAGun;
-import com.flansmod.common.FlansMod;
-import com.flansmod.common.types.InfoType;
-import com.flansmod.common.types.TypeFile;
+import java.util.ArrayList;
+import java.util.List;
 
-public class AAGunType extends InfoType
-{
+public class AAGunType extends InfoType {
+	public static List<AAGunType> infoTypes = new ArrayList<>();
 	/**
 	 * The ammo types used by this gun
 	 */
-	public List<BulletType> ammo = new ArrayList<BulletType>();
+	public List<BulletType> ammo = new ArrayList<>();
 	public int reloadTime;
 	public int recoil = 5;
 	public int accuracy;
@@ -48,26 +47,28 @@ public class AAGunType extends InfoType
 	 * If true, then all barrels share the same ammo slot
 	 */
 	public boolean shareAmmo = false;
-	
-	public static List<AAGunType> infoTypes = new ArrayList<AAGunType>();
-	
-	public AAGunType(TypeFile file)
-	{
+
+	public AAGunType(TypeFile file) {
 		super(file);
 		infoTypes.add(this);
 	}
-	
+
+	public static AAGunType getAAGun(String s) {
+		for (AAGunType gun : infoTypes) {
+			if (gun.shortName.equals(s))
+				return gun;
+		}
+		return null;
+	}
+
 	@Override
-	protected void read(String[] split, TypeFile file)
-	{
+	protected void read(String[] split, TypeFile file) {
 		super.read(split, file);
-		try
-		{
-			if(FMLCommonHandler.instance().getSide().isClient() && split[0].equals("Model"))
-			{
+		try {
+			if (FMLCommonHandler.instance().getSide().isClient() && split[0].equals("Model")) {
 				model = FlansMod.proxy.loadModel(split[1], shortName, ModelAAGun.class);
 			}
-			
+
 			damage = Read(split, "Damage", damage);
 			reloadTime = Read(split, "ReloadTime", reloadTime);
 			recoil = Read(split, "Recoil", recoil);
@@ -85,109 +86,82 @@ public class AAGunType extends InfoType
 			shareAmmo = Read(split, "ShareAmmo", shareAmmo);
 			targetRange = Read(split, "TargetRange", targetRange);
 			bottomViewLimit = Read(split, "BottomViewLimit", bottomViewLimit);
-			
-			if(split[0].equals("TargetDriveables"))
+
+			if (split[0].equals("TargetDriveables"))
 				targetMechas = targetPlanes = targetVehicles = Boolean.parseBoolean(split[1]);
-			
-			if(split[0].equals("ShootSound"))
-			{
+
+			if (split[0].equals("ShootSound")) {
 				shootSound = split[1];
 				FlansMod.proxy.loadSound(contentPack, "aaguns", split[1]);
 			}
-			if(split[0].equals("ReloadSound"))
-			{
+			if (split[0].equals("ReloadSound")) {
 				reloadSound = split[1];
 				FlansMod.proxy.loadSound(contentPack, "aaguns", split[1]);
 			}
-			if(split[0].equals("NumBarrels"))
-			{
+			if (split[0].equals("NumBarrels")) {
 				numBarrels = Integer.parseInt(split[1]);
 				barrelX = new int[numBarrels];
 				barrelY = new int[numBarrels];
 				barrelZ = new int[numBarrels];
 			}
-			if(split[0].equals("Barrel"))
-			{
+			if (split[0].equals("Barrel")) {
 				int id = Integer.parseInt(split[1]);
 				barrelX[id] = Integer.parseInt(split[2]);
 				barrelY[id] = Integer.parseInt(split[3]);
 				barrelZ[id] = Integer.parseInt(split[4]);
 			}
-			if(split[0].equals("Health"))
-			{
+			if (split[0].equals("Health")) {
 				health = Integer.parseInt(split[1]);
 			}
-			if(split[0].equals("Ammo"))
-			{
+			if (split[0].equals("Ammo")) {
 				BulletType type = BulletType.getBullet(split[1]);
-				if(type != null)
-				{
+				if (type != null) {
 					ammo.add(type);
 				}
 			}
-			if(split[0].equals("GunnerPos"))
-			{
+			if (split[0].equals("GunnerPos")) {
 				gunnerX = Integer.parseInt(split[1]);
 				gunnerY = Integer.parseInt(split[2]);
 				gunnerZ = Integer.parseInt(split[3]);
 			}
-		}
-		catch(Exception e)
-		{
+		} catch (Exception e) {
 			FlansMod.log.error("" + e);
 		}
 	}
-	
-	public boolean isAmmo(BulletType type)
-	{
+
+	public boolean isAmmo(BulletType type) {
 		return ammo.contains(type);
 	}
-	
-	public boolean isAmmo(ItemStack stack)
-	{
-		if(stack == null || stack.isEmpty())
+
+	public boolean isAmmo(ItemStack stack) {
+		if (stack == null || stack.isEmpty())
 			return false;
-		return stack.getItem() instanceof ItemBullet && isAmmo(((ItemBullet)stack.getItem()).type);
+		return stack.getItem() instanceof ItemBullet && isAmmo(((ItemBullet) stack.getItem()).type);
 	}
-	
-	public static AAGunType getAAGun(String s)
-	{
-		for(AAGunType gun : infoTypes)
-		{
-			if(gun.shortName.equals(s))
-				return gun;
-		}
-		return null;
-	}
-	
+
 	/**
 	 * To be overriden by subtypes for model reloading
 	 */
-	public void reloadModel()
-	{
+	public void reloadModel() {
 		model = FlansMod.proxy.loadModel(modelString, shortName, ModelAAGun.class);
 	}
-	
+
 	@Override
-	public void addLoot(LootTableLoadEvent event)
-	{
+	public void addLoot(LootTableLoadEvent event) {
 		//Do not add AA guns to dungeon chests. That would be so op.
 	}
-	
+
 	@Override
-	protected void preRead(TypeFile file)
-	{
+	protected void preRead(TypeFile file) {
 	}
-	
+
 	@Override
-	protected void postRead(TypeFile file)
-	{
+	protected void postRead(TypeFile file) {
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
-	public ModelBase GetModel()
-	{
+	public ModelBase GetModel() {
 		return model;
 	}
 }

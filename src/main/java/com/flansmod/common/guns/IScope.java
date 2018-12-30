@@ -1,12 +1,11 @@
 package com.flansmod.common.guns;
 
-public interface IScope
-{
-	public float getFOVFactor();
-	
-	public float getZoomFactor();
-	
-	public boolean hasZoomOverlay();
-	
-	public String getZoomOverlay();
+public interface IScope {
+	float getFOVFactor();
+
+	float getZoomFactor();
+
+	boolean hasZoomOverlay();
+
+	String getZoomOverlay();
 }

@@ -3,8 +3,7 @@ package com.flansmod.common.driveables;
 import com.flansmod.common.guns.GunType;
 import com.flansmod.common.vector.Vector3f;
 
-public class Seat
-{
+public class Seat {
 	/**
 	 * The x, y and z positions of the seat within the plane in model co-ordinates
 	 * x is forwards, y is up and z is left
@@ -62,64 +61,59 @@ public class Seat
 	 * Pitches gun at the last second
 	 */
 	public boolean latePitch = true;
-	
+
 	/**
 	 * Does the turret have traverse sounds?
 	 */
 	public boolean traverseSounds = false;
-	
+
 	public String yawSound;
 	public int yawSoundLength;
 	public String pitchSound;
 	public int pitchSoundLength;
-	
+
 	/**
 	 * Type file constructor. Line from type file should be of one of the following forms
 	 * Passenger ID x y z
 	 * Passenger ID x y z minYaw maxYaw minPitch maxPitch
 	 * Passenger ID x y z minYaw maxYaw minPitch maxPitch gunType.shortName gunName
 	 */
-	public Seat(String[] split)
-	{
+	public Seat(String[] split) {
 		id = Integer.parseInt(split[1]);
 		x = Integer.parseInt(split[2]);
 		y = Integer.parseInt(split[3]);
 		z = Integer.parseInt(split[4]);
 		gunOrigin = new Vector3f(x, y, z);
 		part = EnumDriveablePart.getPart(split[5]);
-		if(split.length > 6)
-		{
+		if (split.length > 6) {
 			minYaw = Float.parseFloat(split[6]);
 			maxYaw = Float.parseFloat(split[7]);
 			minPitch = Float.parseFloat(split[8]);
 			maxPitch = Float.parseFloat(split[9]);
-			if(split.length > 10)
-			{
+			if (split.length > 10) {
 				gunType = GunType.getGun(split[10]);
 				gunName = split[11];
 			}
 		}
 	}
-	
+
 	/**
 	 * Type file driver seat constructor. Line from type file should be of one of the following forms
 	 * Driver x y z
 	 * Pilot x y z
 	 */
-	public Seat(int dx, int dy, int dz)
-	{
+	public Seat(int dx, int dy, int dz) {
 		id = 0;
 		x = dx;
 		y = dy;
 		z = dz;
 		part = EnumDriveablePart.core;
 	}
-	
+
 	/**
 	 * Type file driver seat constructor with yaw and pitch limiters
 	 */
-	public Seat(int dx, int dy, int dz, float y1, float y2, float p1, float p2)
-	{
+	public Seat(int dx, int dy, int dz, float y1, float y2, float p1, float p2) {
 		id = 0;
 		x = dx;
 		y = dy;

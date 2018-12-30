@@ -15,13 +15,11 @@ import com.flansmod.client.model.ModelGun;
 import com.flansmod.client.tmt.ModelRendererTurbo;
 import com.flansmod.common.vector.Vector3f;
 
-public class ModelSten extends ModelGun
-{
+public class ModelSten extends ModelGun {
 	int textureX = 64;
 	int textureY = 32;
 
-	public ModelSten()
-	{
+	public ModelSten() {
 
 
 // Gun
@@ -81,7 +79,7 @@ public class ModelSten extends ModelGun
 		ammoModel[0].addBox(0F, 0F, 0F, 2, 1, 7, 0F); // Ammo1
 		ammoModel[0].setRotationPoint(8.5F, -2.1F, 3.6F);
 
-		
+
 		barrelAttachPoint = new Vector3f(21F / 16F, 5.5F / 16F, 0F / 16F);
 		stockAttachPoint = new Vector3f(0F / 16F, 4F / 16F, 0F / 16F);
 		scopeAttachPoint = new Vector3f(6F / 16F, 7F / 16F, 0F / 16F);
@@ -93,7 +91,7 @@ public class ModelSten extends ModelGun
 
 		flipAll();
 		translateAll(0F, 4F, 0F);
-		
+
 		numBulletsInReloadAnimation = 8;
 		tiltGunTime = 0.25F;
 		unloadClipTime = 0.25F;

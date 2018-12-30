@@ -3,15 +3,13 @@ package com.flansmod.client.model.mw;
 import com.flansmod.client.model.ModelCustomArmour;
 import com.flansmod.client.tmt.ModelRendererTurbo;
 
-public class ModelExoskeletonHelmet extends ModelCustomArmour
-{
-	public ModelExoskeletonHelmet()
-	{
+public class ModelExoskeletonHelmet extends ModelCustomArmour {
+	public ModelExoskeletonHelmet() {
 		int textureX = 512;
 		int textureY = 512;
-		
+
 		headModel = new ModelRendererTurbo[10];
-		
+
 		headModel[0] = new ModelRendererTurbo(this, 1, 1, textureX, textureY); // Box 0
 		headModel[1] = new ModelRendererTurbo(this, 129, 1, textureX, textureY); // Box 6
 		headModel[2] = new ModelRendererTurbo(this, 233, 1, textureX, textureY); // Box 7
@@ -22,7 +20,7 @@ public class ModelExoskeletonHelmet extends ModelCustomArmour
 		headModel[7] = new ModelRendererTurbo(this, 345, 1, textureX, textureY); // Box 12
 		headModel[8] = new ModelRendererTurbo(this, 97, 1, textureX, textureY); // Box 14
 		headModel[9] = new ModelRendererTurbo(this, 129, 1, textureX, textureY); // Box 15
-		
+
 		float y = 64F;
 
 		headModel[0].addShapeBox(-15F, -106F + y, -15.9F, 30, 2, 32, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 1F, 0F, 1F, 1F, 0F, 1F, 1F, 0F, 1F, 1F, 0F, 1F); // Box 0
@@ -54,6 +52,6 @@ public class ModelExoskeletonHelmet extends ModelCustomArmour
 
 		headModel[9].addShapeBox(-20F, -90F + y, 5F, 4, 7, 8, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 15
 		headModel[9].setRotationPoint(0F, 0F, 0F);
-		
+
 	}
 }

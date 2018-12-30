@@ -1,25 +1,21 @@
 package com.flansmod.client.debug;
 
+import com.flansmod.common.vector.Vector3f;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
-import com.flansmod.common.vector.Vector3f;
-
-public class EntityDebugVector extends Entity
-{
+public class EntityDebugVector extends Entity {
 	public Vector3f vector;
 	public int life;
 	public float red = 1F, green = 1F, blue = 1F;
-	
-	public EntityDebugVector(World w)
-	{
+
+	public EntityDebugVector(World w) {
 		super(w);
 	}
-	
-	public EntityDebugVector(World w, Vector3f u, Vector3f v, int i, float r, float g, float b)
-	{
+
+	public EntityDebugVector(World w, Vector3f u, Vector3f v, int i, float r, float g, float b) {
 		super(w);
 		setPosition(u.x, u.y, u.z);
 		vector = v;
@@ -28,45 +24,39 @@ public class EntityDebugVector extends Entity
 		green = g;
 		blue = b;
 	}
-	
-	public EntityDebugVector(World w, Vector3f u, Vector3f v, int i)
-	{
+
+	public EntityDebugVector(World w, Vector3f u, Vector3f v, int i) {
 		super(w);
 		setPosition(u.x, u.y, u.z);
 		vector = v;
 		life = i;
 	}
-	
+
 	@Override
-	public void onUpdate()
-	{
+	public void onUpdate() {
 		life--;
-		if(life <= 0)
+		if (life <= 0)
 			setDead();
 	}
-	
+
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox()
-	{
+	public AxisAlignedBB getCollisionBoundingBox() {
 		return null;
 	}
-	
-	
+
+
 	@Override
-	protected void entityInit()
-	{
-		
+	protected void entityInit() {
+
 	}
-	
+
 	@Override
-	protected void readEntityFromNBT(NBTTagCompound nbttagcompound)
-	{
-		
+	protected void readEntityFromNBT(NBTTagCompound nbttagcompound) {
+
 	}
-	
+
 	@Override
-	protected void writeEntityToNBT(NBTTagCompound nbttagcompound)
-	{
-	
+	protected void writeEntityToNBT(NBTTagCompound nbttagcompound) {
+
 	}
 }

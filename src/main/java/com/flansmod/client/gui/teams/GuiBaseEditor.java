@@ -1,24 +1,21 @@
 package com.flansmod.client.gui.teams;
 
-import java.io.IOException;
-import java.util.Arrays;
-
+import com.flansmod.common.FlansMod;
+import com.flansmod.common.network.PacketBaseEdit;
+import net.minecraft.client.gui.*;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.util.ResourceLocation;
+import java.io.IOException;
+import java.util.Arrays;
 
-import com.flansmod.common.FlansMod;
-import com.flansmod.common.network.PacketBaseEdit;
-
-public class GuiBaseEditor extends GuiScreen
-{
+public class GuiBaseEditor extends GuiScreen {
 	private static final ResourceLocation texture = new ResourceLocation("flansmod", "gui/baseEdit.png");
+	/**
+	 * The packet received from the server containing all the base information. Modify this and send it back
+	 */
+	public PacketBaseEdit packet;
 	private int guiOriginX;
 	private int guiOriginY;
 	private GuiTextField nameEntryField;
@@ -27,19 +24,12 @@ public class GuiBaseEditor extends GuiScreen
 	private GuiButton leftButton;
 	private GuiButton rightButton;
 	private int mapsPage;
-	
-	/**
-	 * The packet received from the server containing all the base information. Modify this and send it back
-	 */
-	public PacketBaseEdit packet;
-	
-	public GuiBaseEditor(PacketBaseEdit packet)
-	{
+
+	public GuiBaseEditor(PacketBaseEdit packet) {
 		this.packet = packet;
 	}
-	
-	public void initGui()
-	{
+
+	public void initGui() {
 		super.initGui();
 		this.buttonList.clear();
 		//Setup the text entry field
@@ -51,7 +41,7 @@ public class GuiBaseEditor extends GuiScreen
 		nameEntryField.setFocused(true);
 		nameEntryField.setTextColor(16777215);
 		nameEntryField.setText(packet.baseName);
-		
+
 		//Add buttons
 		teamButtons = new GuiButton[4];
 		teamButtons[0] = new GuiButton(0, width / 2 - 128 + 6, height / 2 - 94 + 38, 58, 20, "No Team");
@@ -60,14 +50,13 @@ public class GuiBaseEditor extends GuiScreen
 		teamButtons[3] = new GuiButton(3, width / 2 - 128 + 192, height / 2 - 94 + 38, 58, 20, "Team 2");
 
 		buttonList.addAll(Arrays.asList(teamButtons).subList(0, 4));
-		
+
 		mapButtons = new GuiButton[5];
-		for(int i = 0; i < 5; i++)
-		{
+		for (int i = 0; i < 5; i++) {
 			mapButtons[i] = new GuiButton(4 + i, width / 2 - 128 + 28, height / 2 - 94 + 75 + 22 * i, 200, 20, "Map " + (i + 1));
 			buttonList.add(mapButtons[i]);
 		}
-		
+
 		leftButton = new GuiButton(9, width / 2 - 128 + 6, height / 2 - 94 + 119, 20, 20, "<");
 		rightButton = new GuiButton(10, width / 2 + 128 - 26, height / 2 - 94 + 119, 20, 20, ">");
 		buttonList.add(leftButton);
@@ -75,8 +64,7 @@ public class GuiBaseEditor extends GuiScreen
 	}
 
 	@Override
-	public void drawScreen(int i, int j, float f)
-	{
+	public void drawScreen(int i, int j, float f) {
 		ScaledResolution scaledresolution = new ScaledResolution(mc);
 		int k = scaledresolution.getScaledWidth();
 		int l = scaledresolution.getScaledHeight();
@@ -88,48 +76,51 @@ public class GuiBaseEditor extends GuiScreen
 		int m = guiOriginX = k / 2 - 128;
 		int n = guiOriginY = l / 2 - 94;
 		drawTexturedModalRect(m, n, 0, 0, 256, 189);
-		
+
 		drawString(fontRenderer, "Base Settings", guiOriginX + 6, guiOriginY + 6, 0xffffff);
 		drawString(fontRenderer, "Base Name : ", guiOriginX + 6, guiOriginY + 24, 0xffffff);
 		drawString(fontRenderer, "Map", guiOriginX + 6, guiOriginY + 64, 0xffffff);
-		
+
 		nameEntryField.drawTextBox();
-		
+
 		super.drawScreen(i, j, f);
-		
+
 	}
-	
+
 	@Override
-	protected void actionPerformed(GuiButton button)
-	{
-		switch(button.id)
-		{
-			case 0: case 1: case 2: case 3:
-			packet.teamID = button.id;
-			break;
-			case 4: case 5: case 6: case 7: case 8:
-			packet.mapID = mapsPage * 5 + button.id - 4;
-			break;
-			case 9: mapsPage--;
+	protected void actionPerformed(GuiButton button) {
+		switch (button.id) {
+			case 0:
+			case 1:
+			case 2:
+			case 3:
+				packet.teamID = button.id;
 				break;
-			case 10: mapsPage++;
+			case 4:
+			case 5:
+			case 6:
+			case 7:
+			case 8:
+				packet.mapID = mapsPage * 5 + button.id - 4;
+				break;
+			case 9:
+				mapsPage--;
+				break;
+			case 10:
+				mapsPage++;
 				break;
 		}
 
 	}
-	
+
 	@Override
-	public void updateScreen()
-	{
-		for(int i = 0; i < 4; i++)
-		{
+	public void updateScreen() {
+		for (int i = 0; i < 4; i++) {
 			teamButtons[i].enabled = packet.teamID != i;
 		}
-		for(int i = 0; i < 5; i++)
-		{
+		for (int i = 0; i < 5; i++) {
 			mapButtons[i].visible = packet.maps.length > i + mapsPage * 5;
-			if(mapButtons[i].visible)
-			{
+			if (mapButtons[i].visible) {
 				mapButtons[i].displayString = packet.maps[i + mapsPage * 5];
 				mapButtons[i].enabled = i + mapsPage * 5 != packet.mapID;
 			}
@@ -139,46 +130,36 @@ public class GuiBaseEditor extends GuiScreen
 
 		nameEntryField.updateCursorCounter();
 	}
-	
+
 	@Override
-	protected void mouseClicked(int i, int j, int k)
-	{
-		try
-		{
+	protected void mouseClicked(int i, int j, int k) {
+		try {
 			super.mouseClicked(i, j, k);
-		}
-		catch(IOException e)
-		{
+		} catch (IOException e) {
 		}
 
 		nameEntryField.mouseClicked(i, j, k);
 	}
-	
+
 	@Override
-	protected void keyTyped(char c, int i)
-	{
-		try
-		{
+	protected void keyTyped(char c, int i) {
+		try {
 			super.keyTyped(c, i);
-		}
-		catch(IOException e)
-		{
+		} catch (IOException e) {
 		}
 		nameEntryField.textboxKeyTyped(c, i);
 	}
-	
+
 	@Override
-	public void onGuiClosed()
-	{
+	public void onGuiClosed() {
 		super.onGuiClosed();
 		packet.baseName = nameEntryField.getText();
 		Keyboard.enableRepeatEvents(false);
 		FlansMod.getPacketHandler().sendToServer(packet);
 	}
-	
+
 	@Override
-	public boolean doesGuiPauseGame()
-	{
+	public boolean doesGuiPauseGame() {
 		return false;
 	}
 }

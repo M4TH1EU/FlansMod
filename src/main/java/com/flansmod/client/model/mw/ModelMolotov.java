@@ -1,18 +1,15 @@
 package com.flansmod.client.model.mw;
 
+import com.flansmod.client.tmt.ModelRendererTurbo;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.Entity;
 
-import com.flansmod.client.tmt.ModelRendererTurbo;
-
-public class ModelMolotov extends ModelBase
-{
+public class ModelMolotov extends ModelBase {
 	public ModelRendererTurbo neckModel;
 	public ModelRendererTurbo bodyModel;
 	public ModelRendererTurbo clothModel;
-	
-	public ModelMolotov()
-	{
+
+	public ModelMolotov() {
 		bodyModel = new ModelRendererTurbo(this, 0, 0, 32, 16);
 		bodyModel.addBox(-1F, -2F, -1F, 2, 4, 2);
 		neckModel = new ModelRendererTurbo(this, 8, 0, 32, 16);
@@ -22,10 +19,9 @@ public class ModelMolotov extends ModelBase
 		clothModel.setRotationPoint(0F, 4F, 0F);
 		clothModel.rotateAngleX = 1F;
 	}
-	
+
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		neckModel.render(f5);
 		bodyModel.render(f5);
 		clothModel.render(f5);

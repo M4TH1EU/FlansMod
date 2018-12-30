@@ -3,10 +3,8 @@ package com.flansmod.client.model.yeolde;
 import com.flansmod.client.model.ModelPlane;
 import com.flansmod.client.tmt.ModelRendererTurbo;
 
-public class ModelTwoSeatBiplane extends ModelPlane
-{
-	public ModelTwoSeatBiplane()
-	{
+public class ModelTwoSeatBiplane extends ModelPlane {
+	public ModelTwoSeatBiplane() {
 		int textureX = 128; //The x-size of the texture
 		int textureY = 64;    //The y-size of the texture
 
@@ -20,7 +18,7 @@ public class ModelTwoSeatBiplane extends ModelPlane
 		propellerModels[0][0].setRotationPoint(-14, 0, 0);    //Set the position of the propeller
 		propellerModels[0][1].setRotationPoint(-14, 0, 0);
 		propellerModels[0][2].setRotationPoint(-14, 0, 0);
-		
+
 		yawFlapModel = new ModelRendererTurbo[1]; //Only one part to the yaw flap
 		yawFlapModel[0] = new ModelRendererTurbo(this, 104, 0, textureX, textureY);
 		yawFlapModel[0].addBox(0F, 0F, 0F, 10, 10, 2, 0.0F);
@@ -31,7 +29,7 @@ public class ModelTwoSeatBiplane extends ModelPlane
 		pitchFlapLeftModel[0].addBox(0F, 0F, 0F, 10, 15, 2, 0.0F);
 		pitchFlapLeftModel[0].rotateAngleX = 1.570796F;
 		pitchFlapLeftModel[0].setPosition(44F, 3F, -15F);
-		
+
 		pitchFlapRightModel = new ModelRendererTurbo[1]; //Only one part to the right pitch flap
 		pitchFlapRightModel[0] = new ModelRendererTurbo(this, 104, 0, textureX, textureY);
 		pitchFlapRightModel[0].addBox(0F, 0F, 0F, 10, 15, 2, 0.0F);
@@ -64,7 +62,7 @@ public class ModelTwoSeatBiplane extends ModelPlane
 
 		bodyModel[4].addBox(-length / 2 + 2, -sidePieceHeight - 1, -1F, length - 4, sidePieceHeight, 2, 0.0F);
 		bodyModel[4].setPosition(0.0F, boatDepth, width / 2 - 1);
-		
+
 		bodyModel[5].addBox(0F, 0F, 0F, 4, 4, 4, 0.0F);        //Propeller Centre
 		bodyModel[5].setPosition(-15F, -2F, -2F);
 
@@ -118,7 +116,7 @@ public class ModelTwoSeatBiplane extends ModelPlane
 		rightWingModel[0].setPosition(-9F, 0F, -9F);
 		rightWingModel[1].addBox(-1F, -18F, -40F, 2, 18, 2, 0.0F);    //Right Strut
 
-		
+
 		leftWingModel = new ModelRendererTurbo[2];
 		leftWingModel[0] = new ModelRendererTurbo(this, 64, 0, textureX, textureY);
 		leftWingModel[1] = new ModelRendererTurbo(this, 56, 15, textureX, textureY);
@@ -132,15 +130,15 @@ public class ModelTwoSeatBiplane extends ModelPlane
 		topWingModel[0] = new ModelRendererTurbo(this, 64, 0, textureX, textureY);
 		topWingModel[1] = new ModelRendererTurbo(this, 64, 0, textureX, textureY);
 		topWingModel[2] = new ModelRendererTurbo(this, 64, 0, textureX, textureY);
-		
+
 		topWingModel[0].addBox(0F, 0F, 0F, 18, 18, 2, 0.0F);        //Top Middle Wing
 		topWingModel[0].rotateAngleX = -1.570796F;
 		topWingModel[0].setPosition(-9F, -20F, 9F);
-		
+
 		topWingModel[1].addBox(0F, 0F, 0F, 18, 41, 2, 0.0F);        //Top Left Wing
 		topWingModel[1].rotateAngleX = -1.570796F;
 		topWingModel[1].setPosition(-9F, -20F, 50F);
-		
+
 		topWingModel[2].addBox(0F, 0F, 0F, 18, 41, 2, 0.0F);        //Top Right Wing
 		topWingModel[2].rotateAngleX = -1.570796F;
 		topWingModel[2].setPosition(-9F, -20F, -9F);

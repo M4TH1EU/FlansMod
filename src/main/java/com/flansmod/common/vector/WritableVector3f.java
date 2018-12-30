@@ -38,16 +38,15 @@ package com.flansmod.common.vector;
  * @version $revision$
  * $Id$
  */
-public interface WritableVector3f extends WritableVector2f
-{
-	
+public interface WritableVector3f extends WritableVector2f {
+
 	/**
 	 * Set the Z value
 	 *
 	 * @param z
 	 */
 	void setZ(float z);
-	
+
 	/**
 	 * Set the X,Y,Z values
 	 *
@@ -56,5 +55,5 @@ public interface WritableVector3f extends WritableVector2f
 	 * @param z
 	 */
 	void set(float x, float y, float z);
-	
+
 }

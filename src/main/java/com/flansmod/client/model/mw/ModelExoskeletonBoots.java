@@ -3,20 +3,18 @@ package com.flansmod.client.model.mw;
 import com.flansmod.client.model.ModelCustomArmour;
 import com.flansmod.client.tmt.ModelRendererTurbo;
 
-public class ModelExoskeletonBoots extends ModelCustomArmour
-{
-	public ModelExoskeletonBoots()
-	{
+public class ModelExoskeletonBoots extends ModelCustomArmour {
+	public ModelExoskeletonBoots() {
 		int textureX = 512;
 		int textureY = 512;
-		
+
 		rightLegModel = new ModelRendererTurbo[3];
-		
+
 		rightLegModel[0] = new ModelRendererTurbo(this, 313, 113, textureX, textureY); // Box 100
 		rightLegModel[1] = new ModelRendererTurbo(this, 57, 121, textureX, textureY); // Box 102
 		rightLegModel[2] = new ModelRendererTurbo(this, 217, 121, textureX, textureY); // Box 104
 
-		
+
 		float x = 8.5F;
 		float y = 24F;
 		float z = 1F;

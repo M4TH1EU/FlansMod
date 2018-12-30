@@ -1,5 +1,6 @@
 package com.flansmod.common.teams;
 
+import com.flansmod.common.FlansMod;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
@@ -11,54 +12,43 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
-import com.flansmod.common.FlansMod;
-
-public class CommandTeams extends CommandBase
-{
+public class CommandTeams extends CommandBase {
 	public static TeamsManager teamsManager = TeamsManager.getInstance();
-	
+
 	@Override
-	public String getName()
-	{
+	public String getName() {
 		return "teams";
 	}
-	
+
 	@Override
-	public void execute(MinecraftServer server, ICommandSender sender, String[] split) throws CommandException
-	{
-		if(teamsManager == null)
-		{
+	public void execute(MinecraftServer server, ICommandSender sender, String[] split) throws CommandException {
+		if (teamsManager == null) {
 			sender.sendMessage(new TextComponentString("Teams mod is broken. You will need to look at the server side logs to see what's wrong"));
 			return;
 		}
-		if(split == null || split.length == 0 || split[0].equals("help") || split[0].equals("?"))
-		{
-			if(split.length == 2)
+		if (split == null || split.length == 0 || split[0].equals("help") || split[0].equals("?")) {
+			if (split.length == 2)
 				sendHelpInformation(sender, Integer.parseInt(split[1]));
 			else sendHelpInformation(sender, 1);
 			return;
 		}
 		//On / off
-		if(split[0].equals("off"))
-		{
+		if (split[0].equals("off")) {
 			teamsManager.currentRound = null;
 			teamsManager.enabled = false;
 			TeamsManager.messageAll("Flan's Teams Mod disabled");
 			return;
 		}
-		if(split[0].equals("on"))
-		{
+		if (split[0].equals("on")) {
 			teamsManager.enabled = true;
 			TeamsManager.messageAll("Flan's Teams Mod enabled");
 			return;
 		}
-		if(!teamsManager.enabled)
-		{
+		if (!teamsManager.enabled) {
 			sender.sendMessage(new TextComponentString("Teams mod is disabled. Try /teams on"));
 			return;
 		}
-		if(split[0].equals("survival"))
-		{
+		if (split[0].equals("survival")) {
 			teamsManager.explosions = true;
 			teamsManager.driveablesBreakBlocks = true;
 			teamsManager.bombsEnabled = true;
@@ -74,8 +64,7 @@ public class CommandTeams extends CommandBase
 			teamsManager.messageAll("Flan's Mod switching to survival presets");
 			return;
 		}
-		if(split[0].equals("arena"))
-		{
+		if (split[0].equals("arena")) {
 			teamsManager.explosions = false;
 			teamsManager.driveablesBreakBlocks = false;
 			teamsManager.bombsEnabled = true;
@@ -91,14 +80,11 @@ public class CommandTeams extends CommandBase
 			TeamsManager.messageAll("Flan's Mod switching to arena mode presets");
 			return;
 		}
-		if(split[0].equals("motd"))
-		{
+		if (split[0].equals("motd")) {
 			teamsManager.motd = "";
-			for(int i = 0; i < split.length - 1; i++)
-			{
+			for (int i = 0; i < split.length - 1; i++) {
 				teamsManager.motd += split[i + 1];
-				if(i != split.length - 2)
-				{
+				if (i != split.length - 2) {
 					teamsManager.motd += " ";
 				}
 			}
@@ -106,12 +92,10 @@ public class CommandTeams extends CommandBase
 			sender.sendMessage(new TextComponentString(teamsManager.motd));
 			return;
 		}
-		if(split[0].equals("listGametypes"))
-		{
+		if (split[0].equals("listGametypes")) {
 			sender.sendMessage(new TextComponentString("\u00a72Showing all avaliable gametypes"));
 			sender.sendMessage(new TextComponentString("\u00a72To pick a gametype, use \"/teams setGametype <gametype>\" with the name in brackets"));
-			for(Gametype gametype : Gametype.gametypes.values())
-			{
+			for (Gametype gametype : Gametype.gametypes.values()) {
 				sender.sendMessage(new TextComponentString("\u00a7f" + gametype.name + " (" + gametype.shortName + ")"));
 			}
 			return;
@@ -162,66 +146,52 @@ public class CommandTeams extends CommandBase
 			gametype.initGametype();
 			return;
 		}*/
-		if(split[0].equals("listMaps"))
-		{
-			if(teamsManager.maps == null)
-			{
+		if (split[0].equals("listMaps")) {
+			if (teamsManager.maps == null) {
 				sender.sendMessage(new TextComponentString("The map list is null"));
 				return;
 			}
 			sender.sendMessage(new TextComponentString("\u00a72Listing maps"));
-			for(TeamsMap map : teamsManager.maps.values())
-			{
+			for (TeamsMap map : teamsManager.maps.values()) {
 				sender.sendMessage(new TextComponentString((teamsManager.currentRound != null && map == teamsManager.currentRound.map ? "\u00a74" : "") + map.name + " (" + map.shortName + ")"));
 			}
 			return;
 		}
-		if(split[0].equals("addMap"))
-		{
-			if(split.length < 3)
-			{
+		if (split[0].equals("addMap")) {
+			if (split.length < 3) {
 				sender.sendMessage(new TextComponentString("You need to specify a map name"));
 				return;
 			}
 			String shortName = split[1];
 			String name = split[2];
-			for(int i = 3; i < split.length; i++)
-			{
+			for (int i = 3; i < split.length; i++) {
 				name += " " + split[i];
 			}
 			teamsManager.maps.put(shortName, new TeamsMap(sender.getEntityWorld(), shortName, name));
 			sender.sendMessage(new TextComponentString("Added new map : " + name + " (" + shortName + ")"));
 			return;
 		}
-		if(split[0].equals("removeMap"))
-		{
-			if(split.length != 2)
-			{
+		if (split[0].equals("removeMap")) {
+			if (split.length != 2) {
 				sender.sendMessage(new TextComponentString("You need to specify a map's short name"));
 				return;
 			}
-			if(teamsManager.maps.containsKey(split[1]))
-			{
+			if (teamsManager.maps.containsKey(split[1])) {
 				teamsManager.maps.remove(split[1]);
 				sender.sendMessage(new TextComponentString("Removed map " + split[1]));
-			}
-			else
-			{
+			} else {
 				sender.sendMessage(new TextComponentString("Map (" + split[1] + ") not found"));
 			}
-			
+
 			return;
 		}
-		if(split[0].equals("setRound"))
-		{
-			if(split.length != 2)
-			{
+		if (split[0].equals("setRound")) {
+			if (split.length != 2) {
 				sender.sendMessage(new TextComponentString("You need to specify the round index (see /teams listRounds)"));
 				return;
 			}
 			TeamsRound round = teamsManager.rounds.get(Integer.parseInt(split[1]));
-			if(round != null)
-			{
+			if (round != null) {
 				teamsManager.nextRound = round;
 				TeamsManager.messageAll("\u00a72Next round will be " + round.gametype.shortName + " in " + round.map.name);
 			}
@@ -247,17 +217,14 @@ public class CommandTeams extends CommandBase
 			return;
 		}
 		*/
-		if(split[0].equals("listTeams") || split[0].equals("listAllTeams"))
-		{
-			if(Team.teams.size() == 0)
-			{
+		if (split[0].equals("listTeams") || split[0].equals("listAllTeams")) {
+			if (Team.teams.isEmpty()) {
 				sender.sendMessage(new TextComponentString("\u00a74No teams available. You need a content pack that has some teams with it"));
 				return;
 			}
 			sender.sendMessage(new TextComponentString("\u00a72Showing all avaliable teams"));
 			sender.sendMessage(new TextComponentString("\u00a72To pick these teams, use /teams setTeams <team1> <team2> with the names in brackets"));
-			for(Team team : Team.teams)
-			{
+			for (Team team : Team.teams) {
 				sender.sendMessage(new TextComponentString("\u00a7" + team.textColour + team.name + " (" + team.shortName + ")"));
 			}
 			return;
@@ -303,11 +270,9 @@ public class CommandTeams extends CommandBase
 			return;
 		}
 		*/
-		if(split[0].equals("getSticks") || split[0].equals("getOpSticks") || split[0].equals("getOpKit"))
-		{
+		if (split[0].equals("getSticks") || split[0].equals("getOpSticks") || split[0].equals("getOpKit")) {
 			EntityPlayerMP player = getPlayer(sender.getName());
-			if(player != null)
-			{
+			if (player != null) {
 				player.inventory.addItemStackToInventory(new ItemStack(FlansMod.opStick, 1, 0));
 				player.inventory.addItemStackToInventory(new ItemStack(FlansMod.opStick, 1, 1));
 				player.inventory.addItemStackToInventory(new ItemStack(FlansMod.opStick, 1, 2));
@@ -320,10 +285,8 @@ public class CommandTeams extends CommandBase
 			}
 			return;
 		}
-		if(split[0].toLowerCase().equals("autobalance"))
-		{
-			if(split.length != 2)
-			{
+		if (split[0].toLowerCase().equals("autobalance")) {
+			if (split.length != 2) {
 				sender.sendMessage(new TextComponentString("Incorrect Usage : Should be /teams " + split[0] + " <true/false>"));
 				return;
 			}
@@ -331,10 +294,8 @@ public class CommandTeams extends CommandBase
 			sender.sendMessage(new TextComponentString("Autobalance is now " + (TeamsManager.autoBalance ? "enabled" : "disabled")));
 			return;
 		}
-		if(split[0].equals("useRotation"))
-		{
-			if(split.length != 2)
-			{
+		if (split[0].equals("useRotation")) {
+			if (split.length != 2) {
 				sender.sendMessage(new TextComponentString("Incorrect Usage : Should be /teams " + split[0] + " <true/false>"));
 				return;
 			}
@@ -342,10 +303,8 @@ public class CommandTeams extends CommandBase
 			sender.sendMessage(new TextComponentString("Voting is now " + (TeamsManager.voting ? "enabled" : "disabled")));
 			return;
 		}
-		if(split[0].equals("voting"))
-		{
-			if(split.length != 2)
-			{
+		if (split[0].equals("voting")) {
+			if (split.length != 2) {
 				sender.sendMessage(new TextComponentString("Incorrect Usage : Should be /teams " + split[0] + " <true/false>"));
 				return;
 			}
@@ -353,42 +312,34 @@ public class CommandTeams extends CommandBase
 			sender.sendMessage(new TextComponentString("Voting is now " + (TeamsManager.voting ? "enabled" : "disabled")));
 			return;
 		}
-		if(split[0].equals("listRounds") || split[0].equals("listRotation"))
-		{
+		if (split[0].equals("listRounds") || split[0].equals("listRotation")) {
 			sender.sendMessage(new TextComponentString("\u00a72Current Round List"));
-			for(int i = 0; i < TeamsManager.getInstance().rounds.size(); i++)
-			{
+			for (int i = 0; i < TeamsManager.getInstance().rounds.size(); i++) {
 				TeamsRound entry = TeamsManager.getInstance().rounds.get(i);
-				if(entry.map == null)
-				{
+				if (entry.map == null) {
 					sender.sendMessage(new TextComponentString("Round had null map"));
 					return;
 				}
-				if(entry.gametype == null)
-				{
+				if (entry.gametype == null) {
 					sender.sendMessage(new TextComponentString("Round had null gametype"));
 					return;
 				}
 				String s = i + ". " + entry.map.shortName + ", " + entry.gametype.shortName;
-				if(entry == TeamsManager.getInstance().currentRound)
-				{
+				if (entry == TeamsManager.getInstance().currentRound) {
 					s = "\u00a74" + s;
 				}
-				for(int j = 0; j < entry.teams.length; j++)
-				{
+				for (int j = 0; j < entry.teams.length; j++) {
 					s += ", " + entry.teams[j].shortName;
 				}
 				s += ", " + entry.timeLimit;
 				s += ", " + entry.scoreLimit;
-				s += ", Pop : " + (int)(entry.popularity * 100F) + "%";
+				s += ", Pop : " + (int) (entry.popularity * 100F) + "%";
 				sender.sendMessage(new TextComponentString(s));
 			}
 			return;
 		}
-		if(split[0].equals("removeRound") || split[0].equals("removeMapFromRotation") || split[0].equals("removeFromRotation") || split[0].equals("removeRotation"))
-		{
-			if(split.length != 2)
-			{
+		if (split[0].equals("removeRound") || split[0].equals("removeMapFromRotation") || split[0].equals("removeFromRotation") || split[0].equals("removeRotation")) {
+			if (split.length != 2) {
 				sender.sendMessage(new TextComponentString("Incorrect Usage : Should be /teams " + split[0] + " <ID>"));
 				return;
 			}
@@ -397,47 +348,39 @@ public class CommandTeams extends CommandBase
 			TeamsManager.getInstance().rounds.remove(map);
 			return;
 		}
-		if(split[0].equals("addMapToRotation") || split[0].equals("addToRotation") || split[0].equals("addRotation") || split[0].equals("addRound"))
-		{
-			if(split.length < 7)
-			{
+		if (split[0].equals("addMapToRotation") || split[0].equals("addToRotation") || split[0].equals("addRotation") || split[0].equals("addRound")) {
+			if (split.length < 7) {
 				sender.sendMessage(new TextComponentString("Incorrect Usage : Should be /teams " + split[0] + " <Map> <Gametype> <Team1> <Team2> ... <TimeLimit> <ScoreLimit>"));
 				return;
 			}
 			TeamsMap map = TeamsManager.getInstance().maps.get(split[1]);
-			if(map == null)
-			{
+			if (map == null) {
 				sender.sendMessage(new TextComponentString("Could not find map : " + split[1]));
 				return;
 			}
 			Gametype gametype = Gametype.getGametype(split[2]);
-			if(gametype == null)
-			{
+			if (gametype == null) {
 				sender.sendMessage(new TextComponentString("Could not find gametype : " + split[2]));
 				return;
 			}
-			if(split.length != 5 + gametype.numTeamsRequired)
-			{
+			if (split.length != 5 + gametype.numTeamsRequired) {
 				sender.sendMessage(new TextComponentString("Incorrect Usage : Should be /teams " + split[0] + " <Map> <Gametype> <Team1> <Team2> ... <ScoreLimit> <TimeLimit>"));
 				return;
 			}
 			Team[] teams = new Team[gametype.numTeamsRequired];
-			for(int i = 0; i < teams.length; i++)
-			{
+			for (int i = 0; i < teams.length; i++) {
 				teams[i] = Team.getTeam(split[3 + i]);
 			}
 			sender.sendMessage(new TextComponentString("Added map (" + map.shortName + ") to rotation"));
 			TeamsManager.getInstance().rounds.add(new TeamsRound(map, gametype, teams, Integer.parseInt(split[3 + gametype.numTeamsRequired]), Integer.parseInt(split[4 + gametype.numTeamsRequired])));
 			return;
 		}
-		if(split[0].equals("start") || split[0].equals("begin"))
-		{
+		if (split[0].equals("start") || split[0].equals("begin")) {
 			teamsManager.start();
 			sender.sendMessage(new TextComponentString("Started teams map rotation"));
 			return;
 		}
-		if(split[0].equals("nextMap") || split[0].equals("next") || split[0].equals("nextRound"))
-		{
+		if (split[0].equals("nextMap") || split[0].equals("next") || split[0].equals("nextRound")) {
 			teamsManager.roundTimeLeft = 1;
 			return;
 		}
@@ -458,10 +401,8 @@ public class CommandTeams extends CommandBase
 			return;
 		}
 		*/
-		if(split[0].equals("forceAdventure") || split[0].equals("forceAdventureMode"))
-		{
-			if(split.length != 2)
-			{
+		if (split[0].equals("forceAdventure") || split[0].equals("forceAdventureMode")) {
+			if (split.length != 2) {
 				sender.sendMessage(new TextComponentString("Incorrect Usage : Should be /teams " + split[0] + " <true/false>"));
 				return;
 			}
@@ -469,10 +410,8 @@ public class CommandTeams extends CommandBase
 			sender.sendMessage(new TextComponentString("Adventure mode will " + (TeamsManager.forceAdventureMode ? "now" : "no longer") + " be forced"));
 			return;
 		}
-		if(split[0].equals("overrideHunger") || split[0].equals("noHunger"))
-		{
-			if(split.length != 2)
-			{
+		if (split[0].equals("overrideHunger") || split[0].equals("noHunger")) {
+			if (split.length != 2) {
 				sender.sendMessage(new TextComponentString("Incorrect Usage : Should be /teams " + split[0] + " <true/false>"));
 				return;
 			}
@@ -480,10 +419,8 @@ public class CommandTeams extends CommandBase
 			sender.sendMessage(new TextComponentString("Players will " + (TeamsManager.overrideHunger ? "no longer" : "now") + " get hungry during rounds"));
 			return;
 		}
-		if(split[0].equals("explosions"))
-		{
-			if(split.length != 2)
-			{
+		if (split[0].equals("explosions")) {
+			if (split.length != 2) {
 				sender.sendMessage(new TextComponentString("Incorrect Usage : Should be /teams " + split[0] + " <true/false>"));
 				return;
 			}
@@ -491,10 +428,8 @@ public class CommandTeams extends CommandBase
 			sender.sendMessage(new TextComponentString("Expolsions are now " + (TeamsManager.explosions ? "enabled" : "disabled")));
 			return;
 		}
-		if(split[0].equals("bombs") || split[0].equals("allowBombs"))
-		{
-			if(split.length != 2)
-			{
+		if (split[0].equals("bombs") || split[0].equals("allowBombs")) {
+			if (split.length != 2) {
 				sender.sendMessage(new TextComponentString("Incorrect Usage : Should be /teams " + split[0] + " <true/false>"));
 				return;
 			}
@@ -502,10 +437,8 @@ public class CommandTeams extends CommandBase
 			sender.sendMessage(new TextComponentString("Bombs are now " + (TeamsManager.bombsEnabled ? "enabled" : "disabled")));
 			return;
 		}
-		if(split[0].equals("bullets") || split[0].equals("bulletsEnabled"))
-		{
-			if(split.length != 2)
-			{
+		if (split[0].equals("bullets") || split[0].equals("bulletsEnabled")) {
+			if (split.length != 2) {
 				sender.sendMessage(new TextComponentString("Incorrect Usage : Should be /teams " + split[0] + " <true/false>"));
 				return;
 			}
@@ -513,10 +446,8 @@ public class CommandTeams extends CommandBase
 			sender.sendMessage(new TextComponentString("Bullets are now " + (TeamsManager.bulletsEnabled ? "enabled" : "disabled")));
 			return;
 		}
-		if(split[0].equals("canBreakGuns"))
-		{
-			if(split.length != 2)
-			{
+		if (split[0].equals("canBreakGuns")) {
+			if (split.length != 2) {
 				sender.sendMessage(new TextComponentString("Incorrect Usage : Should be /teams " + split[0] + " <true/false>"));
 				return;
 			}
@@ -524,10 +455,8 @@ public class CommandTeams extends CommandBase
 			sender.sendMessage(new TextComponentString("AAGuns and MGs can " + (TeamsManager.canBreakGuns ? "now" : "no longer") + " be broken"));
 			return;
 		}
-		if(split[0].equals("canBreakGlass"))
-		{
-			if(split.length != 2)
-			{
+		if (split[0].equals("canBreakGlass")) {
+			if (split.length != 2) {
 				sender.sendMessage(new TextComponentString("Incorrect Usage : Should be /teams " + split[0] + " <true/false>"));
 				return;
 			}
@@ -535,10 +464,8 @@ public class CommandTeams extends CommandBase
 			sender.sendMessage(new TextComponentString("Glass and glowstone can " + (TeamsManager.canBreakGlass ? "now" : "no longer") + " be broken"));
 			return;
 		}
-		if(split[0].equals("armourDrops") || split[0].equals("armorDrops"))
-		{
-			if(split.length != 2)
-			{
+		if (split[0].equals("armourDrops") || split[0].equals("armorDrops")) {
+			if (split.length != 2) {
 				sender.sendMessage(new TextComponentString("Incorrect Usage : Should be /teams " + split[0] + " <true/false>"));
 				return;
 			}
@@ -546,34 +473,25 @@ public class CommandTeams extends CommandBase
 			sender.sendMessage(new TextComponentString("Armour will " + (TeamsManager.armourDrops ? "now" : "no longer") + " be dropped"));
 			return;
 		}
-		if(split[0].equals("weaponDrops"))
-		{
-			if(split.length != 2)
-			{
+		if (split[0].equals("weaponDrops")) {
+			if (split.length != 2) {
 				sender.sendMessage(new TextComponentString("Incorrect Usage : Should be /teams " + split[0] + " <on/off/smart>"));
 				return;
 			}
-			if(split[1].toLowerCase().equals("on"))
-			{
+			if (split[1].toLowerCase().equals("on")) {
 				TeamsManager.weaponDrops = 1;
 				sender.sendMessage(new TextComponentString("Weapons will be dropped normally"));
-			}
-			else if(split[1].toLowerCase().equals("off"))
-			{
+			} else if (split[1].toLowerCase().equals("off")) {
 				TeamsManager.weaponDrops = 0;
 				sender.sendMessage(new TextComponentString("Weapons will be not be dropped"));
-			}
-			else if(split[1].toLowerCase().equals("smart"))
-			{
+			} else if (split[1].toLowerCase().equals("smart")) {
 				TeamsManager.weaponDrops = 2;
 				sender.sendMessage(new TextComponentString("Smart drops enabled"));
 			}
 			return;
 		}
-		if(split[0].equals("fuelNeeded"))
-		{
-			if(split.length != 2)
-			{
+		if (split[0].equals("fuelNeeded")) {
+			if (split.length != 2) {
 				sender.sendMessage(new TextComponentString("Incorrect Usage : Should be /teams " + split[0] + " <true/false>"));
 				return;
 			}
@@ -581,75 +499,63 @@ public class CommandTeams extends CommandBase
 			sender.sendMessage(new TextComponentString("Vehicles will " + (TeamsManager.vehiclesNeedFuel ? "now" : "no longer") + " require fuel"));
 			return;
 		}
-		if(split[0].equals("mgLife"))
-		{
-			if(split.length != 2)
-			{
+		if (split[0].equals("mgLife")) {
+			if (split.length != 2) {
 				sender.sendMessage(new TextComponentString("Incorrect Usage : Should be /teams " + split[0] + " <time>"));
 				return;
 			}
 			TeamsManager.mgLife = Integer.parseInt(split[1]);
-			if(TeamsManager.mgLife > 0)
+			if (TeamsManager.mgLife > 0)
 				sender.sendMessage(new TextComponentString("MGs will despawn after " + TeamsManager.mgLife + " seconds"));
 			else sender.sendMessage(new TextComponentString("MGs will not despawn"));
 			return;
 		}
-		if(split[0].equals("planeLife"))
-		{
-			if(split.length != 2)
-			{
+		if (split[0].equals("planeLife")) {
+			if (split.length != 2) {
 				sender.sendMessage(new TextComponentString("Incorrect Usage : Should be /teams " + split[0] + " <time>"));
 				return;
 			}
 			TeamsManager.planeLife = Integer.parseInt(split[1]);
-			if(TeamsManager.planeLife > 0)
+			if (TeamsManager.planeLife > 0)
 				sender.sendMessage(new TextComponentString("Planes will despawn after " + TeamsManager.planeLife + " seconds"));
 			else sender.sendMessage(new TextComponentString("Planes will not despawn"));
 			return;
 		}
-		if(split[0].equals("vehicleLife"))
-		{
-			if(split.length != 2)
-			{
+		if (split[0].equals("vehicleLife")) {
+			if (split.length != 2) {
 				sender.sendMessage(new TextComponentString("Incorrect Usage : Should be /teams " + split[0] + " <time>"));
 				return;
 			}
 			TeamsManager.vehicleLife = Integer.parseInt(split[1]);
-			if(TeamsManager.vehicleLife > 0)
+			if (TeamsManager.vehicleLife > 0)
 				sender.sendMessage(new TextComponentString("Vehicles will despawn after " + TeamsManager.vehicleLife + " seconds"));
 			else sender.sendMessage(new TextComponentString("Vehicles will not despawn"));
 			return;
 		}
-		if(split[0].equals("mechaLife"))
-		{
-			if(split.length != 2)
-			{
+		if (split[0].equals("mechaLife")) {
+			if (split.length != 2) {
 				sender.sendMessage(new TextComponentString("Incorrect Usage : Should be /teams " + split[0] + " <time>"));
 				return;
 			}
 			TeamsManager.mechaLove = Integer.parseInt(split[1]);
-			if(TeamsManager.mechaLove > 0)
+			if (TeamsManager.mechaLove > 0)
 				sender.sendMessage(new TextComponentString("Mechas will despawn after " + TeamsManager.mechaLove + " seconds"));
 			else sender.sendMessage(new TextComponentString("Mechas will not despawn"));
 			return;
 		}
-		if(split[0].equals("aaLife"))
-		{
-			if(split.length != 2)
-			{
+		if (split[0].equals("aaLife")) {
+			if (split.length != 2) {
 				sender.sendMessage(new TextComponentString("Incorrect Usage : Should be /teams " + split[0] + " <time>"));
 				return;
 			}
 			TeamsManager.aaLife = Integer.parseInt(split[1]);
-			if(TeamsManager.aaLife > 0)
+			if (TeamsManager.aaLife > 0)
 				sender.sendMessage(new TextComponentString("AA Guns will despawn after " + TeamsManager.aaLife + " seconds"));
 			else sender.sendMessage(new TextComponentString("AA Guns will not despawn"));
 			return;
 		}
-		if(split[0].equals("vehiclesBreakBlocks"))
-		{
-			if(split.length != 2)
-			{
+		if (split[0].equals("vehiclesBreakBlocks")) {
+			if (split.length != 2) {
 				sender.sendMessage(new TextComponentString("Incorrect Usage : Should be /teams " + split[0] + " <true/false>"));
 				return;
 			}
@@ -657,10 +563,8 @@ public class CommandTeams extends CommandBase
 			sender.sendMessage(new TextComponentString("Vehicles will " + (TeamsManager.driveablesBreakBlocks ? "now" : "no longer") + " break blocks"));
 			return;
 		}
-		if(split[0].equals("scoreDisplayTime"))
-		{
-			if(split.length != 2)
-			{
+		if (split[0].equals("scoreDisplayTime")) {
+			if (split.length != 2) {
 				sender.sendMessage(new TextComponentString("Incorrect Usage : Should be /teams " + split[0] + " <time>"));
 				return;
 			}
@@ -668,10 +572,8 @@ public class CommandTeams extends CommandBase
 			sender.sendMessage(new TextComponentString("Score summary menu will appear for " + TeamsManager.scoreDisplayTime / 20 + " seconds"));
 			return;
 		}
-		if(split[0].equals("rankUpdateTime"))
-		{
-			if(split.length != 2)
-			{
+		if (split[0].equals("rankUpdateTime")) {
+			if (split.length != 2) {
 				sender.sendMessage(new TextComponentString("Incorrect Usage : Should be /teams " + split[0] + " <time>"));
 				return;
 			}
@@ -679,10 +581,8 @@ public class CommandTeams extends CommandBase
 			sender.sendMessage(new TextComponentString("Rank update menu will appear for " + TeamsManager.rankUpdateTime / 20 + " seconds"));
 			return;
 		}
-		if(split[0].equals("votingTime"))
-		{
-			if(split.length != 2)
-			{
+		if (split[0].equals("votingTime")) {
+			if (split.length != 2) {
 				sender.sendMessage(new TextComponentString("Incorrect Usage : Should be /teams " + split[0] + " <time>"));
 				return;
 			}
@@ -690,10 +590,8 @@ public class CommandTeams extends CommandBase
 			sender.sendMessage(new TextComponentString("Voting menu will appear for " + TeamsManager.votingTime / 20 + " seconds"));
 			return;
 		}
-		if(split[0].toLowerCase().equals("autobalancetime"))
-		{
-			if(split.length != 2)
-			{
+		if (split[0].toLowerCase().equals("autobalancetime")) {
+			if (split.length != 2) {
 				sender.sendMessage(new TextComponentString("Incorrect Usage : Should be /teams " + split[0] + " <time>"));
 				return;
 			}
@@ -701,112 +599,90 @@ public class CommandTeams extends CommandBase
 			sender.sendMessage(new TextComponentString("Autobalance will now occur every " + TeamsManager.autoBalanceInterval / 20 + " seconds"));
 			return;
 		}
-		if(split[0].equals("setVariable"))
-		{
-			if(TeamsManager.getInstance().currentRound == null)
-			{
+		if (split[0].equals("setVariable")) {
+			if (TeamsManager.getInstance().currentRound == null) {
 				sender.sendMessage(new TextComponentString("There is no gametype to set variables for"));
 				return;
 			}
-			if(split.length != 3)
-			{
+			if (split.length != 3) {
 				sender.sendMessage(new TextComponentString("Incorrect Usage : Should be /teams setVariable <variable> <value>"));
 				return;
 			}
-			if(TeamsManager.getInstance().currentRound.gametype.setVariable(split[1], split[2]))
+			if (TeamsManager.getInstance().currentRound.gametype.setVariable(split[1], split[2]))
 				sender.sendMessage(new TextComponentString("Set variable " + split[1] + " in gametype " + TeamsManager.getInstance().currentRound.gametype.shortName + " to " + split[2]));
 			else
 				sender.sendMessage(new TextComponentString("Variable " + split[1] + " did not exist in gametype " + TeamsManager.getInstance().currentRound.gametype.shortName));
 			return;
 		}
-		if(split[0].toLowerCase().equals("setloadoutpool"))
-		{
+		if (split[0].toLowerCase().equals("setloadoutpool")) {
 			LoadoutPool pool = LoadoutPool.GetPool(split[1]);
-			if(pool != null)
-			{
+			if (pool != null) {
 				TeamsManagerRanked.GetInstance().currentPool = pool;
 				sender.sendMessage(new TextComponentString("Loadout pool set to " + split[1]));
-			}
-			else
-			{
+			} else {
 				sender.sendMessage(new TextComponentString("No such loadout pool"));
 			}
-			
+
 			return;
 		}
-		if(split[0].toLowerCase().equals("go"))
-		{
+		if (split[0].toLowerCase().equals("go")) {
 			TeamsManagerRanked.GetInstance().currentPool = LoadoutPool.GetPool("modernLoadout");
 			teamsManager.start();
 			return;
 		}
-		if(split[0].toLowerCase().equals("xp"))
-		{
+		if (split[0].toLowerCase().equals("xp")) {
 			sender.sendMessage(new TextComponentString("Awarded " + Integer.parseInt(split[1]) + " XP"));
-			TeamsManagerRanked.AwardXP((EntityPlayerMP)sender, Integer.parseInt(split[1]));
+			TeamsManagerRanked.AwardXP((EntityPlayerMP) sender, Integer.parseInt(split[1]));
 			return;
 		}
-		if(split[0].toLowerCase().equals("resetrank"))
-		{
+		if (split[0].toLowerCase().equals("resetrank")) {
 			sender.sendMessage(new TextComponentString("Reset your rank"));
-			TeamsManagerRanked.ResetRank((EntityPlayerMP)sender);
+			TeamsManagerRanked.ResetRank((EntityPlayerMP) sender);
 			return;
 		}
-		if(split[0].toLowerCase().equals("giverewardbox"))
-		{
+		if (split[0].toLowerCase().equals("giverewardbox")) {
 			String name = split[1];
 			RewardBox box = RewardBox.GetRewardBox(split[2]);
-			if(box == null)
-			{
+			if (box == null) {
 				sender.sendMessage(new TextComponentString("Invalid box"));
 				return;
 			}
-			
+
 			GameProfile profile = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerProfileCache().getGameProfileForUsername(name);
-			if(profile != null)
-			{
+			if (profile != null) {
 				RewardBoxInstance instance = RewardBoxInstance.CreateCheatReward(box, name);
 				PlayerRankData data = TeamsManagerRanked.GetRankData(profile.getId());
-				if(data != null)
-				{
+				if (data != null) {
 					data.AddRewardBoxInstance(instance);
 				}
 			}
 			return;
 		}
-		if(split[0].toLowerCase().equals("xpmultiplier"))
-		{
+		if (split[0].toLowerCase().equals("xpmultiplier")) {
 			float target = Float.parseFloat(split[1]);
-			if(target < 0.5f || target > 2.0f)
-			{
+			if (target < 0.5f || target > 2.0f) {
 				sender.sendMessage(new TextComponentString("Not going to allow that for now. Keep it within 0.5 to 2.0"));
-			}
-			else
-			{
+			} else {
 				sender.sendMessage(new TextComponentString("XP multiplier is now " + target));
 				TeamsManagerRanked.GetInstance().XPMultiplier = target;
 			}
 			return;
 		}
-		
+
 		sender.sendMessage(new TextComponentString(split[0] + " is not a valid teams command. Try /teams help"));
 	}
-	
-	public void sendHelpInformation(ICommandSender sender, int page)
-	{
-		if(page > 3 || page < 1)
-		{
+
+	public void sendHelpInformation(ICommandSender sender, int page) {
+		if (page > 3 || page < 1) {
 			TextComponentString text = new TextComponentString("Invalid help page, should be in the range (1-3)");
 			text.getStyle().setColor(TextFormatting.RED);
 			sender.sendMessage(text);
 			return;
 		}
-		
+
 		sender.sendMessage(new TextComponentString("\u00a72Listing teams commands \u00a7f[Page " + page + " of 3]"));
-		switch(page)
-		{
-			case 1:
-			{
+		switch (page) {
+			case 1: {
 				sender.sendMessage(new TextComponentString("/teams help [page]"));
 				sender.sendMessage(new TextComponentString("/teams off"));
 				sender.sendMessage(new TextComponentString("/teams arena"));
@@ -822,9 +698,8 @@ public class CommandTeams extends CommandBase
 				sender.sendMessage(new TextComponentString("/teams removeMap <shortName>"));
 				break;
 			}
-			case 2:
-			{
-				
+			case 2: {
+
 				//sender.sendMessage(new TextComponentString("/teams setMap <shortName>"));
 				sender.sendMessage(new TextComponentString("/teams useRotation <true / false>"));
 				sender.sendMessage(new TextComponentString("/teams voting <true / false>"));
@@ -837,8 +712,7 @@ public class CommandTeams extends CommandBase
 				sender.sendMessage(new TextComponentString("/teams scoreDisplayTime <time>"));
 				break;
 			}
-			case 3:
-			{
+			case 3: {
 				sender.sendMessage(new TextComponentString("/teams setVariable <variable> <value>"));
 				sender.sendMessage(new TextComponentString("/teams forceAdventure <true / false>"));
 				sender.sendMessage(new TextComponentString("/teams overrideHunger <true / false>"));
@@ -852,21 +726,19 @@ public class CommandTeams extends CommandBase
 				sender.sendMessage(new TextComponentString("/teams planeLife <time>"));
 				sender.sendMessage(new TextComponentString("/teams vehicleLife <time>"));
 				sender.sendMessage(new TextComponentString("/teams aaLife <time>"));
-				
+
 				sender.sendMessage(new TextComponentString("/teams vehiclesBreakBlocks <true / false>"));
 				break;
 			}
 		}
 	}
-	
-	public EntityPlayerMP getPlayer(String name)
-	{
+
+	public EntityPlayerMP getPlayer(String name) {
 		return FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUsername(name);
 	}
-	
+
 	@Override
-	public String getUsage(ICommandSender icommandsender)
-	{
+	public String getUsage(ICommandSender icommandsender) {
 		return "Try \"/teams help\"";
 	}
 }

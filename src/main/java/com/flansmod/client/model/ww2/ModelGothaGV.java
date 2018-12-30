@@ -13,13 +13,11 @@ package com.flansmod.client.model.ww2;
 import com.flansmod.client.model.ModelPlane;
 import com.flansmod.client.tmt.ModelRendererTurbo;
 
-public class ModelGothaGV extends ModelPlane
-{
+public class ModelGothaGV extends ModelPlane {
 	int textureX = 1024;
 	int textureY = 1024;
 
-	public ModelGothaGV()
-	{
+	public ModelGothaGV() {
 
 // Body
 		bodyModel = new ModelRendererTurbo[43];
@@ -217,10 +215,10 @@ public class ModelGothaGV extends ModelPlane
 
 		bodyModel[42].addBox(0F, 0F, 0F, 10, 2, 10, 0F); // Shape20
 		bodyModel[42].setRotationPoint(5F, -35F, -11F);
-		
+
 		ModelRendererTurbo[][] MGBModel = new ModelRendererTurbo[3][];
 		MGBModel[0] = new ModelRendererTurbo[0];
-		
+
 		MGBModel[1] = new ModelRendererTurbo[0];
 
 
@@ -229,10 +227,10 @@ public class ModelGothaGV extends ModelPlane
 
 		MGBModel[2][0].addBox(101F, -45F, 0F, 18, 1, 1, 0F); // MGB
 		MGBModel[2][0].setRotationPoint(-100F, 29F, 0F);
-		
-		for(ModelRendererTurbo MGBPart : MGBModel[2])
+
+		for (ModelRendererTurbo MGBPart : MGBModel[2])
 			MGBPart.setRotationPoint(0F, 0F, 0F);
-		
+
 		registerGunModel("MGB", MGBModel);
 
 // Propeller
@@ -246,8 +244,8 @@ public class ModelGothaGV extends ModelPlane
 		propellerModels[0][0].setRotationPoint(-54, -2, 0);    //Set the position of the propeller
 		propellerModels[0][1].setRotationPoint(-54, -2, 0);
 		propellerModels[0][2].setRotationPoint(-54, -2, 0);
-		
-		
+
+
 		translateAll(0, 0, 0);
 
 
@@ -255,9 +253,7 @@ public class ModelGothaGV extends ModelPlane
 	}
 
 	// Replace with your propeller function
-	private ModelRendererTurbo[] makeProp(int i, int j, int k)
-	{
-		ModelRendererTurbo[] prop = new ModelRendererTurbo[0];
-		return prop;
+	private ModelRendererTurbo[] makeProp(int i, int j, int k) {
+		return new ModelRendererTurbo[0];
 	}
 }

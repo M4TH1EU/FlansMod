@@ -1,8 +1,8 @@
 package com.flansmod.common.tools;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
+import com.flansmod.common.FlansMod;
+import com.flansmod.common.types.InfoType;
+import com.flansmod.common.types.TypeFile;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -15,18 +15,16 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import com.flansmod.common.FlansMod;
-import com.flansmod.common.types.InfoType;
-import com.flansmod.common.types.TypeFile;
+import java.util.ArrayList;
+import java.util.HashMap;
 
-public class ToolType extends InfoType
-{
-	public static HashMap<String, ToolType> tools = new HashMap<String, ToolType>();
-	
+public class ToolType extends InfoType {
+	public static HashMap<String, ToolType> tools = new HashMap<>();
+
 	@SideOnly(value = Side.CLIENT)
 	/** The parachute model */
 	public ModelBase model;
-	
+
 	/**
 	 * Boolean switches that decide whether the tool should heal players and / or driveables
 	 */
@@ -46,7 +44,7 @@ public class ToolType extends InfoType
 	/**
 	 * The items required to be added (shapelessly) to recharge the tool
 	 */
-	public ArrayList<ItemStack> rechargeRecipe = new ArrayList<ItemStack>();
+	public ArrayList<ItemStack> rechargeRecipe = new ArrayList<>();
 	/**
 	 * Not yet implemented. For making tools chargeable with IC2 EU
 	 */
@@ -63,97 +61,83 @@ public class ToolType extends InfoType
 	 * If > 0, then the player can eat this and recover this much hunger
 	 */
 	public int foodness = 0;
-	
-	public ToolType(TypeFile file)
-	{
+
+	public ToolType(TypeFile file) {
 		super(file);
 	}
-	
+
+	public static ToolType getType(String shortName) {
+		return tools.get(shortName);
+	}
+
 	@Override
-	protected void postRead(TypeFile file)
-	{
+	protected void postRead(TypeFile file) {
 		tools.put(shortName, this);
 	}
-	
+
 	/**
 	 * Pack reader
 	 */
 	@Override
-	protected void read(String[] split, TypeFile file)
-	{
+	protected void read(String[] split, TypeFile file) {
 		super.read(split, file);
-		try
-		{
-			if(FMLCommonHandler.instance().getSide().isClient() && split[0].equals("Model"))
+		try {
+			if (FMLCommonHandler.instance().getSide().isClient() && split[0].equals("Model"))
 				model = FlansMod.proxy.loadModel(split[1], shortName, ModelBase.class);
-			else if(split[0].equals("Parachute"))
+			else if (split[0].equals("Parachute"))
 				parachute = Boolean.parseBoolean(split[1].toLowerCase());
-			else if(split[0].equals("ExplosiveRemote"))
+			else if (split[0].equals("ExplosiveRemote"))
 				remote = Boolean.parseBoolean(split[1].toLowerCase());
-			else if(split[0].equals("Heal") || split[0].equals("HealPlayers"))
+			else if (split[0].equals("Heal") || split[0].equals("HealPlayers"))
 				healPlayers = Boolean.parseBoolean(split[1].toLowerCase());
-			else if(split[0].equals("Repair") || split[0].equals("RepairVehicles"))
+			else if (split[0].equals("Repair") || split[0].equals("RepairVehicles"))
 				healDriveables = Boolean.parseBoolean(split[1].toLowerCase());
-			else if(split[0].equals("HealAmount") || split[0].equals("RepairAmount"))
+			else if (split[0].equals("HealAmount") || split[0].equals("RepairAmount"))
 				healAmount = Integer.parseInt(split[1]);
-			else if(split[0].equals("ToolLife") || split[0].equals("ToolUses"))
+			else if (split[0].equals("ToolLife") || split[0].equals("ToolUses"))
 				toolLife = Integer.parseInt(split[1]);
-			else if(split[0].equals("EUPerCharge"))
+			else if (split[0].equals("EUPerCharge"))
 				EUPerCharge = Integer.parseInt(split[1]);
-			else if(split[0].equals("RechargeRecipe"))
-			{
-				for(int i = 0; i < (split.length - 1) / 2; i++)
-				{
+			else if (split[0].equals("RechargeRecipe")) {
+				for (int i = 0; i < (split.length - 1) / 2; i++) {
 					int amount = Integer.parseInt(split[2 * i + 1]);
 					boolean damaged = split[2 * i + 2].contains(".");
 					String itemName = damaged ? split[2 * i + 2].split("\\.")[0] : split[2 * i + 2];
 					int damage = damaged ? Integer.parseInt(split[2 * i + 2].split("\\.")[1]) : 0;
 					rechargeRecipe.add(getRecipeElement(itemName, amount, damage, shortName));
 				}
-			}
-			else if(split[0].equals("DestroyOnEmpty"))
+			} else if (split[0].equals("DestroyOnEmpty"))
 				destroyOnEmpty = Boolean.parseBoolean(split[1].toLowerCase());
-			else if(split[0].equals("Food") || split[0].equals("Foodness"))
+			else if (split[0].equals("Food") || split[0].equals("Foodness"))
 				foodness = Integer.parseInt(split[1]);
-		}
-		catch(Exception e)
-		{
+		} catch (Exception e) {
 			FlansMod.log.error("Reading file failed : " + shortName);
 			FlansMod.log.throwing(e);
 		}
 	}
-	
+
 	@Override
-	public void addRecipe(IForgeRegistry<IRecipe> registry, Item item)
-	{
+	public void addRecipe(IForgeRegistry<IRecipe> registry, Item item) {
 		super.addRecipe(registry, item);
 		//Add the recharge recipe if there is one
-		if(rechargeRecipe.size() < 1)
+		if (rechargeRecipe.size() < 1)
 			return;
 		rechargeRecipe.add(new ItemStack(item, 1, toolLife));
-		
-		NonNullList<Ingredient> ingredients = NonNullList.<Ingredient>create();
-		for(ItemStack stack : rechargeRecipe)
-		{
+
+		NonNullList<Ingredient> ingredients = NonNullList.create();
+		for (ItemStack stack : rechargeRecipe) {
 			ingredients.add(Ingredient.fromStacks(stack));
 		}
 		registry.register(new ShapelessRecipes("FlansMod", new ItemStack(item, 1, 0), ingredients).setRegistryName(name + "_recharge"));
 	}
-	
-	public static ToolType getType(String shortName)
-	{
-		return tools.get(shortName);
-	}
-	
+
 	@Override
-	protected void preRead(TypeFile file)
-	{
+	protected void preRead(TypeFile file) {
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
-	public ModelBase GetModel()
-	{
+	public ModelBase GetModel() {
 		return null;
 	}
 }

@@ -504,8 +504,7 @@ public class ModelMustang extends ModelPlane //Same as Filename
 		flipAll();
 	}
 
-	private ModelRendererTurbo[] makeProp1(float i, float j, float k)
-	{
+	private ModelRendererTurbo[] makeProp1(float i, float j, float k) {
 		ModelRendererTurbo[] prop = new ModelRendererTurbo[4];
 		prop[0] = new ModelRendererTurbo(this, 0, 250, textureX, textureY);
 		prop[1] = new ModelRendererTurbo(this, 0, 250, textureX, textureY);

@@ -1,28 +1,23 @@
 package com.flansmod.client.model.yeolde;
 
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
+import com.flansmod.client.FlansModClient;
+import com.flansmod.client.util.WorldRenderer;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
 
-import com.flansmod.client.FlansModClient;
-import com.flansmod.client.util.WorldRenderer;
-
-public class ModelArrow extends ModelBase
-{
+public class ModelArrow extends ModelBase {
 	public ModelRenderer bulletModel;
 
-	public ModelArrow()
-	{
+	public ModelArrow() {
 		bulletModel = new ModelRenderer(this, 0, 0);
 		bulletModel.addBox(-0.5F, -1F, -0.5F, 1, 2, 1);
 	}
 
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		WorldRenderer worldrenderer = FlansModClient.getWorldRenderer();
 		byte var11 = 0;
 		float var12 = 0.0F;
@@ -54,8 +49,7 @@ public class ModelArrow extends ModelBase
 		worldrenderer.addVertexWithUV(-7.0D, -2.0D, -2.0D, var16, var19);
 		worldrenderer.draw();
 
-		for(int var23 = 0; var23 < 4; ++var23)
-		{
+		for (int var23 = 0; var23 < 4; ++var23) {
 			GL11.glRotatef(90.0F, 1.0F, 0.0F, 0.0F);
 			GL11.glNormal3f(0.0F, 0.0F, var20);
 			worldrenderer.startDrawingQuads();
@@ -69,7 +63,6 @@ public class ModelArrow extends ModelBase
 
 	}
 
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5)
-	{
+	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5) {
 	}
 }

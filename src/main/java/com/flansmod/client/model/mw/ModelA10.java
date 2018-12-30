@@ -1828,8 +1828,7 @@ public class ModelA10 extends ModelPlane //Same as Filename
 		flipAll();
 	}
 
-	private ModelRendererTurbo[] makeProp1(float i, float j, float k)
-	{
+	private ModelRendererTurbo[] makeProp1(float i, float j, float k) {
 		ModelRendererTurbo[] prop = new ModelRendererTurbo[4];
 		prop[0] = new ModelRendererTurbo(this, 200, 786, textureX, textureY);
 		prop[1] = new ModelRendererTurbo(this, 200, 786, textureX, textureY);
@@ -1846,8 +1845,7 @@ public class ModelA10 extends ModelPlane //Same as Filename
 		return prop;
 	}
 
-	private ModelRendererTurbo[] makeProp2(float i, float j, float k)
-	{
+	private ModelRendererTurbo[] makeProp2(float i, float j, float k) {
 		ModelRendererTurbo[] prop = new ModelRendererTurbo[4];
 		prop[0] = new ModelRendererTurbo(this, 200, 786, textureX, textureY);
 		prop[1] = new ModelRendererTurbo(this, 200, 786, textureX, textureY);

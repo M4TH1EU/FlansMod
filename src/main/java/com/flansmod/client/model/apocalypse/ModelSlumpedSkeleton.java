@@ -8,13 +8,11 @@ import com.flansmod.client.model.ModelItemHolder;
 import com.flansmod.client.tmt.ModelRendererTurbo;
 import com.flansmod.common.vector.Vector3f;
 
-public class ModelSlumpedSkeleton extends ModelItemHolder
-{
+public class ModelSlumpedSkeleton extends ModelItemHolder {
 	int textureX = 128;
 	int textureY = 32;
 
-	public ModelSlumpedSkeleton()
-	{
+	public ModelSlumpedSkeleton() {
 		baseModel = new ModelRendererTurbo[6];
 		baseModel[0] = new ModelRendererTurbo(this, 1, 1, textureX, textureY); // Import Box1
 		baseModel[1] = new ModelRendererTurbo(this, 41, 1, textureX, textureY); // Import Box2
@@ -49,7 +47,7 @@ public class ModelSlumpedSkeleton extends ModelItemHolder
 		baseModel[5].setRotationPoint(9F, 16F, 10F);
 		baseModel[5].rotateAngleX = 1.57079633F;
 		baseModel[5].rotateAngleY = 0.26179939F;
-		
+
 		translateAll(0, -16, -8);
 		itemOffset = new Vector3f(0F, -0.35F, 0.25F);
 	}

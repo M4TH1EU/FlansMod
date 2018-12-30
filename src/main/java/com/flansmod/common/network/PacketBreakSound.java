@@ -1,5 +1,6 @@
 package com.flansmod.common.network;
 
+import com.flansmod.common.FlansMod;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.block.Block;
@@ -16,58 +17,49 @@ import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.flansmod.common.FlansMod;
-
-public class PacketBreakSound extends PacketBase
-{
+public class PacketBreakSound extends PacketBase {
 	public int x, y, z;
 	public int blockID;
-	
-	public PacketBreakSound()
-	{
+
+	public PacketBreakSound() {
 	}
-	
-	public PacketBreakSound(int x, int y, int z, Block block)
-	{
+
+	public PacketBreakSound(int x, int y, int z, Block block) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
 		blockID = Block.getIdFromBlock(block);
 	}
-	
+
 	@Override
-	public void encodeInto(ChannelHandlerContext ctx, ByteBuf data)
-	{
+	public void encodeInto(ChannelHandlerContext ctx, ByteBuf data) {
 		data.writeInt(x);
 		data.writeInt(y);
 		data.writeInt(z);
 		data.writeInt(blockID);
 	}
-	
+
 	@Override
-	public void decodeInto(ChannelHandlerContext ctx, ByteBuf data)
-	{
+	public void decodeInto(ChannelHandlerContext ctx, ByteBuf data) {
 		x = data.readInt();
 		y = data.readInt();
 		z = data.readInt();
 		blockID = data.readInt();
 	}
-	
+
 	@Override
-	public void handleServerSide(EntityPlayerMP playerEntity)
-	{
+	public void handleServerSide(EntityPlayerMP playerEntity) {
 		FlansMod.log.warn("Received block break sound packet on server. Skipping.");
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void handleClientSide(EntityPlayer clientPlayer)
-	{
+	public void handleClientSide(EntityPlayer clientPlayer) {
 		World world = clientPlayer.world;
 		BlockPos pos = new BlockPos(x, y, z);
 		IBlockState state = world.getBlockState(new BlockPos(x, y, z));
 		Block block = Block.getBlockById(blockID);
-		
+
 		FMLClientHandler.instance().getClient().effectRenderer.addBlockDestroyEffects(new BlockPos(x, y, z), block.getDefaultState());
 		SoundType sound = block.getSoundType(state, world, pos, clientPlayer);
 		SoundEvent event = sound.getBreakSound();

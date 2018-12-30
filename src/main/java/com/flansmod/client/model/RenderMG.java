@@ -1,33 +1,28 @@
 package com.flansmod.client.model;
 
-import org.lwjgl.opengl.GL11;
-
+import com.flansmod.client.FlansModResourceHandler;
+import com.flansmod.common.guns.EntityMG;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
+import org.lwjgl.opengl.GL11;
 
-import com.flansmod.client.FlansModResourceHandler;
-import com.flansmod.common.guns.EntityMG;
-
-public class RenderMG extends Render
-{
-	public RenderMG(RenderManager renderManager)
-	{
+public class RenderMG extends Render {
+	public RenderMG(RenderManager renderManager) {
 		super(renderManager);
 		shadowSize = 0.5F;
 	}
-	
-	public void render(EntityMG mg, double d, double d1, double d2, float f, float f1)
-	{
+
+	public void render(EntityMG mg, double d, double d1, double d2, float f, float f1) {
 		bindEntityTexture(mg);
 		GL11.glPushMatrix();
-		GL11.glTranslatef((float)d, (float)d1, (float)d2);
-		
+		GL11.glTranslatef((float) d, (float) d1, (float) d2);
+
 		GL11.glRotatef(180F - mg.direction * 90F, 0.0F, 1.0F, 0.0F);
 		ModelMG model = mg.type.deployableModel;
-		if(model == null)
+		if (model == null)
 			return;
 		//GL11.glScalef(-1F, -1F, 1.0F);
 		model.renderBipod(0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F, mg);
@@ -35,24 +30,20 @@ public class RenderMG extends Render
 		model.renderGun(0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F, f1, mg);
 		GL11.glPopMatrix();
 	}
-	
+
 	@Override
-	public void doRender(Entity entity, double d, double d1, double d2, float f, float f1)
-	{
-		render((EntityMG)entity, d, d1, d2, f, f1);
+	public void doRender(Entity entity, double d, double d1, double d2, float f, float f1) {
+		render((EntityMG) entity, d, d1, d2, f, f1);
 	}
-	
+
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity)
-	{
-		return FlansModResourceHandler.getDeployableTexture(((EntityMG)entity).type);
+	protected ResourceLocation getEntityTexture(Entity entity) {
+		return FlansModResourceHandler.getDeployableTexture(((EntityMG) entity).type);
 	}
-	
-	public static class Factory implements IRenderFactory
-	{
+
+	public static class Factory implements IRenderFactory {
 		@Override
-		public Render createRenderFor(RenderManager manager)
-		{
+		public Render createRenderFor(RenderManager manager) {
 			return new RenderMG(manager);
 		}
 	}

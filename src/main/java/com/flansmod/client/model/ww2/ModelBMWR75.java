@@ -1871,8 +1871,7 @@ public class ModelBMWR75 extends ModelVehicle //Same as Filename
 		gun_2_Model[1][78].addShapeBox(8F, -1.7F, 0.35F, 1, 1, 1, 0F, 0F, -0.3F, -0.4F, 0F, -0.3F, -0.4F, 0F, -0.3F, -0.55F, 0F, -0.3F, -0.55F, 0F, -0.4F, -0.4F, 0F, -0.4F, -0.4F, 0F, -0.4F, -0.55F, 0F, -0.4F, -0.55F); // Box 106
 
 		//Gun Origin
-		for(ModelRendererTurbo gunPart : gun_2_Model[1])
-		{
+		for (ModelRendererTurbo gunPart : gun_2_Model[1]) {
 			gunPart.setRotationPoint(8F, -10F, -23F);
 		}
 

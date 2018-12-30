@@ -3,13 +3,11 @@ package com.flansmod.client.model.mw;
 import com.flansmod.client.model.ModelAttachment;
 import com.flansmod.client.tmt.ModelRendererTurbo;
 
-public class ModelPistolFlashlight extends ModelAttachment
-{
-	public ModelPistolFlashlight()
-	{
+public class ModelPistolFlashlight extends ModelAttachment {
+	public ModelPistolFlashlight() {
 		int textureX = 32;
 		int textureY = 32;
-		
+
 		attachmentModel = new ModelRendererTurbo[2];
 		attachmentModel[0] = new ModelRendererTurbo(this, 0, 22, textureX, textureY); // Box 10
 		attachmentModel[1] = new ModelRendererTurbo(this, 8, 5, textureX, textureY); // Box 11

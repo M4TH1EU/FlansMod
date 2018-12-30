@@ -3,17 +3,15 @@ package com.flansmod.client.model.titan;
 import com.flansmod.client.model.ModelMechaTool;
 import com.flansmod.client.tmt.ModelRendererTurbo;
 
-public class ModelExcavator extends ModelMechaTool
-{
-	public ModelExcavator()
-	{
+public class ModelExcavator extends ModelMechaTool {
+	public ModelExcavator() {
 		int textureX = 32;
 		int textureY = 32;
-		
+
 		baseModel = new ModelRendererTurbo[1];
 		baseModel[0] = new ModelRendererTurbo(this, 0, 0, textureX, textureY);
 		baseModel[0].addBox(0, -3.5F, -3.5F, 3, 7, 7);
-		
+
 		drillModel = new ModelRendererTurbo[9];
 		drillModel[0] = new ModelRendererTurbo(this, 13, 0, textureX, textureY);
 		drillModel[0].addBox(3, -0.5F, -0.5F, 1, 1, 1);
