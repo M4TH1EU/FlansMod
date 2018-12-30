@@ -19,6 +19,7 @@ public class LoadoutPool extends InfoType {
 	public RewardBox[] rewardBoxes = new RewardBox[3];
 	public ArrayList<RewardBox>[] rewardsPerLevel;
 	public int[] slotUnlockLevels = new int[]{0, 0, 5, 10, 20};
+
 	public LoadoutPool(TypeFile file) {
 		super(file);
 		pools.add(this);

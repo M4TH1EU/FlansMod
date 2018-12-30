@@ -24,6 +24,7 @@ public class RewardBoxInstance {
 	 * This is the definitive "has been opened" bool, but it should be verified against the hashes
 	 */
 	public boolean opened = false;
+
 	private RewardBoxInstance(EnumRewardOrigin ori, int hash) {
 		origin = ori;
 		boxHash = hash;

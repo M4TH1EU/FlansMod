@@ -5,6 +5,10 @@ bin/
 out/
 run/*
 
+classes/
+classes/*
+.idea/
+.idea/*
 # IDEs
 .classpath
 .project

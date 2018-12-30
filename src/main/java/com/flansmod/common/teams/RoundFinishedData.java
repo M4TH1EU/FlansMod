@@ -12,6 +12,7 @@ public class RoundFinishedData {
 	public int pendingXP = 0;
 	public int resultantXP = 0;
 	public int resultantLevel = 0;
+
 	public RoundFinishedData() {
 	}
 

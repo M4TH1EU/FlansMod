@@ -17,6 +17,7 @@ public class ContainerDriveableMenu extends Container {
 	public ContainerDriveableMenu(InventoryPlayer inventoryplayer, World worldy) {
 		this(inventoryplayer, worldy, false, null);
 	}
+
 	public ContainerDriveableMenu(InventoryPlayer inventoryplayer, World worldy, boolean fuel, EntityDriveable planey) {
 		inventory = inventoryplayer;
 		world = worldy;

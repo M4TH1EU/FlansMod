@@ -40,6 +40,7 @@ public class GuiOpenRewardBox extends GuiTeamsBase {
 	private int timeLeftInState = spinTime;
 	private float spinner = 0.0f;
 	private GuiButton doneButton;
+
 	public GuiOpenRewardBox(RewardBox rewardBox) {
 		super();
 		state = EnumPageState.SPINNING;

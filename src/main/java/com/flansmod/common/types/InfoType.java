@@ -107,7 +107,9 @@ public class InfoType {
 	}
 
 	/** -------------------------------------------------------------------------------------------------------- */
-	/** HELPER FUNCTIONS FOR READING. Should give better debug output                                            */
+	/**
+	 * HELPER FUNCTIONS FOR READING. Should give better debug output
+	 */
 
 	public static ItemStack getRecipeElement(String s, int amount, int damage, String requester) {
 		if (s.equals("doorIron")) {

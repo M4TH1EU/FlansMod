@@ -9,6 +9,7 @@ public enum EnumLoadoutSlot {
 
 	public boolean isWeapon;
 	public String name;
+
 	EnumLoadoutSlot(String s, boolean b) {
 		name = s;
 		isWeapon = b;

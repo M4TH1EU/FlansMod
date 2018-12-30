@@ -827,6 +827,7 @@ public class ClientRenderHooks {
 		public int timer = 0;
 		public int line = 0;
 		public boolean headshot = false;
+
 		public KillMessage(boolean head, InfoType infoType, String killer, String killed) {
 			headshot = head;
 			killerName = killer;

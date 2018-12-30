@@ -124,6 +124,7 @@ public class PlayerData {
 	 */
 	@SideOnly(Side.CLIENT)
 	public ResourceLocation skin;
+
 	public PlayerData(String name) {
 		username = name;
 		snapshots = new PlayerSnapshot[FlansMod.numPlayerSnapshots];

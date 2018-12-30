@@ -12,6 +12,7 @@ public class InventoryGunModTable extends InventoryBasic {
 	 * Hacky way to change slots within onInventoryChanged without causing a huge stack overflow
 	 */
 	private boolean busy = false;
+
 	public InventoryGunModTable() {
 		super("Gun Modification Table", true, 13);
 	}

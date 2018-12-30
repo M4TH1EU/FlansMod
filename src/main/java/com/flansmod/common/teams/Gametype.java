@@ -27,6 +27,7 @@ public abstract class Gametype {
 	public String name;
 	public String shortName;
 	public int numTeamsRequired;
+
 	public Gametype(String s, String s1, int numTeams) {
 		name = s;
 		shortName = s1;

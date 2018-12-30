@@ -29,6 +29,7 @@ public class ShotData {
 			this.shooterID = shooterID;
 			this.direction = direction;
 		}
+
 		public SpawnEntityShotData(int slot, EnumHand hand, InfoType shotFrom, ShootableType shotType, Entity shooter, Vector3f direction) {
 			this(slot, hand, shotFrom, shotType, shooter.getEntityId(), direction);
 		}
@@ -43,6 +44,7 @@ public class ShotData {
 		public float damage;
 		public boolean isExtraBullet; // For shotgun extra bullets that shouldn't consume ammo
 		public boolean silenced;
+
 		public InstantShotData(int slot, EnumHand hand, InfoType shotFrom, ShootableType shotType, int shooterID, Vector3f origin, BulletHit hitData, Vector3f hit, float damage, boolean isExtraBullet, boolean silenced) {
 			super(slot, hand, shotFrom, shotType);
 			this.shooterID = shooterID;
@@ -53,6 +55,7 @@ public class ShotData {
 			this.isExtraBullet = isExtraBullet;
 			this.silenced = silenced;
 		}
+
 		public InstantShotData(int slot, EnumHand hand, InfoType shotFrom, ShootableType shotType, Entity shooter, Vector3f origin, BulletHit hitData, Vector3f hit, float damage, boolean isExtraBullet, boolean silenced) {
 			this(slot, hand, shotFrom, shotType, shooter.getEntityId(), origin, hitData, hit, damage, isExtraBullet, silenced);
 		}

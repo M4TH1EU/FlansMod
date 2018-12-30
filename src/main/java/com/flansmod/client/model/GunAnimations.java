@@ -7,7 +7,9 @@ import java.util.Random;
 public class GunAnimations {
 	public static final int[] lookAtTimes = new int[]{1, 10, 20, 10, 20, 10};
 
-	/** (Purely aesthetic) gun animation variables */
+	/**
+	 * (Purely aesthetic) gun animation variables
+	 */
 	public static GunAnimations defaults = new GunAnimations();
 	/**
 	 * Slide
