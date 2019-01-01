@@ -17,13 +17,8 @@ Rendez vous dans le dossier ``YourPack/parts``.
 Pour chaque fichier :  
     - Supprimez la ligne : ``ItemID XXXXX``  
     - Enlevez les majuscules présente dans ``ShortName`` et ``Icon``
-   
+  
 ### Deuxième étape
-Ensuite allez dans ``YourPack/assets/flansmod/lang/`` et enlevez les majuscules dans les fichiers ``.lang``.  
-***Exemple :*** 
-``en_US.lang`` -> ``en_us.lang``  
-
-### Troisième étape
 Par la suite allez dans ``YourPack/assets/flansmod/textures/items/`` et enlevez à nouveau toutes les majuscules des fichiers ``.png/.jpg``.  
 ***Exemple :***
 ``ItemMotor.png`` -> ``itemmotor.png``  
@@ -282,13 +277,8 @@ Rendez vous dans le dossier ``YourPack/vehicles``.
 Pour chaque fichier :  
     - Supprimez la ligne : ``ItemID XXXXX``  
     - Enlevez les majuscules présente dans ``ShortName XXXX`` et ``Icon XXXX``
-   
+    
 ### Deuxième étape
-Ensuite allez dans ``YourPack/assets/flansmod/lang/`` et enlevez les majuscules dans les fichiers ``.lang``.  
-***Exemple :*** 
-``en_US.lang`` -> ``en_us.lang``  
-
-### Troisième étape
 Par la suite allez dans ``YourPack/assets/flansmod/textures/items/`` et enlevez à nouveau toutes les majuscules des fichiers ``.png/.jpg``.  
 ***Exemple :***
 ``VehicleBmw.png`` -> ``vehiclebmw.png``  
