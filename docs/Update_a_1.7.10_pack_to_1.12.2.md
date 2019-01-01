@@ -14,13 +14,8 @@ Go to the ``YourPack/parts`` folder.
 For every file :  
     - Delete this line : ``ItemID XXXXX``  
     - Remove uppercase present in ``ShortName`` et ``Icon``  
-  
-### Second step
-Then, go to ``YourPack/assets/flansmod/lang/`` and remove uppercase in the files ``.lang``. 
-***Example :*** 
-``en_US.lang`` -> ``en_us.lang``  
 
-### Third step
+### Second step
 Then go to ``YourPack/assets/flansmod/textures/items/`` and remove uppercase in the files ``.png/.jpg``.  
 ***Example :***
 ``ItemMotor.png`` -> ``itemmotor.png``  
@@ -269,13 +264,8 @@ Go in ``YourPack/vehicles``.
 For every file :  
     - Delete the line : ``ItemID XXXXX``  
     - Remove the uppercase present in ``ShortName XXXX`` et ``Icon XXXX``  
-   
-### Second step
-Then go in ``YourPack/assets/flansmod/lang/`` and remove uppercase in files ``.lang``.  
-***Example :***
-``en_US.lang`` -> ``en_us.lang``  
 
-### Third Step
+### Second Step
 Then go in ``YourPack/assets/flansmod/textures/items/`` and remove uppercase in files ``.png/.jpg``.  
 ***Example :***
 ``VehicleBmw.png`` -> ``vehiclebmw.png``  
